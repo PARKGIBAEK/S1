@@ -1,0 +1,5 @@
+프로토버프 컴파일러(protoc.exe)를 vcpkg로 설치한버전이라서 vcpkg폴더에서 가져왔기 때문에 다음 파일이 경로에 함께 포함되어 있어야 한다.
+
+- abseil_dll.dll
+- libprotobuf.dll
+- libprotoc.dll

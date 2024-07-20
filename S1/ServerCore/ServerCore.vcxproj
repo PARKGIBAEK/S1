@@ -178,8 +178,9 @@
     <ClInclude Include="Core\CoreMacro.h" />
     <ClInclude Include="Core\CoreTLS.h" />
     <ClInclude Include="Core\Types.h" />
+    <ClInclude Include="DB\ConnectionTest.h" />
     <ClInclude Include="DB\MySqlConnectionPool.h" />
-    <ClInclude Include="DB\test\user.h" />
+    <ClInclude Include="DB\test_table\user_test.h" />
     <ClInclude Include="Job\GlobalQueue.h" />
     <ClInclude Include="Job\Job.h" />
     <ClInclude Include="Job\JobData.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Core\CoreTLS.cpp" />
     <ClCompile Include="Core\GlobalInitializer.cpp" />
+    <ClCompile Include="DB\ConnectionTest.cpp" />
     <ClCompile Include="DB\MySqlConnectionPool.cpp" />
     <ClCompile Include="Job\GlobalQueue.cpp" />
     <ClCompile Include="Job\JobData.cpp" />

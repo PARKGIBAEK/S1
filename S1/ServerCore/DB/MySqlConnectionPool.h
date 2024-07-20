@@ -11,8 +11,6 @@
 using namespace boost;
 using namespace ServerCore;
 
-// #define DB_TEST_MODE
-
 /*  boost::mysql::tcp_connection을 사용한 단순한 pooling 방식을 선택한 이유 :
  *  boost::mysql::pooled_connection은 아직 experimental이라 제대로 작동하지 않음 */
 class MySqlConnectionPool : public asio::noncopyable
@@ -51,9 +49,12 @@ private:
     asio::ip::basic_resolver_results<asio::ip::tcp>* m_endpoints;
     mysql::handshake_params* m_params;
 
+#define DB_TEST_MODE
+
 #if defined(DB_TEST_MODE)
+    // test.users 테이블이 존재해야 한다
     bool TestConnect(mysql::tcp_connection* conn);
     bool TestConnectionPool();
-    std::string m_testTableName = "users";
+    std::string m_testTableName = "user_test";
 #endif
 };

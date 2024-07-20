@@ -9,7 +9,6 @@
 #include "Util/Path.h"
 
 #if defined(DB_TEST_MODE)
-#include "user.h"
 #endif
 using namespace ServerCore;
 
@@ -185,7 +184,7 @@ void MySqlConnectionPool::CleanupConnectionPool()
 bool MySqlConnectionPool::TestConnect(mysql::tcp_connection* conn)
 {
     // test for user table.
-    const char* sql = "SELECT * from users";
+    const char* sql = "SELECT * from user_test";
     mysql::results result;
     conn->execute(sql, result);
 

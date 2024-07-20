@@ -82,13 +82,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)binary\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(ProjectDir);$(SolutionDir)Libraries\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\library\lib\;</LibraryPath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)Libraries\Include\;$(SolutionDir)ServerCore\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\library\lib\;$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)binary\$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>$(ProjectDir);$(SolutionDir)Libraries\Include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\library\lib\;</LibraryPath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)Libraries\Include\;$(SolutionDir)ServerCore\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\library\lib\;$(LibraryPath);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,6 +130,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +147,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,6 +158,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp" />
+    <ClCompile Include="WebServerTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DB\TableSchemas\user_accounts.h" />
+    <ClInclude Include="LibConfig.h" />
+    <ClInclude Include="WebServerTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\SQL\test_db_data.sql" />
+    <Content Include="DB\SQL\test_db_setup.sql" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

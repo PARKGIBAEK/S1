@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3938433b-3447-43f0-a1fd-fb4e458599e0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.metadata.v8.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.projects.v8.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.strings.v8.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vs/S1/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vs/S1/v17/.futdcache.v2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/API.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/API.csproj.user" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/API.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Controllers/AuthController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Controllers/MyController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Controllers/WeatherForecastController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/DB/MyQueryExecutor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/DB/SQL/TableCreation.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/DB/SQL/pre_stored_procedures.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Data/DesignTimeDbContextFactory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Data/MyDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Data/snake_case_migration_model_differ.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Data/snake_case_naming_convention.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/AuthKey.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/ItemAccessory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/ItemArmor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/ItemWeapon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/UserAccount.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/UserCharacter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/UserItem.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Model/UserTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Properties/launchSettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Services/KeyService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Services/UserService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/WeatherForecast.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.deps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.runtimeconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/BCrypt.Net-Next.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Humanizer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.CodeAnalysis.Workspaces.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Microsoft.OpenApi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Mono.TextTemplating.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/MySqlConnector.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Pomelo.EntityFrameworkCore.MySql.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.CodeDom.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.Composition.AttributedModel.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.Composition.Convention.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.Composition.Hosting.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.Composition.Runtime.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.Composition.TypedParts.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/API.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/API.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/API.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.MvcApplicationPartsAssemblyInfo.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.MvcApplicationPartsAssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.BuildWithSkipAnalyzers" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.Up2Date" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.genruntimeconfig.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.sourcelink.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/ref/API.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/refint/API.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/staticwebassets.build.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/staticwebassets/msbuild.build.API.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.API.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.API.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/project.nuget.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/project.packagespec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/obj/rider.project.restore.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/ModelGenerator/ModelGenerator.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/ModelGenerator/SQL/create_table.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Procedures/GenProcs.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Procedures/New Text Document.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Procedures/Templates/GenProcedures.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Procedures/Templates/Procedure.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/Enum.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/PacketGenerator.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/Protocol.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/Struct.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/Templates/PacketHandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/abseil_dll.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/libprotobuf.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/libprotoc.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/bin/memo.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/any.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/api.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/compiler/plugin.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/descriptor.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/duration.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/empty.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/field_mask.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/source_context.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/struct.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/timestamp.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/type.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/include/google/protobuf/wrappers.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Common/Protobuf/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DB/config.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DB/connection_string.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DB/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/Enum.pb.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/Enum.pb.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/Protocol.pb.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/Protocol.pb.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/ServerPacketHandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/Struct.pb.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DummyClient/Struct.pb.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/ClientPacketHandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/SQL/test_db_data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/SQL/test_db_setup.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/TableSchemas/user_accounts.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/Enum.pb.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/Enum.pb.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/LibConfig.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/Protocol.pb.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/Protocol.pb.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/Struct.pb.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/Struct.pb.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/WebServerTest.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/WebServerTest.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/x64/Debug/GameServer.vcxproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/x64/Release/GameServer.vcxproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/DB/test_table/user_test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ModelGenerator.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ModelGenerator.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ModelGenerator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ModelGenerator.pyproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SQL/create_table.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/ModelGenerator.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator_/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/Enum.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/MakeExe.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/MakeExe파일 설명.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/PacketGenerator 설명.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/PacketGenerator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/PacketGenerator.pyproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/ProtoParser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/Protocol.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/Struct.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/Templates/PacketHandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PacketGenerator/TestPacketHandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/GameDB.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/GenProcedures.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/MakeExe.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/MakeExe파일 설명.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/ProcedureGenerator 설명.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/ProcedureGenerator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/ProcedureGenerator.pyproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/Templates/GenProcedures.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/Templates/Procedure.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ProcedureGenerator/XmlDBParser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/boost_charconv-vc144-mt-gd-x64-1_85.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/libcrypto-1_1-x64.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/.idea.S1/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.idea.S1/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/FileContentIndex/134290c5-8648-4611-b4a2-deeeede92158.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/FileContentIndex/31163356-8c7b-49a9-b0df-f9f891991ac4.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/FileContentIndex/551754f1-4f8f-4810-b053-2599b2cb0254.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/FileContentIndex/8d59dad7-0eea-45d1-bc81-8bc6bb5ff546.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/FileContentIndex/96c948f5-2d18-4bd9-9684-942ba53babd3.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/v17/DocumentLayout.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/S1/v17/DocumentLayout.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.vs/S1/v17/fileList.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/S1/v17/fileList.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../S1.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../S1.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/test/user.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryPool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/ServerCore.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/ServerCore.vcxproj" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="2jSbMsu2BdlJCs13CfuMhhT1UWz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3938433b-3447-43f0-a1fd-fb4e458599e0" name="Changes" comment="" />
+      <created>1721383382027</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721383382027</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -31,7 +31,8 @@ inline void aligned_free(void* ptr) {
 #endif
 }
 
-class alignas(static_cast<int>(MEMORY_ALIGNMENT::FOR_MEMORY_POOL)) MemoryPool
+// class alignas(static_cast<int>(MEMORY_ALIGNMENT::FOR_MEMORY_POOL)) MemoryPool
+class MemoryPool
 {
     static constexpr int Q_SIZE = 0x10'000;
 

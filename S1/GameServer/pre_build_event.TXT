@@ -1,0 +1,2 @@
+CALL $(SolutionDir)Common\Protobuf\bin\GenPackets.bat
+ CALL $(SolutionDir)Common\Procedures\GenProcs.bat

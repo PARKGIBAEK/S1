@@ -254,29 +254,29 @@ private:
         return result.affected_rows();
     }
 
-    bool delete_by_user_character_id_from_user_inventory(mysql::tcp_connection* conn, int user_character_id)
+    int delete_by_user_character_id_from_user_inventory(mysql::tcp_connection* conn, int user_character_id)
     {
         std::cout << "delete_by_user_character_id_from_user_inventory Test" << std::endl;
+        mysql::results result;
         try
         {
             // user_inventory 테이블 전체 조회 SP(반환 값 : 테이블 전체)
             auto stmt = conn->prepare_statement("CALL sp_114(?)");
-            mysql::results result;
             conn->execute(stmt.bind(1), result); // user_character_id가 1이면 삭제
             std::cout << "affected rows - " << result.affected_rows() << std::endl;
         }
         catch (boost::mysql::error_code& ec)
         {
             std::cerr << ec.what();
-            return false;
+            return -1;
         }
         catch (std::exception& ex)
         {
             std::cerr << ex.what();
-            return false;
+            return -1;
         }
 
         std::cout << "[Test] delete_by_user_character_id_from_user_inventory Test - [done]" << std::endl;
-        return true;
+        return result.affected_rows();
     }
 };

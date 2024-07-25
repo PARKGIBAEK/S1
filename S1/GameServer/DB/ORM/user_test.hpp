@@ -4,15 +4,14 @@
 #include <boost/mysql.hpp>
 #include <boost/mysql/tcp.hpp>
 #include <boost/describe.hpp>
-#include <vector>
 #include <string>
-#include <chrono>
+#include <iostream>
+#include <format>
 
 namespace ORM {
 
 struct user_test
 {
-    // 멤버 변수
     int id; // int
     std::string username; // varchar(32)
     std::string password; // varchar(32)
@@ -20,363 +19,553 @@ struct user_test
     boost::mysql::datetime created_at; // timestamp
     boost::mysql::datetime updated_at; // timestamp
 };
+
 BOOST_DESCRIBE_STRUCT(user_test, (), (id, username, password, email, created_at, updated_at));
 
-// 데이터베이스 연산
-void insert(boost::mysql::tcp_connection& conn, const user_test& obj);
-std::vector<user_test> select_all(boost::mysql::tcp_connection& conn);
-std::vector<user_test> select_all_by_email(boost::mysql::tcp_connection& conn, std::string email);
-std::vector<user_test> select_all_by_id(boost::mysql::tcp_connection& conn, int id);
-void update_username_by_email(boost::mysql::tcp_connection& conn, std::string new_username, std::string email);
-void update_username_by_id(boost::mysql::tcp_connection& conn, std::string new_username, int id);
-void update_password_by_email(boost::mysql::tcp_connection& conn, std::string new_password, std::string email);
-void update_password_by_id(boost::mysql::tcp_connection& conn, std::string new_password, int id);
-void update_email_by_email(boost::mysql::tcp_connection& conn, std::string new_email, std::string email);
-void update_email_by_id(boost::mysql::tcp_connection& conn, std::string new_email, int id);
-void update_created_at_by_email(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, std::string email);
-void update_created_at_by_id(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, int id);
-void delete_by_email(boost::mysql::tcp_connection& conn, std::string email);
-void delete_by_id(boost::mysql::tcp_connection& conn, int id);
+class user_test_orm
+{
+public:
+    // 데이터베이스 쿼리 호출
+    static bool insert(boost::mysql::tcp_connection* conn, std::string username, std::string password, std::string email, boost::mysql::datetime created_at, boost::mysql::datetime updated_at);
+    static boost::mysql::results select_all(boost::mysql::tcp_connection* conn);
+    static boost::mysql::results select_by_email(boost::mysql::tcp_connection* conn, std::string email);
+    static boost::mysql::results select_by_id(boost::mysql::tcp_connection* conn, int id);
+    static std::uint64_t update_username_by_email(boost::mysql::tcp_connection* conn, std::string new_username, std::string email);
+    static std::uint64_t update_username_by_id(boost::mysql::tcp_connection* conn, std::string new_username, int id);
+    static std::uint64_t update_password_by_email(boost::mysql::tcp_connection* conn, std::string new_password, std::string email);
+    static std::uint64_t update_password_by_id(boost::mysql::tcp_connection* conn, std::string new_password, int id);
+    static std::uint64_t update_email_by_email(boost::mysql::tcp_connection* conn, std::string new_email, std::string email);
+    static std::uint64_t update_email_by_id(boost::mysql::tcp_connection* conn, std::string new_email, int id);
+    static std::uint64_t update_created_at_by_email(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, std::string email);
+    static std::uint64_t update_created_at_by_id(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, int id);
+    static std::uint64_t update_updated_at_by_email(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_updated_at, std::string email);
+    static std::uint64_t update_updated_at_by_id(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_updated_at, int id);
+    static std::uint64_t delete_by_email(boost::mysql::tcp_connection* conn, std::string email);
+    static std::uint64_t delete_by_id(boost::mysql::tcp_connection* conn, int id);
 
-// 저장 프로시저 호출
-void sp_insert(boost::mysql::tcp_connection& conn, const user_test& obj);
-std::vector<user_test> sp_select_all(boost::mysql::tcp_connection& conn);
-std::vector<user_test> sp_select_all_by_email(boost::mysql::tcp_connection& conn, std::string email);
-std::vector<user_test> sp_select_all_by_id(boost::mysql::tcp_connection& conn, int id);
-void sp_set_username_by_email(boost::mysql::tcp_connection& conn, std::string new_username, std::string email);
-void sp_set_username_by_id(boost::mysql::tcp_connection& conn, std::string new_username, int id);
-void sp_set_password_by_email(boost::mysql::tcp_connection& conn, std::string new_password, std::string email);
-void sp_set_password_by_id(boost::mysql::tcp_connection& conn, std::string new_password, int id);
-void sp_set_email_by_email(boost::mysql::tcp_connection& conn, std::string new_email, std::string email);
-void sp_set_email_by_id(boost::mysql::tcp_connection& conn, std::string new_email, int id);
-void sp_set_created_at_by_email(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, std::string email);
-void sp_set_created_at_by_id(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, int id);
-void sp_delete_by_email(boost::mysql::tcp_connection& conn, std::string email);
-void sp_delete_by_id(boost::mysql::tcp_connection& conn, int id);
+    // 저장 프로시저 호출
+    static bool sp_insert(boost::mysql::tcp_connection* conn, std::string username, std::string password, std::string email, boost::mysql::datetime created_at);
+    static boost::mysql::results sp_select_all(boost::mysql::tcp_connection* conn);
+    static boost::mysql::results sp_select_all_by_email(boost::mysql::tcp_connection* conn, std::string email);
+    static boost::mysql::results sp_select_all_by_id(boost::mysql::tcp_connection* conn, int id);
+    static std::uint64_t sp_set_username_by_email(boost::mysql::tcp_connection* conn, std::string new_username, std::string email);
+    static std::uint64_t sp_set_username_by_id(boost::mysql::tcp_connection* conn, std::string new_username, int id);
+    static std::uint64_t sp_set_password_by_email(boost::mysql::tcp_connection* conn, std::string new_password, std::string email);
+    static std::uint64_t sp_set_password_by_id(boost::mysql::tcp_connection* conn, std::string new_password, int id);
+    static std::uint64_t sp_set_email_by_email(boost::mysql::tcp_connection* conn, std::string new_email, std::string email);
+    static std::uint64_t sp_set_email_by_id(boost::mysql::tcp_connection* conn, std::string new_email, int id);
+    static std::uint64_t sp_set_created_at_by_email(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, std::string email);
+    static std::uint64_t sp_set_created_at_by_id(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, int id);
+    static std::uint64_t sp_delete_by_email(boost::mysql::tcp_connection* conn, std::string email);
+    static std::uint64_t sp_delete_by_id(boost::mysql::tcp_connection* conn, int id);
+};
 
-// 구현부
+// 데이터베이스 쿼리 호출 구현부
 
-void ORM::insert(boost::mysql::tcp_connection& conn, const user_test& obj) {
-    conn.execute("INSERT INTO user_test (username, password, email, created_at) VALUES (?, ?, ?, ?)",
-                 obj.username, obj.password, obj.email, obj.created_at);
+inline bool user_test_orm::insert(boost::mysql::tcp_connection* conn, std::string username, std::string password, std::string email, boost::mysql::datetime created_at, boost::mysql::datetime updated_at)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("INSERT INTO user_test (username, password, email, created_at, updated_at) VALUES ({username}, {password}, {email}, {created_at}, {updated_at})");
+        conn->execute(query, result);
+        return result.affected_rows() > 0;
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return false;
+    }
 }
+    
 
-
-std::vector<user_test> ORM::select_all(boost::mysql::tcp_connection& conn) {
+inline boost::mysql::results user_test_orm::select_all(boost::mysql::tcp_connection* conn)
+{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM user_test", result);
-    std::vector<user_test> objects;
-    for (const auto& row : result.rows()) {
-        user_test obj;
-        obj.id = row[0].as_int64();
-        obj.username = row[1].as_string();
-        obj.password = row[2].as_string();
-        obj.email = row[3].as_string();
-        obj.created_at = boost::mysql::datetime(row[4].as_datetime());
-        obj.updated_at = boost::mysql::datetime(row[5].as_datetime());
-        objects.push_back(obj);
+    try
+    {
+        conn->execute("SELECT * FROM user_test", result);
     }
-    return objects;
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+    }
+    return result;
 }
+    
 
-
-std::vector<user_test> ORM::select_all_by_email(boost::mysql::tcp_connection& conn, std::string email) {
+inline boost::mysql::results user_test_orm::select_by_email(boost::mysql::tcp_connection* conn, std::string email)
+{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM user_test WHERE email = ?",
-                 email);
-    std::vector<user_test> objects;
-    for (const auto& row : result.rows()) {
-        user_test obj;
-        obj.id = row[0].as_int64();
-        obj.username = row[1].as_string();
-        obj.password = row[2].as_string();
-        obj.email = row[3].as_string();
-        obj.created_at = boost::mysql::datetime(row[4].as_datetime());
-        obj.updated_at = boost::mysql::datetime(row[5].as_datetime());
-        objects.push_back(obj);
+    try
+    {
+        std::string query = std::format("SELECT * FROM user_test WHERE email = {email}");
+        conn->execute(query, result);
     }
-    return objects;
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+    }
+    return result;
 }
+    
 
-
-std::vector<user_test> ORM::select_all_by_id(boost::mysql::tcp_connection& conn, int id) {
+inline boost::mysql::results user_test_orm::select_by_id(boost::mysql::tcp_connection* conn, int id)
+{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM user_test WHERE id = ?",
-                 id);
-    std::vector<user_test> objects;
-    for (const auto& row : result.rows()) {
-        user_test obj;
-        obj.id = row[0].as_int64();
-        obj.username = row[1].as_string();
-        obj.password = row[2].as_string();
-        obj.email = row[3].as_string();
-        obj.created_at = boost::mysql::datetime(row[4].as_datetime());
-        obj.updated_at = boost::mysql::datetime(row[5].as_datetime());
-        objects.push_back(obj);
+    try
+    {
+        std::string query = std::format("SELECT * FROM user_test WHERE id = {id}");
+        conn->execute(query, result);
     }
-    return objects;
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+    }
+    return result;
 }
+    
 
-
-void ORM::update_username_by_email(boost::mysql::tcp_connection& conn, std::string new_username, std::string email) {
-    conn.execute("UPDATE user_test SET username = ? WHERE email = ?",
-                 new_username, email);
+inline std::uint64_t user_test_orm::update_username_by_email(boost::mysql::tcp_connection* conn, std::string new_username, std::string email)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET username = {new_username} WHERE email = {email}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_username_by_id(boost::mysql::tcp_connection& conn, std::string new_username, int id) {
-    conn.execute("UPDATE user_test SET username = ? WHERE id = ?",
-                 new_username, id);
+inline std::uint64_t user_test_orm::update_username_by_id(boost::mysql::tcp_connection* conn, std::string new_username, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET username = {new_username} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_password_by_email(boost::mysql::tcp_connection& conn, std::string new_password, std::string email) {
-    conn.execute("UPDATE user_test SET password = ? WHERE email = ?",
-                 new_password, email);
+inline std::uint64_t user_test_orm::update_password_by_email(boost::mysql::tcp_connection* conn, std::string new_password, std::string email)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET password = {new_password} WHERE email = {email}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_password_by_id(boost::mysql::tcp_connection& conn, std::string new_password, int id) {
-    conn.execute("UPDATE user_test SET password = ? WHERE id = ?",
-                 new_password, id);
+inline std::uint64_t user_test_orm::update_password_by_id(boost::mysql::tcp_connection* conn, std::string new_password, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET password = {new_password} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_email_by_email(boost::mysql::tcp_connection& conn, std::string new_email, std::string email) {
-    conn.execute("UPDATE user_test SET email = ? WHERE email = ?",
-                 new_email, email);
+inline std::uint64_t user_test_orm::update_email_by_email(boost::mysql::tcp_connection* conn, std::string new_email, std::string email)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET email = {new_email} WHERE email = {email}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_email_by_id(boost::mysql::tcp_connection& conn, std::string new_email, int id) {
-    conn.execute("UPDATE user_test SET email = ? WHERE id = ?",
-                 new_email, id);
+inline std::uint64_t user_test_orm::update_email_by_id(boost::mysql::tcp_connection* conn, std::string new_email, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET email = {new_email} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_created_at_by_email(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, std::string email) {
-    conn.execute("UPDATE user_test SET created_at = ? WHERE email = ?",
-                 new_created_at, email);
+inline std::uint64_t user_test_orm::update_created_at_by_email(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, std::string email)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET created_at = {new_created_at} WHERE email = {email}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_created_at_by_id(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, int id) {
-    conn.execute("UPDATE user_test SET created_at = ? WHERE id = ?",
-                 new_created_at, id);
+inline std::uint64_t user_test_orm::update_created_at_by_id(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET created_at = {new_created_at} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::delete_by_email(boost::mysql::tcp_connection& conn, std::string email) {
-    conn.execute("DELETE FROM user_test WHERE email = ?",
-                 email);
+inline std::uint64_t user_test_orm::update_updated_at_by_email(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_updated_at, std::string email)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET updated_at = {new_updated_at} WHERE email = {email}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::delete_by_id(boost::mysql::tcp_connection& conn, int id) {
-    conn.execute("DELETE FROM user_test WHERE id = ?",
-                 id);
+inline std::uint64_t user_test_orm::update_updated_at_by_id(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_updated_at, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE user_test SET updated_at = {new_updated_at} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
-
-
-    void ORM::sp_insert(boost::mysql::tcp_connection& conn, const user_test& obj) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_231(?, ?, ?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(obj.username, obj.password, obj.email, obj.created_at), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_insert: " << e.what() << std::endl;
-        }
-    }
     
 
-    std::vector<user_test> ORM::sp_select_all(boost::mysql::tcp_connection& conn) {
-        std::vector<user_test> objects;
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_232()");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(), result);
-            for (const auto& row : result.rows()) {
-                user_test obj;
-                obj.id = row[0].as_int64();
-            obj.username = row[1].as_string();
-            obj.password = row[2].as_string();
-            obj.email = row[3].as_string();
-            obj.created_at = boost::mysql::datetime(row[4].as_datetime());
-            obj.updated_at = boost::mysql::datetime(row[5].as_datetime());
-                objects.push_back(obj);
-            }
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_select_all: " << e.what() << std::endl;
-        }
-        return objects;
+inline std::uint64_t user_test_orm::delete_by_email(boost::mysql::tcp_connection* conn, std::string email)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("DELETE FROM user_test WHERE email = {email}");
+        conn->execute(query, result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    std::vector<user_test> ORM::sp_select_all_by_email(boost::mysql::tcp_connection& conn, std::string email) {
-        std::vector<user_test> objects;
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_233(?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(email), result);
-            for (const auto& row : result.rows()) {
-                user_test obj;
-                obj.id = row[0].as_int64();
-            obj.username = row[1].as_string();
-            obj.password = row[2].as_string();
-            obj.email = row[3].as_string();
-            obj.created_at = boost::mysql::datetime(row[4].as_datetime());
-            obj.updated_at = boost::mysql::datetime(row[5].as_datetime());
-                objects.push_back(obj);
-            }
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_select_all_by_email: " << e.what() << std::endl;
-        }
-        return objects;
+inline std::uint64_t user_test_orm::delete_by_id(boost::mysql::tcp_connection* conn, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("DELETE FROM user_test WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    std::vector<user_test> ORM::sp_select_all_by_id(boost::mysql::tcp_connection& conn, int id) {
-        std::vector<user_test> objects;
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_234(?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(id), result);
-            for (const auto& row : result.rows()) {
-                user_test obj;
-                obj.id = row[0].as_int64();
-            obj.username = row[1].as_string();
-            obj.password = row[2].as_string();
-            obj.email = row[3].as_string();
-            obj.created_at = boost::mysql::datetime(row[4].as_datetime());
-            obj.updated_at = boost::mysql::datetime(row[5].as_datetime());
-                objects.push_back(obj);
-            }
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_select_all_by_id: " << e.what() << std::endl;
-        }
-        return objects;
+// 저장 프로시저 호출 구현부
+
+inline bool user_test_orm::sp_insert(boost::mysql::tcp_connection* conn, std::string username, std::string password, std::string email, boost::mysql::datetime created_at)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_116(?, ?, ?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(username, password, email, created_at), result);
+        std::cout << "Affected rows: " << result.affected_rows() << std::endl;
+        return result.affected_rows() > 0;
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_insert: " << e.what() << std::endl;
+        return false;
+    }
+}
     
 
-    void ORM::sp_set_username_by_email(boost::mysql::tcp_connection& conn, std::string new_username, std::string email) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_235(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_username, email), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_username_by_email: " << e.what() << std::endl;
-        }
+inline boost::mysql::results user_test_orm::sp_select_all(boost::mysql::tcp_connection* conn)
+{
+    boost::mysql::results result;
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_117()");
+        conn->execute(stmt.bind(), result);
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_select_all: " << e.what() << std::endl;
+    }
+    return result;
+}
     
 
-    void ORM::sp_set_username_by_id(boost::mysql::tcp_connection& conn, std::string new_username, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_236(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_username, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_username_by_id: " << e.what() << std::endl;
-        }
+inline boost::mysql::results user_test_orm::sp_select_all_by_email(boost::mysql::tcp_connection* conn, std::string email)
+{
+    boost::mysql::results result;
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_118(?)");
+        conn->execute(stmt.bind(email), result);
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_select_all_by_email: " << e.what() << std::endl;
+    }
+    return result;
+}
     
 
-    void ORM::sp_set_password_by_email(boost::mysql::tcp_connection& conn, std::string new_password, std::string email) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_237(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_password, email), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_password_by_email: " << e.what() << std::endl;
-        }
+inline boost::mysql::results user_test_orm::sp_select_all_by_id(boost::mysql::tcp_connection* conn, int id)
+{
+    boost::mysql::results result;
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_119(?)");
+        conn->execute(stmt.bind(id), result);
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_select_all_by_id: " << e.what() << std::endl;
+    }
+    return result;
+}
     
 
-    void ORM::sp_set_password_by_id(boost::mysql::tcp_connection& conn, std::string new_password, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_238(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_password, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_password_by_id: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_username_by_email(boost::mysql::tcp_connection* conn, std::string new_username, std::string email)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_120(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_username, email), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_username_by_email: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_set_email_by_email(boost::mysql::tcp_connection& conn, std::string new_email, std::string email) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_239(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_email, email), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_email_by_email: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_username_by_id(boost::mysql::tcp_connection* conn, std::string new_username, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_121(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_username, id), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_username_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_set_email_by_id(boost::mysql::tcp_connection& conn, std::string new_email, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_240(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_email, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_email_by_id: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_password_by_email(boost::mysql::tcp_connection* conn, std::string new_password, std::string email)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_122(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_password, email), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_password_by_email: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_set_created_at_by_email(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, std::string email) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_241(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_created_at, email), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_created_at_by_email: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_password_by_id(boost::mysql::tcp_connection* conn, std::string new_password, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_123(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_password, id), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_password_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_set_created_at_by_id(boost::mysql::tcp_connection& conn, boost::mysql::datetime new_created_at, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_242(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_created_at, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_created_at_by_id: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_email_by_email(boost::mysql::tcp_connection* conn, std::string new_email, std::string email)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_124(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_email, email), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_email_by_email: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_delete_by_email(boost::mysql::tcp_connection& conn, std::string email) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_245(?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(email), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_delete_by_email: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_email_by_id(boost::mysql::tcp_connection* conn, std::string new_email, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_125(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_email, id), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_email_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_delete_by_id(boost::mysql::tcp_connection& conn, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_246(?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_delete_by_id: " << e.what() << std::endl;
-        }
+inline std::uint64_t user_test_orm::sp_set_created_at_by_email(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, std::string email)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_126(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_created_at, email), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_created_at_by_email: " << e.what() << std::endl;
+        return 0;
+    }
+}
+    
+
+inline std::uint64_t user_test_orm::sp_set_created_at_by_id(boost::mysql::tcp_connection* conn, boost::mysql::datetime new_created_at, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_127(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_created_at, id), result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_created_at_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
+    
+
+inline std::uint64_t user_test_orm::sp_delete_by_email(boost::mysql::tcp_connection* conn, std::string email)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_130(?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(email), result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_delete_by_email: " << e.what() << std::endl;
+        return 0;
+    }
+}
+    
+
+inline std::uint64_t user_test_orm::sp_delete_by_id(boost::mysql::tcp_connection* conn, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_131(?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(id), result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_delete_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
 } // namespace ORM

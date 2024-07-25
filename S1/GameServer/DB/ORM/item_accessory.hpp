@@ -4,205 +4,298 @@
 #include <boost/mysql.hpp>
 #include <boost/mysql/tcp.hpp>
 #include <boost/describe.hpp>
-#include <vector>
 #include <string>
-#include <chrono>
+#include <iostream>
+#include <format>
 
 namespace ORM {
 
 struct item_accessory
 {
-    // 멤버 변수
     int id; // int
     std::string item_name; // varchar(30)
     std::string item_description; // text(65535)
     int item_effect; // int
 };
+
 BOOST_DESCRIBE_STRUCT(item_accessory, (), (id, item_name, item_description, item_effect));
 
-// 데이터베이스 연산
-void insert(boost::mysql::tcp_connection& conn, const item_accessory& obj);
-std::vector<item_accessory> select_all(boost::mysql::tcp_connection& conn);
-std::vector<item_accessory> select_all_by_id(boost::mysql::tcp_connection& conn, int id);
-void update_item_name_by_id(boost::mysql::tcp_connection& conn, std::string new_item_name, int id);
-void update_item_description_by_id(boost::mysql::tcp_connection& conn, std::string new_item_description, int id);
-void update_item_effect_by_id(boost::mysql::tcp_connection& conn, int new_item_effect, int id);
-void delete_by_id(boost::mysql::tcp_connection& conn, int id);
+class item_accessory_orm
+{
+public:
+    // 데이터베이스 쿼리 호출
+    static bool insert(boost::mysql::tcp_connection* conn, int id, std::string item_name, std::string item_description, int item_effect);
+    static boost::mysql::results select_all(boost::mysql::tcp_connection* conn);
+    static boost::mysql::results select_by_id(boost::mysql::tcp_connection* conn, int id);
+    static std::uint64_t update_id_by_id(boost::mysql::tcp_connection* conn, int new_id, int id);
+    static std::uint64_t update_item_name_by_id(boost::mysql::tcp_connection* conn, std::string new_item_name, int id);
+    static std::uint64_t update_item_description_by_id(boost::mysql::tcp_connection* conn, std::string new_item_description, int id);
+    static std::uint64_t update_item_effect_by_id(boost::mysql::tcp_connection* conn, int new_item_effect, int id);
+    static std::uint64_t delete_by_id(boost::mysql::tcp_connection* conn, int id);
 
-// 저장 프로시저 호출
-void sp_insert(boost::mysql::tcp_connection& conn, const item_accessory& obj);
-std::vector<item_accessory> sp_select_all(boost::mysql::tcp_connection& conn);
-std::vector<item_accessory> sp_select_all_by_id(boost::mysql::tcp_connection& conn, int id);
-void sp_set_item_name_by_id(boost::mysql::tcp_connection& conn, std::string new_item_name, int id);
-void sp_set_item_description_by_id(boost::mysql::tcp_connection& conn, std::string new_item_description, int id);
-void sp_set_item_effect_by_id(boost::mysql::tcp_connection& conn, int new_item_effect, int id);
-void sp_delete_by_id(boost::mysql::tcp_connection& conn, int id);
+    // 저장 프로시저 호출
+    static bool sp_insert(boost::mysql::tcp_connection* conn, int id, std::string item_name, std::string item_description, int item_effect);
+    static boost::mysql::results sp_select_all(boost::mysql::tcp_connection* conn);
+    static boost::mysql::results sp_select_all_by_id(boost::mysql::tcp_connection* conn, int id);
+    static std::uint64_t sp_set_item_name_by_id(boost::mysql::tcp_connection* conn, std::string new_item_name, int id);
+    static std::uint64_t sp_set_item_description_by_id(boost::mysql::tcp_connection* conn, std::string new_item_description, int id);
+    static std::uint64_t sp_set_item_effect_by_id(boost::mysql::tcp_connection* conn, int new_item_effect, int id);
+    static std::uint64_t sp_delete_by_id(boost::mysql::tcp_connection* conn, int id);
+};
 
-// 구현부
+// 데이터베이스 쿼리 호출 구현부
 
-void ORM::insert(boost::mysql::tcp_connection& conn, const item_accessory& obj) {
-    conn.execute("INSERT INTO item_accessory (id, item_name, item_description, item_effect) VALUES (?, ?, ?, ?)",
-                 obj.id, obj.item_name, obj.item_description, obj.item_effect);
+inline bool item_accessory_orm::insert(boost::mysql::tcp_connection* conn, int id, std::string item_name, std::string item_description, int item_effect)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("INSERT INTO item_accessory (id, item_name, item_description, item_effect) VALUES ({id}, {item_name}, {item_description}, {item_effect})");
+        conn->execute(query, result);
+        return result.affected_rows() > 0;
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return false;
+    }
 }
+    
 
-
-std::vector<item_accessory> ORM::select_all(boost::mysql::tcp_connection& conn) {
+inline boost::mysql::results item_accessory_orm::select_all(boost::mysql::tcp_connection* conn)
+{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM item_accessory", result);
-    std::vector<item_accessory> objects;
-    for (const auto& row : result.rows()) {
-        item_accessory obj;
-        obj.id = row[0].as_int64();
-        obj.item_name = row[1].as_string();
-        obj.item_description = row[2].as_string();
-        obj.item_effect = row[3].as_int64();
-        objects.push_back(obj);
+    try
+    {
+        conn->execute("SELECT * FROM item_accessory", result);
     }
-    return objects;
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+    }
+    return result;
 }
+    
 
-
-std::vector<item_accessory> ORM::select_all_by_id(boost::mysql::tcp_connection& conn, int id) {
+inline boost::mysql::results item_accessory_orm::select_by_id(boost::mysql::tcp_connection* conn, int id)
+{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM item_accessory WHERE id = ?",
-                 id);
-    std::vector<item_accessory> objects;
-    for (const auto& row : result.rows()) {
-        item_accessory obj;
-        obj.id = row[0].as_int64();
-        obj.item_name = row[1].as_string();
-        obj.item_description = row[2].as_string();
-        obj.item_effect = row[3].as_int64();
-        objects.push_back(obj);
+    try
+    {
+        std::string query = std::format("SELECT * FROM item_accessory WHERE id = {id}");
+        conn->execute(query, result);
     }
-    return objects;
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+    }
+    return result;
 }
+    
 
-
-void ORM::update_item_name_by_id(boost::mysql::tcp_connection& conn, std::string new_item_name, int id) {
-    conn.execute("UPDATE item_accessory SET item_name = ? WHERE id = ?",
-                 new_item_name, id);
+inline std::uint64_t item_accessory_orm::update_id_by_id(boost::mysql::tcp_connection* conn, int new_id, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE item_accessory SET id = {new_id} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_item_description_by_id(boost::mysql::tcp_connection& conn, std::string new_item_description, int id) {
-    conn.execute("UPDATE item_accessory SET item_description = ? WHERE id = ?",
-                 new_item_description, id);
+inline std::uint64_t item_accessory_orm::update_item_name_by_id(boost::mysql::tcp_connection* conn, std::string new_item_name, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE item_accessory SET item_name = {new_item_name} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::update_item_effect_by_id(boost::mysql::tcp_connection& conn, int new_item_effect, int id) {
-    conn.execute("UPDATE item_accessory SET item_effect = ? WHERE id = ?",
-                 new_item_effect, id);
+inline std::uint64_t item_accessory_orm::update_item_description_by_id(boost::mysql::tcp_connection* conn, std::string new_item_description, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE item_accessory SET item_description = {new_item_description} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
+    
 
-
-void ORM::delete_by_id(boost::mysql::tcp_connection& conn, int id) {
-    conn.execute("DELETE FROM item_accessory WHERE id = ?",
-                 id);
+inline std::uint64_t item_accessory_orm::update_item_effect_by_id(boost::mysql::tcp_connection* conn, int new_item_effect, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE item_accessory SET item_effect = {new_item_effect} WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
 }
-
-
-    void ORM::sp_insert(boost::mysql::tcp_connection& conn, const item_accessory& obj) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_21(?, ?, ?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(obj.id, obj.item_name, obj.item_description, obj.item_effect), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_insert: " << e.what() << std::endl;
-        }
-    }
     
 
-    std::vector<item_accessory> ORM::sp_select_all(boost::mysql::tcp_connection& conn) {
-        std::vector<item_accessory> objects;
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_22()");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(), result);
-            for (const auto& row : result.rows()) {
-                item_accessory obj;
-                obj.id = row[0].as_int64();
-            obj.item_name = row[1].as_string();
-            obj.item_description = row[2].as_string();
-            obj.item_effect = row[3].as_int64();
-                objects.push_back(obj);
-            }
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_select_all: " << e.what() << std::endl;
-        }
-        return objects;
+inline std::uint64_t item_accessory_orm::delete_by_id(boost::mysql::tcp_connection* conn, int id)
+{
+    try
+    {
+        boost::mysql::results result;
+        std::string query = std::format("DELETE FROM item_accessory WHERE id = {id}");
+        conn->execute(query, result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_code& ec)
+    {
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    std::vector<item_accessory> ORM::sp_select_all_by_id(boost::mysql::tcp_connection& conn, int id) {
-        std::vector<item_accessory> objects;
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_23(?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(id), result);
-            for (const auto& row : result.rows()) {
-                item_accessory obj;
-                obj.id = row[0].as_int64();
-            obj.item_name = row[1].as_string();
-            obj.item_description = row[2].as_string();
-            obj.item_effect = row[3].as_int64();
-                objects.push_back(obj);
-            }
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_select_all_by_id: " << e.what() << std::endl;
-        }
-        return objects;
+// 저장 프로시저 호출 구현부
+
+inline bool item_accessory_orm::sp_insert(boost::mysql::tcp_connection* conn, int id, std::string item_name, std::string item_description, int item_effect)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_11(?, ?, ?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(id, item_name, item_description, item_effect), result);
+        std::cout << "Affected rows: " << result.affected_rows() << std::endl;
+        return result.affected_rows() > 0;
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_insert: " << e.what() << std::endl;
+        return false;
+    }
+}
     
 
-    void ORM::sp_set_item_name_by_id(boost::mysql::tcp_connection& conn, std::string new_item_name, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_25(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_item_name, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_item_name_by_id: " << e.what() << std::endl;
-        }
+inline boost::mysql::results item_accessory_orm::sp_select_all(boost::mysql::tcp_connection* conn)
+{
+    boost::mysql::results result;
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_12()");
+        conn->execute(stmt.bind(), result);
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_select_all: " << e.what() << std::endl;
+    }
+    return result;
+}
     
 
-    void ORM::sp_set_item_description_by_id(boost::mysql::tcp_connection& conn, std::string new_item_description, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_26(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_item_description, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_item_description_by_id: " << e.what() << std::endl;
-        }
+inline boost::mysql::results item_accessory_orm::sp_select_all_by_id(boost::mysql::tcp_connection* conn, int id)
+{
+    boost::mysql::results result;
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_13(?)");
+        conn->execute(stmt.bind(id), result);
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_select_all_by_id: " << e.what() << std::endl;
+    }
+    return result;
+}
     
 
-    void ORM::sp_set_item_effect_by_id(boost::mysql::tcp_connection& conn, int new_item_effect, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_27(?, ?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(new_item_effect, id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_set_item_effect_by_id: " << e.what() << std::endl;
-        }
+inline std::uint64_t item_accessory_orm::sp_set_item_name_by_id(boost::mysql::tcp_connection* conn, std::string new_item_name, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_15(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_item_name, id), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_item_name_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
-    void ORM::sp_delete_by_id(boost::mysql::tcp_connection& conn, int id) {
-        try {
-            auto stmt = conn.prepare_statement("CALL sp_28(?)");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(id), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        } catch (const boost::mysql::error_with_diagnostics& e) {
-            std::cerr << "Error in sp_delete_by_id: " << e.what() << std::endl;
-        }
+inline std::uint64_t item_accessory_orm::sp_set_item_description_by_id(boost::mysql::tcp_connection* conn, std::string new_item_description, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_16(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_item_description, id), result);
+        return result.affected_rows();
     }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_item_description_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
+    
+
+inline std::uint64_t item_accessory_orm::sp_set_item_effect_by_id(boost::mysql::tcp_connection* conn, int new_item_effect, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_17(?, ?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(new_item_effect, id), result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_set_item_effect_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
+    
+
+inline std::uint64_t item_accessory_orm::sp_delete_by_id(boost::mysql::tcp_connection* conn, int id)
+{
+    try
+    {
+        auto stmt = conn->prepare_statement("CALL sp_18(?)");
+        boost::mysql::results result;
+        conn->execute(stmt.bind(id), result);
+        return result.affected_rows();
+    }
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {
+        std::cerr << "Error in sp_delete_by_id: " << e.what() << std::endl;
+        return 0;
+    }
+}
     
 
 } // namespace ORM

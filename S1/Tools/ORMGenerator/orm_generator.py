@@ -122,137 +122,295 @@ class OrmGenerator:
     def generate_table_class(self, output_path: str, table_name: str, columns: List[ColumnInfo],
                              indices: List[IndexInfo]) -> None:
         """테이블별로 C++ 구조체와 관련 함수들을 생성"""
-        struct_str = f"""
+        class_name = f"{table_name}_orm"
+        header_str = f"""
 #pragma once
 
 #include <boost/mysql.hpp>
 #include <boost/mysql/tcp.hpp>
 #include <boost/describe.hpp>
-#include <vector>
 #include <string>
-#include <chrono>
+#include <iostream>
+#include <format>
 
 namespace ORM {{
 
 struct {table_name}
 {{
-    // 멤버 변수
     {self._generate_member_variables(columns)}
 }};
+
 BOOST_DESCRIBE_STRUCT({table_name}, (), ({', '.join(col.column_name for col in columns)}));
 
-// 데이터베이스 연산
-void insert(boost::mysql::tcp_connection& conn, const {table_name}& obj);
-std::vector<{table_name}> select_all(boost::mysql::tcp_connection& conn);
-{self._generate_select_by_index_declarations(table_name, indices)}
-{self._generate_update_declarations(table_name, columns, indices)}
-{self._generate_delete_declarations(table_name, indices)}
+class {class_name}
+{{
+public:
+    // 데이터베이스 쿼리 호출
+    {self._generate_db_operation_declarations(table_name, columns, indices)}
 
-// 저장 프로시저 호출
-{self._generate_sp_declarations(table_name, columns, indices)}
+    // 저장 프로시저 호출
+    {self._generate_sp_declarations(table_name, columns, indices)}
+}};
 
-// 구현부
-{self._generate_insert_implementation(table_name, columns)}
-{self._generate_select_all_implementation(table_name, columns)}
-{self._generate_select_by_index_implementations(table_name, columns, indices)}
-{self._generate_update_implementations(table_name, columns, indices)}
-{self._generate_delete_implementations(table_name, indices)}
+// 데이터베이스 쿼리 호출 구현부
+{self._generate_db_operation_implementations(table_name, columns, indices)}
+
+// 저장 프로시저 호출 구현부
 {self._generate_sp_implementations(table_name, columns, indices)}
 
 }} // namespace ORM
 """
+
         path = output_path
         file_name = f"{table_name}.hpp"
         full_path = os.path.join(path, file_name)
         with open(full_path, 'w', encoding='utf-8') as file:
-            file.write(struct_str)
+            file.write(header_str)
 
         print(f"Generated C++ struct and functions for table {table_name} in : {full_path}")
 
         self.generate_stored_procedures(table_name, columns, indices)  # DB상에 SP생성
 
 
-    def generate_stored_procedures(self, table_name: str, columns: List[ColumnInfo],
-                                   indices: List[IndexInfo]) -> None:
+    def _generate_db_operation_declarations(self, table_name: str, columns: List[ColumnInfo],
+                                            indices: List[IndexInfo]) -> str:
+        declarations = []
+
+        # Insert
+        insert_params = ', '.join(
+            [f"{self.cpp_type(col.data_type)} {col.column_name}" for col in columns if not col.is_auto_increment])
+        declarations.append(f"static bool insert(boost::mysql::tcp_connection* conn, {insert_params});")
+
+        # Select all
+        declarations.append(f"static boost::mysql::results select_all(boost::mysql::tcp_connection* conn);")
+
+        # Select by index
+        for index in indices:
+            params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
+            declarations.append(
+                f"static boost::mysql::results select_by_{'_and_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
+
+        # Update
+        for col in columns:
+            if not col.is_auto_increment:
+                for index in indices:
+                    params = f"{self.cpp_type(col.data_type)} new_{col.column_name}, " + ', '.join(
+                        [f"{self.cpp_type(idx_col.data_type)} {idx_col.column_name}" for idx_col in index.columns])
+                    declarations.append(
+                        f"static std::uint64_t update_{col.column_name}_by_{'_and_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
+
+        # Delete
+        for index in indices:
+            params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
+            declarations.append(
+                f"static std::uint64_t delete_by_{'_and_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
+
+        return '\n    '.join(declarations)
+
+
+    def _generate_db_operation_implementations(self, table_name: str, columns: List[ColumnInfo],
+                                               indices: List[IndexInfo]) -> str:
+        implementations = []
+
+        # Insert
+        insert_columns = [col for col in columns if not col.is_auto_increment]
+        insert_params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in insert_columns])
+        insert_values = ', '.join([f"{{{col.column_name}}}" for col in insert_columns])
+        implementations.append(f"""
+inline bool {table_name}_orm::insert(boost::mysql::tcp_connection* conn, {insert_params})
+{{
+    try
+    {{
+        boost::mysql::results result;
+        std::string query = std::format("INSERT INTO {table_name} ({', '.join([col.column_name for col in insert_columns])}) VALUES ({insert_values})");
+        conn->execute(query, result);
+        return result.affected_rows() > 0;
+    }}
+    catch (const boost::mysql::error_code& ec)
+    {{
+        std::cerr << ec.what() << std::endl;
+        return false;
+    }}
+}}
+    """)
+
+        # Select all
+        implementations.append(f"""
+inline boost::mysql::results {table_name}_orm::select_all(boost::mysql::tcp_connection* conn)
+{{
+    boost::mysql::results result;
+    try
+    {{
+        conn->execute("SELECT * FROM {table_name}", result);
+    }}
+    catch (const boost::mysql::error_code& ec)
+    {{
+        std::cerr << ec.what() << std::endl;
+    }}
+    return result;
+}}
+    """)
+
+        # Select by index
+        for index in indices:
+            params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
+            where_clause = ' AND '.join([f"{col.column_name} = {{{col.column_name}}}" for col in index.columns])
+            implementations.append(f"""
+inline boost::mysql::results {table_name}_orm::select_by_{'_and_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params})
+{{
+    boost::mysql::results result;
+    try
+    {{
+        std::string query = std::format("SELECT * FROM {table_name} WHERE {where_clause}");
+        conn->execute(query, result);
+    }}
+    catch (const boost::mysql::error_code& ec)
+    {{
+        std::cerr << ec.what() << std::endl;
+    }}
+    return result;
+}}
+    """)
+
+        # Update
+        for col in columns:
+            if not col.is_auto_increment:
+                for index in indices:
+                    params = f"{self.cpp_type(col.data_type)} new_{col.column_name}, " + ', '.join(
+                        [f"{self.cpp_type(idx_col.data_type)} {idx_col.column_name}" for idx_col in index.columns])
+                    where_clause = ' AND '.join(
+                        [f"{idx_col.column_name} = {{{idx_col.column_name}}}" for idx_col in index.columns])
+                    implementations.append(f"""
+inline std::uint64_t {table_name}_orm::update_{col.column_name}_by_{'_and_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection* conn, {params})
+{{
+    try
+    {{
+        boost::mysql::results result;
+        std::string query = std::format("UPDATE {table_name} SET {col.column_name} = {{new_{col.column_name}}} WHERE {where_clause}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }}
+    catch (const boost::mysql::error_code& ec)
+    {{
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }}
+}}
+    """)
+
+        # Delete
+        for index in indices:
+            params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
+            where_clause = ' AND '.join([f"{col.column_name} = {{{col.column_name}}}" for col in index.columns])
+            implementations.append(f"""
+inline std::uint64_t {table_name}_orm::delete_by_{'_and_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params})
+{{
+    try
+    {{
+        boost::mysql::results result;
+        std::string query = std::format("DELETE FROM {table_name} WHERE {where_clause}");
+        conn->execute(query, result);
+        return result.affected_rows();
+    }}
+    catch (const boost::mysql::error_code& ec)
+    {{
+        std::cerr << ec.what() << std::endl;
+        return 0;
+    }}
+}}
+    """)
+
+        return '\n'.join(implementations)
+
+
+    def generate_stored_procedures(self, table_name: str, columns: List[ColumnInfo], indices: List[IndexInfo]) -> None:
         sp_queries = []
 
         # INSERT 프로시저
-        insertable_columns = [col for col in columns if not (col.is_auto_increment or
-                                                             col.has_default_current_timestamp or
-                                                             col.has_on_update_current_timestamp)]
-        params = ', '.join([f'IN p_{col.column_name} {self.mysql_type(col.data_type)}' for col in insertable_columns])
-        columns_str = ', '.join([col.column_name for col in insertable_columns])
-        values_str = ', '.join([f'p_{col.column_name}' for col in insertable_columns])
-        sp_name = f"sp_{self.sp_counter}"
-        sp_queries.append((sp_name, f"""
-    CREATE PROCEDURE {sp_name}({params})
-    BEGIN
-        INSERT INTO {table_name} ({columns_str}) VALUES ({values_str});
-    END
-    """))
-        self.sp_mapping[f"insert_{table_name}"] = sp_name
-        self.sp_counter += 1
+        if f"insert_{table_name}" not in self.sp_mapping:
+            insertable_columns = [col for col in columns if not (col.is_auto_increment or
+                                                                 col.has_default_current_timestamp or
+                                                                 col.has_on_update_current_timestamp)]
+            params = ', '.join(
+                [f'IN p_{col.column_name} {self.mysql_type(col.data_type)}' for col in insertable_columns])
+            columns_str = ', '.join([col.column_name for col in insertable_columns])
+            values_str = ', '.join([f'p_{col.column_name}' for col in insertable_columns])
+            sp_name = f"sp_{self.sp_counter}"
+            sp_queries.append((sp_name, f"""
+            CREATE PROCEDURE {sp_name}({params})
+            BEGIN
+                INSERT INTO {table_name} ({columns_str}) VALUES ({values_str});
+            END
+            """))
+            self.sp_mapping[f"insert_{table_name}"] = sp_name
+            self.sp_counter += 1
 
         # SELECT ALL 프로시저
-        sp_name = f"sp_{self.sp_counter}"
-        sp_queries.append((sp_name, f"""
-    CREATE PROCEDURE {sp_name}()
-    BEGIN
-        SELECT * FROM {table_name};
-    END
-    """))
-        self.sp_mapping[f"select_all_from_{table_name}"] = sp_name
-        self.sp_counter += 1
+        if f"select_all_from_{table_name}" not in self.sp_mapping:
+            sp_name = f"sp_{self.sp_counter}"
+            sp_queries.append((sp_name, f"""
+            CREATE PROCEDURE {sp_name}()
+            BEGIN
+                SELECT * FROM {table_name};
+            END
+            """))
+            self.sp_mapping[f"select_all_from_{table_name}"] = sp_name
+            self.sp_counter += 1
 
         # SELECT BY INDEX 프로시저
         for index in indices:
-            params = ', '.join([f'IN p_{col.column_name} {self.mysql_type(col.data_type)}' for col in index.columns])
-            where_clause = ' AND '.join([f'{col.column_name} = p_{col.column_name}' for col in index.columns])
-            sp_name = f"sp_{self.sp_counter}"
-            sp_queries.append((sp_name, f"""
-    CREATE PROCEDURE {sp_name}({params})
-    BEGIN
-        SELECT * FROM {table_name} WHERE {where_clause};
-    END
-    """))
-            self.sp_mapping[
-                f"select_all_by_{'_and_'.join([col.column_name for col in index.columns])}_from_{table_name}"] = sp_name
-            self.sp_counter += 1
+            sp_key = f"select_all_by_{'_and_'.join([col.column_name for col in index.columns])}_from_{table_name}"
+            if sp_key not in self.sp_mapping:
+                params = ', '.join(
+                    [f'IN p_{col.column_name} {self.mysql_type(col.data_type)}' for col in index.columns])
+                where_clause = ' AND '.join([f'{col.column_name} = p_{col.column_name}' for col in index.columns])
+                sp_name = f"sp_{self.sp_counter}"
+                sp_queries.append((sp_name, f"""
+                CREATE PROCEDURE {sp_name}({params})
+                BEGIN
+                    SELECT * FROM {table_name} WHERE {where_clause};
+                END
+                """))
+                self.sp_mapping[sp_key] = sp_name
+                self.sp_counter += 1
 
         # UPDATE 프로시저
         for col in columns:
             if not col.is_auto_increment:
                 for index in indices:
-                    params = f'IN p_new_{col.column_name} {self.mysql_type(col.data_type)}, ' + ', '.join(
-                        [f'IN p_{idx_col.column_name} {self.mysql_type(idx_col.data_type)}' for idx_col in
-                         index.columns])
-                    where_clause = ' AND '.join(
-                        [f'{idx_col.column_name} = p_{idx_col.column_name}' for idx_col in index.columns])
-                    sp_name = f"sp_{self.sp_counter}"
-                    sp_queries.append((sp_name, f"""
-    CREATE PROCEDURE {sp_name}({params})
-    BEGIN
-        UPDATE {table_name} SET {col.column_name} = p_new_{col.column_name} WHERE {where_clause};
-    END
-    """))
-                    self.sp_mapping[
-                        f"update_{col.column_name}_by_{'_and_'.join([idx_col.column_name for idx_col in index.columns])}_from_{table_name}"] = sp_name
-                    self.sp_counter += 1
+                    sp_key = f"update_{col.column_name}_by_{'_and_'.join([idx_col.column_name for idx_col in index.columns])}_from_{table_name}"
+                    if sp_key not in self.sp_mapping:
+                        params = f'IN p_new_{col.column_name} {self.mysql_type(col.data_type)}, ' + ', '.join(
+                            [f'IN p_{idx_col.column_name} {self.mysql_type(idx_col.data_type)}' for idx_col in
+                             index.columns])
+                        where_clause = ' AND '.join(
+                            [f'{idx_col.column_name} = p_{idx_col.column_name}' for idx_col in index.columns])
+                        sp_name = f"sp_{self.sp_counter}"
+                        sp_queries.append((sp_name, f"""
+                        CREATE PROCEDURE {sp_name}({params})
+                        BEGIN
+                            UPDATE {table_name} SET {col.column_name} = p_new_{col.column_name} WHERE {where_clause};
+                        END
+                        """))
+                        self.sp_mapping[sp_key] = sp_name
+                        self.sp_counter += 1
 
         # DELETE 프로시저
         for index in indices:
-            params = ', '.join([f'IN p_{col.column_name} {self.mysql_type(col.data_type)}' for col in index.columns])
-            where_clause = ' AND '.join([f'{col.column_name} = p_{col.column_name}' for col in index.columns])
-            sp_name = f"sp_{self.sp_counter}"
-            sp_queries.append((sp_name, f"""
-    CREATE PROCEDURE {sp_name}({params})
-    BEGIN
-        DELETE FROM {table_name} WHERE {where_clause};
-    END
-    """))
-            self.sp_mapping[
-                f"delete_by_{'_and_'.join([col.column_name for col in index.columns])}_from_{table_name}"] = sp_name
-            self.sp_counter += 1
+            sp_key = f"delete_by_{'_and_'.join([col.column_name for col in index.columns])}_from_{table_name}"
+            if sp_key not in self.sp_mapping:
+                params = ', '.join(
+                    [f'IN p_{col.column_name} {self.mysql_type(col.data_type)}' for col in index.columns])
+                where_clause = ' AND '.join([f'{col.column_name} = p_{col.column_name}' for col in index.columns])
+                sp_name = f"sp_{self.sp_counter}"
+                sp_queries.append((sp_name, f"""
+                CREATE PROCEDURE {sp_name}({params})
+                BEGIN
+                    DELETE FROM {table_name} WHERE {where_clause};
+                END
+                """))
+                self.sp_mapping[sp_key] = sp_name
+                self.sp_counter += 1
 
         # 저장 프로시저 실행
         for sp_name, query in sp_queries:
@@ -271,7 +429,6 @@ std::vector<{table_name}> select_all(boost::mysql::tcp_connection& conn);
 
         self.conn.commit()
 
-
     def _generate_member_variables(self, columns: List[ColumnInfo]) -> str:
         """멤버 변수 생성"""
         return '\n    '.join(
@@ -286,7 +443,7 @@ std::vector<{table_name}> select_all(boost::mysql::tcp_connection& conn);
         for index in indices:
             params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
             declarations.append(
-                f"std::vector<{table_name}> select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params});")
+                f"std::vector<{table_name}> select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
         return '\n'.join(declarations)
 
 
@@ -300,7 +457,7 @@ std::vector<{table_name}> select_all(boost::mysql::tcp_connection& conn);
                     params = f"{self.cpp_type(col.data_type)} new_{col.column_name}, " + ', '.join(
                         [f"{self.cpp_type(idx_col.data_type)} {idx_col.column_name}" for idx_col in index.columns])
                     declarations.append(
-                        f"void update_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection& conn, {params});")
+                        f"void update_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
         return '\n'.join(declarations)
 
 
@@ -310,31 +467,45 @@ std::vector<{table_name}> select_all(boost::mysql::tcp_connection& conn);
         for index in indices:
             params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
             declarations.append(
-                f"void delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params});")
+                f"void delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
         return '\n'.join(declarations)
 
 
     def _generate_sp_declarations(self, table_name: str, columns: List[ColumnInfo], indices: List[IndexInfo]) -> str:
-        """저장 프로시저 호출 메서드 선언 생성"""
         declarations = []
-        declarations.append(f"void sp_insert(boost::mysql::tcp_connection& conn, const {table_name}& obj);")
-        declarations.append(f"std::vector<{table_name}> sp_select_all(boost::mysql::tcp_connection& conn);")
+
+        # sp_insert
+        insertable_columns = [col for col in columns if not (col.is_auto_increment or
+                                                             col.has_default_current_timestamp or
+                                                             col.has_on_update_current_timestamp)]
+        params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in insertable_columns])
+        declarations.append(f"static bool sp_insert(boost::mysql::tcp_connection* conn, {params});")
+
+        # sp_select_all
+        declarations.append(f"static boost::mysql::results sp_select_all(boost::mysql::tcp_connection* conn);")
+
+        # sp_select_by_index
         for index in indices:
             params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
             declarations.append(
-                f"std::vector<{table_name}> sp_select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params});")
+                f"static boost::mysql::results sp_select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
+
+        # sp_update
         for col in columns:
             if not (col.is_auto_increment or col.is_primary_key or col.has_on_update_current_timestamp):
                 for index in indices:
                     params = f"{self.cpp_type(col.data_type)} new_{col.column_name}, " + ', '.join(
                         [f"{self.cpp_type(idx_col.data_type)} {idx_col.column_name}" for idx_col in index.columns])
                     declarations.append(
-                        f"void sp_set_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection& conn, {params});")
+                        f"static std::uint64_t sp_set_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
+
+        # sp_delete
         for index in indices:
             params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
             declarations.append(
-                f"void sp_delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params});")
-        return '\n'.join(declarations)
+                f"static std::uint64_t sp_delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params});")
+
+        return '\n    '.join(declarations)
 
 
     def _generate_insert_implementation(self, table_name: str, columns: List[ColumnInfo]) -> str:
@@ -347,8 +518,8 @@ std::vector<{table_name}> select_all(boost::mysql::tcp_connection& conn);
         values = ', '.join([f'obj.{col.column_name}' for col in insertable_columns])
 
         return f"""
-void ORM::insert(boost::mysql::tcp_connection& conn, const {table_name}& obj) {{
-    conn.execute("INSERT INTO {table_name} ({insert_columns}) VALUES ({placeholders})",
+void ORM::insert(boost::mysql::tcp_connection* conn, const {table_name}& obj) {{
+    conn->execute("INSERT INTO {table_name} ({insert_columns}) VALUES ({placeholders})",
                  {values});
 }}
 """
@@ -361,9 +532,9 @@ void ORM::insert(boost::mysql::tcp_connection& conn, const {table_name}& obj) {{
              for i, col in enumerate(columns)])
 
         return f"""
-std::vector<{table_name}> ORM::select_all(boost::mysql::tcp_connection& conn) {{
+std::vector<{table_name}> ORM::select_all(boost::mysql::tcp_connection* conn) {{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM {table_name}", result);
+    conn->execute("SELECT * FROM {table_name}", result);
     std::vector<{table_name}> objects;
     for (const auto& row : result.rows()) {{
         {table_name} obj;
@@ -387,9 +558,9 @@ std::vector<{table_name}> ORM::select_all(boost::mysql::tcp_connection& conn) {{
                  for i, col in enumerate(columns)])
 
             implementations.append(f"""
-std::vector<{table_name}> ORM::select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params}) {{
+std::vector<{table_name}> ORM::select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params}) {{
     boost::mysql::results result;
-    conn.execute("SELECT * FROM {table_name} WHERE {where_clause}",
+    conn->execute("SELECT * FROM {table_name} WHERE {where_clause}",
                  {', '.join([col.column_name for col in index.columns])});
     std::vector<{table_name}> objects;
     for (const auto& row : result.rows()) {{
@@ -415,8 +586,8 @@ std::vector<{table_name}> ORM::select_all_by_{'_N_'.join([col.column_name for co
                     where_clause = ' AND '.join([f"{idx_col.column_name} = ?" for idx_col in index.columns])
 
                     implementations.append(f"""
-void ORM::update_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection& conn, {params}) {{
-    conn.execute("UPDATE {table_name} SET {col.column_name} = ? WHERE {where_clause}",
+void ORM::update_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection* conn, {params}) {{
+    conn->execute("UPDATE {table_name} SET {col.column_name} = ? WHERE {where_clause}",
                  new_{col.column_name}, {', '.join([idx_col.column_name for idx_col in index.columns])});
 }}
 """)
@@ -431,8 +602,8 @@ void ORM::update_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_c
             where_clause = ' AND '.join([f"{col.column_name} = ?" for col in index.columns])
 
             implementations.append(f"""
-void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params}) {{
-    conn.execute("DELETE FROM {table_name} WHERE {where_clause}",
+void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params}) {{
+    conn->execute("DELETE FROM {table_name} WHERE {where_clause}",
                  {', '.join([col.column_name for col in index.columns])});
 }}
 """)
@@ -441,6 +612,7 @@ void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boo
 
     def _generate_sp_implementations(self, table_name: str, columns: List[ColumnInfo], indices: List[IndexInfo]) -> str:
         implementations = []
+        class_name = f"{table_name}_orm"
 
         # sp_insert
         sp_name = self.sp_mapping.get(f"insert_{table_name}")
@@ -449,40 +621,44 @@ void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boo
                                                                  col.has_default_current_timestamp or
                                                                  col.has_on_update_current_timestamp)]
             params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in insertable_columns])
-            values = ', '.join([f"obj.{col.column_name}" for col in insertable_columns])
+            values = ', '.join([col.column_name for col in insertable_columns])
             implementations.append(f"""
-    void ORM::sp_insert(boost::mysql::tcp_connection& conn, const {table_name}& obj) {{
-        try {{
-            auto stmt = conn.prepare_statement("CALL {sp_name}({', '.join(['?' for _ in insertable_columns])})");
-            boost::mysql::results result;
-            conn.execute(stmt.bind({values}), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        }} catch (const boost::mysql::error_with_diagnostics& e) {{
-            std::cerr << "Error in sp_insert: " << e.what() << std::endl;
-        }}
+inline bool {class_name}::sp_insert(boost::mysql::tcp_connection* conn, {params})
+{{
+    try
+    {{
+        auto stmt = conn->prepare_statement("CALL {sp_name}({', '.join(['?' for _ in insertable_columns])})");
+        boost::mysql::results result;
+        conn->execute(stmt.bind({values}), result);
+        std::cout << "Affected rows: " << result.affected_rows() << std::endl;
+        return result.affected_rows() > 0;
     }}
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {{
+        std::cerr << "Error in sp_insert: " << e.what() << std::endl;
+        return false;
+    }}
+}}
     """)
 
         # sp_select_all
         sp_name = self.sp_mapping.get(f"select_all_from_{table_name}")
         if sp_name:
             implementations.append(f"""
-    std::vector<{table_name}> ORM::sp_select_all(boost::mysql::tcp_connection& conn) {{
-        std::vector<{table_name}> objects;
-        try {{
-            auto stmt = conn.prepare_statement("CALL {sp_name}()");
-            boost::mysql::results result;
-            conn.execute(stmt.bind(), result);
-            for (const auto& row : result.rows()) {{
-                {table_name} obj;
-                {self._generate_row_to_object_assignments(columns)}
-                objects.push_back(obj);
-            }}
-        }} catch (const boost::mysql::error_with_diagnostics& e) {{
-            std::cerr << "Error in sp_select_all: " << e.what() << std::endl;
-        }}
-        return objects;
+inline boost::mysql::results {class_name}::sp_select_all(boost::mysql::tcp_connection* conn)
+{{
+    boost::mysql::results result;
+    try
+    {{
+        auto stmt = conn->prepare_statement("CALL {sp_name}()");
+        conn->execute(stmt.bind(), result);
     }}
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {{
+        std::cerr << "Error in sp_select_all: " << e.what() << std::endl;
+    }}
+    return result;
+}}
     """)
 
         # sp_select_by_index
@@ -493,22 +669,20 @@ void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boo
                 params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
                 bind_params = ', '.join([col.column_name for col in index.columns])
                 implementations.append(f"""
-    std::vector<{table_name}> ORM::sp_select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params}) {{
-        std::vector<{table_name}> objects;
-        try {{
-            auto stmt = conn.prepare_statement("CALL {sp_name}({', '.join(['?' for _ in index.columns])})");
-            boost::mysql::results result;
-            conn.execute(stmt.bind({bind_params}), result);
-            for (const auto& row : result.rows()) {{
-                {table_name} obj;
-                {self._generate_row_to_object_assignments(columns)}
-                objects.push_back(obj);
-            }}
-        }} catch (const boost::mysql::error_with_diagnostics& e) {{
-            std::cerr << "Error in sp_select_all_by_{'_N_'.join([col.column_name for col in index.columns])}: " << e.what() << std::endl;
-        }}
-        return objects;
+inline boost::mysql::results {class_name}::sp_select_all_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params})
+{{
+    boost::mysql::results result;
+    try
+    {{
+        auto stmt = conn->prepare_statement("CALL {sp_name}({', '.join(['?' for _ in index.columns])})");
+        conn->execute(stmt.bind({bind_params}), result);
     }}
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {{
+        std::cerr << "Error in sp_select_all_by_{'_N_'.join([col.column_name for col in index.columns])}: " << e.what() << std::endl;
+    }}
+    return result;
+}}
     """)
 
         # sp_update
@@ -523,16 +697,21 @@ void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boo
                         bind_params = f"new_{col.column_name}, " + ', '.join(
                             [idx_col.column_name for idx_col in index.columns])
                         implementations.append(f"""
-    void ORM::sp_set_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection& conn, {params}) {{
-        try {{
-            auto stmt = conn.prepare_statement("CALL {sp_name}({', '.join(['?' for _ in range(len(index.columns) + 1)])})");
-            boost::mysql::results result;
-            conn.execute(stmt.bind({bind_params}), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        }} catch (const boost::mysql::error_with_diagnostics& e) {{
-            std::cerr << "Error in sp_set_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}: " << e.what() << std::endl;
-        }}
+inline std::uint64_t {class_name}::sp_set_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}(boost::mysql::tcp_connection* conn, {params})
+{{
+    try
+    {{
+        auto stmt = conn->prepare_statement("CALL {sp_name}({', '.join(['?' for _ in range(len(index.columns) + 1)])})");
+        boost::mysql::results result;
+        conn->execute(stmt.bind({bind_params}), result);
+        return result.affected_rows();
     }}
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {{
+        std::cerr << "Error in sp_set_{col.column_name}_by_{'_N_'.join([idx_col.column_name for idx_col in index.columns])}: " << e.what() << std::endl;
+        return 0;
+    }}
+}}
     """)
 
         # sp_delete
@@ -543,16 +722,21 @@ void ORM::delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boo
                 params = ', '.join([f"{self.cpp_type(col.data_type)} {col.column_name}" for col in index.columns])
                 bind_params = ', '.join([col.column_name for col in index.columns])
                 implementations.append(f"""
-    void ORM::sp_delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection& conn, {params}) {{
-        try {{
-            auto stmt = conn.prepare_statement("CALL {sp_name}({', '.join(['?' for _ in index.columns])})");
-            boost::mysql::results result;
-            conn.execute(stmt.bind({bind_params}), result);
-            std::cout << "Affected rows: " << result.affected_rows() << std::endl;
-        }} catch (const boost::mysql::error_with_diagnostics& e) {{
-            std::cerr << "Error in sp_delete_by_{'_N_'.join([col.column_name for col in index.columns])}: " << e.what() << std::endl;
-        }}
+inline std::uint64_t {class_name}::sp_delete_by_{'_N_'.join([col.column_name for col in index.columns])}(boost::mysql::tcp_connection* conn, {params})
+{{
+    try
+    {{
+        auto stmt = conn->prepare_statement("CALL {sp_name}({', '.join(['?' for _ in index.columns])})");
+        boost::mysql::results result;
+        conn->execute(stmt.bind({bind_params}), result);
+        return result.affected_rows();
     }}
+    catch (const boost::mysql::error_with_diagnostics& e)
+    {{
+        std::cerr << "Error in sp_delete_by_{'_N_'.join([col.column_name for col in index.columns])}: " << e.what() << std::endl;
+        return 0;
+    }}
+}}
     """)
 
         return '\n'.join(implementations)

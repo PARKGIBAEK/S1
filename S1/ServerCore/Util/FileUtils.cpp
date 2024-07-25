@@ -30,20 +30,20 @@ String FileUtils::Convert(const std::string& str)
     if (str.empty())
         return ret;
 
-    // ¹®ÀÚ¿­ÀÇ ±æÀÌ¸¦ ±¸ÇÕ´Ï´Ù.
+    // ë¬¸ìì—´ì˜ ê¸¸ì´ë¥¼ êµ¬í•©ë‹ˆë‹¤.
     size_t srcLen = str.size();
     size_t retLen = std::mbstowcs(nullptr, str.c_str(), 0);
 
     if (retLen == static_cast<size_t>(-1))
     {
-        // º¯È¯¿¡ ½ÇÆĞÇÑ °æ¿ì Ã³¸® (¿¹: Àß¸øµÈ UTF-8 ÀÔ·Â)
-        // ÇÊ¿äÇÑ °æ¿ì ÀûÀıÇÑ ¿¹¿Ü Ã³¸®¸¦ Ãß°¡ÇÕ´Ï´Ù.
+        // ë³€í™˜ì— ì‹¤íŒ¨í•œ ê²½ìš° ì²˜ë¦¬ (ì˜ˆ: ì˜ëª»ëœ UTF-8 ì…ë ¥)
+        // í•„ìš”í•œ ê²½ìš° ì ì ˆí•œ ì˜ˆì™¸ ì²˜ë¦¬ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
         throw std::runtime_error("Invalid UTF-8 sequence");
     }
-    // º¯È¯µÈ ¹®ÀÚ¿­ÀÇ Å©±â¸¦ Á¶Á¤ÇÕ´Ï´Ù.
+    // ë³€í™˜ëœ ë¬¸ìì—´ì˜ í¬ê¸°ë¥¼ ì¡°ì •í•©ë‹ˆë‹¤.
     ret.resize(retLen);
 
-    // ¸ÖÆ¼¹ÙÀÌÆ® ¹®ÀÚ¿­À» ¿ÍÀÌµå ¹®ÀÚ¿­·Î º¯È¯ÇÕ´Ï´Ù.
+    // ë©€í‹°ë°”ì´íŠ¸ ë¬¸ìì—´ì„ ì™€ì´ë“œ ë¬¸ìì—´ë¡œ ë³€í™˜í•©ë‹ˆë‹¤.
     std::mbstowcs(ret.data(), str.c_str(), retLen);
 
     return ret;

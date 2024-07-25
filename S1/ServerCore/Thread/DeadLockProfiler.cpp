@@ -12,7 +12,7 @@ void DeadLockProfiler::PushLock(const char* _name)
 {
 	LockGuard guard(mtxLock);
 
-	// ¾ÆÀÌµğ¸¦ Ã£°Å³ª ¹ß±ŞÇÑ´Ù.
+	// ì•„ì´ë””ë¥¼ ì°¾ê±°ë‚˜ ë°œê¸‰í•œë‹¤.
 	int32 lockId = 0;
 
 	auto findIt = nameToId.find(_name);
@@ -27,13 +27,13 @@ void DeadLockProfiler::PushLock(const char* _name)
 		lockId = findIt->second;
 	}
 
-	// ÇöÀç ¾²·¹µå¿¡¼­ Àâ°í ÀÖ´Â ¶ôÀÌ ÀÖ¾ú´Ù¸é
+	// í˜„ì¬ ì“°ë ˆë“œì—ì„œ ì¡ê³  ìˆëŠ” ë½ì´ ìˆì—ˆë‹¤ë©´
 	if (tls_LockStack.empty() == false)
 	{
-		// Àâ°í ÀÖ´Â ¶ô Áß¿¡¼­ Á÷Àü¿¡ ÀâÀº ¶ôÀÇ ID Á¶È¸
+		// ì¡ê³  ìˆëŠ” ë½ ì¤‘ì—ì„œ ì§ì „ì— ì¡ì€ ë½ì˜ ID ì¡°íšŒ
 		const int32 prevId = tls_LockStack.top();
-		// ±âÁ¸¿¡ ¹ß°ßµÇÁö ¾ÊÀº ÄÉÀÌ½º¶ó¸é µ¥µå¶ô ¿©ºÎ ´Ù½Ã È®ÀÎÇÑ´Ù.
-		if (lockId != prevId)// Áö±İ ÀâÀ¸·Á´Â ¶ôÀÌ ¹Ù·Î Á÷Àü¿¡ ÀâÀº ¶ôÀÌ ¾Æ´Ñ°æ¿ì
+		// ê¸°ì¡´ì— ë°œê²¬ë˜ì§€ ì•Šì€ ì¼€ì´ìŠ¤ë¼ë©´ ë°ë“œë½ ì—¬ë¶€ ë‹¤ì‹œ í™•ì¸í•œë‹¤.
+		if (lockId != prevId)// ì§€ê¸ˆ ì¡ìœ¼ë ¤ëŠ” ë½ì´ ë°”ë¡œ ì§ì „ì— ì¡ì€ ë½ì´ ì•„ë‹Œê²½ìš°
 		{
 			std::set<int32>& history = lockHistory[prevId];
 			if (history.find(lockId) == history.end())
@@ -72,7 +72,7 @@ void DeadLockProfiler::CheckCycle()
 	for (int32 lockId = 0; lockId < lockCount; lockId++)
 		DFS(lockId);
 
-	// ¿¬»êÀÌ ³¡³µÀ¸¸é Á¤¸®ÇÑ´Ù.
+	// ì—°ì‚°ì´ ëë‚¬ìœ¼ë©´ ì •ë¦¬í•œë‹¤.
 	discoveredOrder.clear();
 	finished.clear();
 	parent.clear();
@@ -85,7 +85,7 @@ void DeadLockProfiler::DFS(int32 _here)
 
 	discoveredOrder[_here] = discoveredCount++;
 
-	// ¸ğµç ÀÎÁ¢ÇÑ Á¤Á¡À» ¼øÈ¸ÇÏ±â
+	// ëª¨ë“  ì¸ì ‘í•œ ì •ì ì„ ìˆœíšŒí•˜ê¸°
 	auto findIt = lockHistory.find(_here);
 	if (findIt == lockHistory.end())
 	{
@@ -96,7 +96,7 @@ void DeadLockProfiler::DFS(int32 _here)
 	std::set<int32>& nextSet = findIt->second;
 	for (int32 there : nextSet)
 	{
-		// ¾ÆÁ÷ ¹æ¹®ÇÑ ÀûÀÌ ¾ø´Â Á¤Á¡ÀÌ¶ó¸é ¹æ¹®ÇÏ±â
+		// ì•„ì§ ë°©ë¬¸í•œ ì ì´ ì—†ëŠ” ì •ì ì´ë¼ë©´ ë°©ë¬¸í•˜ê¸°
 		if (discoveredOrder[there] == -1)
 		{
 			parent[there] = _here;
@@ -104,11 +104,11 @@ void DeadLockProfiler::DFS(int32 _here)
 			continue;
 		}
 
-		// here°¡ thereº¸´Ù ¸ÕÀú ¹ß°ßµÇ¾ú´Ù¸é, there´Â hereÀÇ ÈÄ¼ÕÀÌ´Ù. (¼ø¹æÇâ °£¼±)
+		// hereê°€ thereë³´ë‹¤ ë¨¼ì € ë°œê²¬ë˜ì—ˆë‹¤ë©´, thereëŠ” hereì˜ í›„ì†ì´ë‹¤. (ìˆœë°©í–¥ ê°„ì„ )
 		if (discoveredOrder[_here] < discoveredOrder[there])
 			continue;
 
-		// ¼ø¹æÇâÀÌ ¾Æ´Ï°í, Dfs(there)°¡ ¾ÆÁ÷ Á¾·áÇÏÁö ¾Ê¾Ò´Ù¸é, there´Â hereÀÇ ¼±Á¶ÀÌ´Ù. (¿ª¹æÇâ °£¼±)
+		// ìˆœë°©í–¥ì´ ì•„ë‹ˆê³ , Dfs(there)ê°€ ì•„ì§ ì¢…ë£Œí•˜ì§€ ì•Šì•˜ë‹¤ë©´, thereëŠ” hereì˜ ì„ ì¡°ì´ë‹¤. (ì—­ë°©í–¥ ê°„ì„ )
 		if (finished[there] == false)
 		{
 			printf("%s -> %s\n", idToName[_here], idToName[there]);

@@ -1,5 +1,7 @@
-﻿#include "TimerItem.h"
+#include "TimerItem.h"
 #include "Job/JobData.h"
+
+
 
 namespace ServerCore
 {

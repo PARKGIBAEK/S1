@@ -5,6 +5,8 @@
 #include "Util/Time.h"
 #include "Memory/ObjectPool.h"
 
+
+
 namespace ServerCore
 {
 void JobTimer::Reserve(uint64 tickAfter, std::weak_ptr<JobQueue> owner, std::shared_ptr<Job> job)
@@ -19,7 +21,7 @@ void JobTimer::Reserve(uint64 tickAfter, std::weak_ptr<JobQueue> owner, std::sha
 
 void JobTimer::Distribute(uint64 now)
 {
-	/* atomic lock (ÇÑ ¹ø¿¡ ÇÑ ¾²·¹µå¸¸ Åë°ú) */
+	/* atomic lock (í•œ ë²ˆì— í•œ ì“°ë ˆë“œë§Œ í†µê³¼) */
 	if (_distributing.exchange(true) == true)
 		return;
 
@@ -29,7 +31,7 @@ void JobTimer::Distribute(uint64 now)
 		WRITE_LOCK;
 
 		while (_items.empty() == false)
-		{ // ½ÇÇàÇØ¾ßÇÒ TimerItem(Job)À» ²¨³½´Ù
+		{ // ì‹¤í–‰í•´ì•¼í•  TimerItem(Job)ì„ êº¼ë‚¸ë‹¤
 			const TimerItem& timerItem = _items.top();
 			if (now < timerItem.executeTick)
 				break;
@@ -40,14 +42,14 @@ void JobTimer::Distribute(uint64 now)
 	}
 
 	for (TimerItem& item : items)
-	{ // ²¨³»¿Â JobÀ» ¼ÒÀ¯ÇÏ°í ÀÖ´Â JobQueue°¡ À¯È¿ÇÑ °æ¿ì ¼ÒÀ¯ÀÚÀÎ JoqQueue¿¡ ³Ö¾îÁØ´Ù
+	{ // êº¼ë‚´ì˜¨ Jobì„ ì†Œìœ í•˜ê³  ìˆëŠ” JobQueueê°€ ìœ íš¨í•œ ê²½ìš° ì†Œìœ ìì¸ JoqQueueì— ë„£ì–´ì¤€ë‹¤
 		if (std::shared_ptr<JobQueue> owner = item.jobData->owner.lock())
-			owner->Push(item.jobData->job, true);// JobQueue¿¡ Push¸¸ÇÏ°í ½ÇÇàÀº ½ÃÅ°Áö ¾ÊÀ½
+			owner->Push(item.jobData->job, true);// JobQueueì— Pushë§Œí•˜ê³  ì‹¤í–‰ì€ ì‹œí‚¤ì§€ ì•ŠìŒ
 
-		ObjectPool<JobData>::Push(item.jobData); // pool¿¡ ¹İÈ¯
+		ObjectPool<JobData>::Push(item.jobData); // poolì— ë°˜í™˜
 	}
 
-	// ³¡³µÀ¸¸é Ç®¾îÁØ´Ù
+	// ëë‚¬ìœ¼ë©´ í’€ì–´ì¤€ë‹¤
 	_distributing.store(false);
 }
 

@@ -8,14 +8,14 @@ namespace API.Services;
 
 /* JWT 인증 토큰을 발급 받기 위한 랜덤키를 DB에 생성하고 가져온다
  * 참고로 '~Service'류의 네이밍은 DbContext를 통해 DB와 통신하는 것들이다 */
-public class KeyService(MyDbContext dbContext)
+public class KeyService(GameDbContext dbContext)
 {
     // GetActiveKeys 메서드를 수정하여 SymmetricSecurityKey를 직접 반환
     public List<SecurityKey> GetActiveKeys()
     {
         try
         {
-            var keys = dbContext.auth_key
+            var keys = dbContext.auth_keys
                 .Where(k => k.created_at > DateTime.UtcNow.AddDays(-1))
                 .Select(k => new SymmetricSecurityKey(Convert.FromBase64String(k.key_value)) as SecurityKey)
                 .ToList();
@@ -23,12 +23,12 @@ public class KeyService(MyDbContext dbContext)
             if (!keys.Any())
             {
                 GenerateAndSaveKey();
-                keys = dbContext.auth_key
+                keys = dbContext.auth_keys
                     .Where(k => k.created_at > DateTime.UtcNow.AddDays(-1))
                     .Select(k => new SymmetricSecurityKey(Convert.FromBase64String(k.key_value)) as SecurityKey)
                     .ToList();
             }
-        
+
             return keys;
         }
         catch (Exception ex)
@@ -39,7 +39,7 @@ public class KeyService(MyDbContext dbContext)
             return new List<SecurityKey>();
         }
     }
-    
+
     public void GenerateAndSaveKey()
     {
         var newRandomGeneratedKey = GenerateRandomKey();
@@ -49,16 +49,16 @@ public class KeyService(MyDbContext dbContext)
             created_at = DateTime.UtcNow,
         };
 
-        dbContext.auth_key.Add(keyEntity);
+        dbContext.auth_keys.Add(keyEntity);
         dbContext.SaveChanges();
     }
-    
+
     // key valid in 24 hours
     public void DeleteExpiredKeys()
     {
         var expiryDate = DateTime.UtcNow.AddDays(-1); // keys generated before 24 hours
-        var expiredKeys = dbContext.auth_key.Where(k => k.created_at <= expiryDate).ToList();
-        dbContext.auth_key.RemoveRange(expiredKeys);
+        var expiredKeys = dbContext.auth_keys.Where(k => k.created_at <= expiryDate).ToList();
+        dbContext.auth_keys.RemoveRange(expiredKeys);
         dbContext.SaveChanges();
     }
 
@@ -73,5 +73,5 @@ public class KeyService(MyDbContext dbContext)
         randomNumberGenerator.GetBytes(byteArray);
         return Convert.ToBase64String(byteArray);
     }
-    
+
 }

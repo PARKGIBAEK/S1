@@ -2,19 +2,20 @@
 #include <memory>
 #include "Util/LockQueue.h"
 
-
 namespace ServerCore
 {
+
 class JobQueue;
-/* std::shared_ptr<JobQueue>¸¦ ³Ñ°Ü ´Ù¸¥ ¿©À¯ ÀÖ´Â ¾²·¹µå¿¡¼­ 
-   JobQueueÀÇ ÀÏ°¨À» Ã³¸®ÇÒ ¼ö ÀÖµµ·ÏÇÏ´Â ÀÏÁ¾ÀÇ ºĞ»ê ½Ã½ºÅÛ*/
+/* std::shared_ptr<JobQueue>ë¥¼ ë„˜ê²¨ ë‹¤ë¥¸ ì—¬ìœ  ìˆëŠ” ì“°ë ˆë“œì—ì„œ
+ * JobQueueì˜ ì¼ê°ì„ ì²˜ë¦¬í•  ìˆ˜ ìˆë„ë¡í•˜ëŠ” ì¼ì¢…ì˜ ë¶„ì‚° ì‹œìŠ¤í…œ
+ */
 class GlobalQueue
 {
 public:
-	void					Push(std::shared_ptr<JobQueue> jobQueue);
-	std::shared_ptr<JobQueue> 				Pop();
+    void    Push(std::shared_ptr<JobQueue> jobQueue);
+    std::shared_ptr<JobQueue>   Pop();
 
-private: 
-	LockQueue<std::shared_ptr<JobQueue> > _jobQueues;
+private:
+    LockQueue<std::shared_ptr<JobQueue>> _jobQueues;
 };
 }

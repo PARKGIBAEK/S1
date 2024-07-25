@@ -25,7 +25,7 @@ void RecvBuffer::Clean()
     }
     else if (FreeSize() < bufferSize)
     {
-        // ¿©À¯ °ø°£ÀÌ ¹öÆÛ 1°³ Å©±â ¹Ì¸¸ÀÌ¸é, µ¥ÀÌÅÍ¸¦ ¾ÕÀ¸·Î ´ç±â±â
+        // ì—¬ìœ  ê³µê°„ì´ ë²„í¼ 1ê°œ í¬ê¸° ë¯¸ë§Œì´ë©´, ë°ì´í„°ë¥¼ ì•žìœ¼ë¡œ ë‹¹ê¸°ê¸°
         ::memcpy(&buffer[0], &buffer[readCursor], dataSize);
         readCursor = 0;
         writeCursor = dataSize;

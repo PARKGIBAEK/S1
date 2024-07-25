@@ -1,4 +1,4 @@
-﻿#include "Path.h"
+#include "Path.h"
 
 #include <filesystem>
 #include <stdexcept>

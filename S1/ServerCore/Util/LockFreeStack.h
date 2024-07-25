@@ -1,9 +1,9 @@
 #pragma once
 #include "Core/Types.h"
 #include <memory>
-//  »ç¿ë ¾ÈÇÔ
+//  ì‚¬ìš© ì•ˆí•¨
 
-/*	Lock-free Stack (Reference Count¸¦ Á÷Á¢ ±¸ÇöÇÏ¿© ABA ¹®Á¦ ÇØ°áÇÏ´Â ¹æ½Ä)*/
+/*	Lock-free Stack (Reference Countë¥¼ ì§ì ‘ êµ¬í˜„í•˜ì—¬ ABA ë¬¸ì œ í•´ê²°í•˜ëŠ” ë°©ì‹)*/
 
 namespace ServerCore
 {
@@ -14,7 +14,7 @@ class LockFreeStack
 
 	struct CountedNodePtr
 	{
-		int32 externalCount = 0;// Push ÇÏ¸é 1·Î ½ÃÀÛ
+		int32 externalCount = 0;// Push í•˜ë©´ 1ë¡œ ì‹œì‘
 		struct Node* ptr = nullptr;
 	};
 
@@ -24,7 +24,7 @@ class LockFreeStack
 		{	}
 
 		std::shared_ptr<T> data;
-		std::atomic<int32> internalCount = 0;// ´Ù¸¥ ThreadµéÀÌ ´õ ÀÌ»ó Á¢±ÙÇÏÁö ¾Ê´ÂÁö È®ÀÎÇÏ±â À§ÇÑ ¿ëµµ ( TryPopÇÔ¼ö¿¡¼­ °Çµå¸² )
+		std::atomic<int32> internalCount = 0;// ë‹¤ë¥¸ Threadë“¤ì´ ë” ì´ìƒ ì ‘ê·¼í•˜ì§€ ì•ŠëŠ”ì§€ í™•ì¸í•˜ê¸° ìœ„í•œ ìš©ë„ ( TryPopí•¨ìˆ˜ì—ì„œ ê±´ë“œë¦¼ )
 		CountedNodePtr next;
 	};
 
@@ -32,13 +32,13 @@ public:
 
 	void Push(const T& value)
 	{
-		CountedNodePtr node;//»õ·Î »ğÀÔÇÒ ³ëµå externalCount´Â 0À¸·Î ½ÃÀÛÇÔ
+		CountedNodePtr node;//ìƒˆë¡œ ì‚½ì…í•  ë…¸ë“œ externalCountëŠ” 0ìœ¼ë¡œ ì‹œì‘í•¨
 		node.ptr = new Node(value);
-		node.externalCount = 1;//¿ÜºÎ ÂüÁ¶ Ä«¿îÆ® 1·Î »ı¼º
+		node.externalCount = 1;//ì™¸ë¶€ ì°¸ì¡° ì¹´ìš´íŠ¸ 1ë¡œ ìƒì„±
 
-		node.ptr->next = head;// head´Â °¡Àå top ³ëµå
-		/*head == node.NodePtr->next ÀÏ °æ¿ì(´Ù¸¥ ½º·¹µåÀÇ °£¼·À» ¹ŞÁö ¾ÊÀº »óÈ²), head = node , true ¹İÈ¯,
-		  head != node.NodePtr->next ÀÏ °æ¿ì(´Ù¸¥ ½º·¹µåÀÇ °£¼·À» ¹ŞÀº »óÈ²), node.NodePtr->next = head , false ¹İÈ¯(·çÇÁ Àç ÁøÀÔÇÏ°ÔµÇ°í ÀÌ¹ø¿¡ °£¼·¹ŞÁö ¾Ê¾Ò´Ù¸é Åë°ú)*/
+		node.ptr->next = head;// headëŠ” ê°€ì¥ top ë…¸ë“œ
+		/*head == node.NodePtr->next ì¼ ê²½ìš°(ë‹¤ë¥¸ ìŠ¤ë ˆë“œì˜ ê°„ì„­ì„ ë°›ì§€ ì•Šì€ ìƒí™©), head = node , true ë°˜í™˜,
+		  head != node.NodePtr->next ì¼ ê²½ìš°(ë‹¤ë¥¸ ìŠ¤ë ˆë“œì˜ ê°„ì„­ì„ ë°›ì€ ìƒí™©), node.NodePtr->next = head , false ë°˜í™˜(ë£¨í”„ ì¬ ì§„ì…í•˜ê²Œë˜ê³  ì´ë²ˆì— ê°„ì„­ë°›ì§€ ì•Šì•˜ë‹¤ë©´ í†µê³¼)*/
 		while (head.compare_exchange_weak(node.ptr->next, node) == false)
 		{
 		}
@@ -46,25 +46,25 @@ public:
 
 	std::shared_ptr<T> TryPop()
 	{
-		CountedNodePtr oldHead = head;//head ³ëµå ²¨³»¿À±â
+		CountedNodePtr oldHead = head;//head ë…¸ë“œ êº¼ë‚´ì˜¤ê¸°
 		while (true)
 		{
-			// ÂüÁ¶±Ç È¹µæ (externalCount¸¦ Çö ½ÃÁ¡ ±âÁØ +1 ÇÑ Thread°¡ ÀÌ±è)
-			IncreaseHeadCount(oldHead);// IncreaseHeadCountÇÔ¼ö´Â externalCount¸¦ 1Áõ°¡½ÃÅ´
+			// ì°¸ì¡°ê¶Œ íšë“ (externalCountë¥¼ í˜„ ì‹œì  ê¸°ì¤€ +1 í•œ Threadê°€ ì´ê¹€)
+			IncreaseHeadCount(oldHead);// IncreaseHeadCountí•¨ìˆ˜ëŠ” externalCountë¥¼ 1ì¦ê°€ì‹œí‚´
 
-			// PushÇÒ ¶§ externalCount°¡ 1·Î º¯°æµÇ¹Ç·Î externalCount´Â ÃÖ¼ÒÇÑ 2ÀÌ»ó ÀÏÅ×´Ï »èÁ¦X  (¾ÈÀüÇÏ°Ô Á¢±ÙÇÒ ¼ö ÀÖ´Â)
+			// Pushí•  ë•Œ externalCountê°€ 1ë¡œ ë³€ê²½ë˜ë¯€ë¡œ externalCountëŠ” ìµœì†Œí•œ 2ì´ìƒ ì¼í…Œë‹ˆ ì‚­ì œX  (ì•ˆì „í•˜ê²Œ ì ‘ê·¼í•  ìˆ˜ ìˆëŠ”)
 			Node* ptr = oldHead.ptr;
 
-			if (ptr == nullptr)// µ¥ÀÌÅÍ ¾øÀ» ½Ã
+			if (ptr == nullptr)// ë°ì´í„° ì—†ì„ ì‹œ
 				return std::shared_ptr<T>();
 
-			// ¼ÒÀ¯±Ç È¹µæ (head¸¦ NodePtr->next·Î º¯°æÇÑ Thread°¡ ÀÌ±è)
-			if (head.compare_exchange_strong(oldHead, ptr->next))//Ã³À½ºÎÅÍ head¿Í oldHead°¡ °°Àº °æ¿ì : ¾ÆÁ÷ ´Ù¸¥ ½º·¹µå¿¡¼­ stack¿¡ ¼ÕÀ» ´ëÁö ¾ÊÀº »óÈ²
+			// ì†Œìœ ê¶Œ íšë“ (headë¥¼ NodePtr->nextë¡œ ë³€ê²½í•œ Threadê°€ ì´ê¹€)
+			if (head.compare_exchange_strong(oldHead, ptr->next))//ì²˜ìŒë¶€í„° headì™€ oldHeadê°€ ê°™ì€ ê²½ìš° : ì•„ì§ ë‹¤ë¥¸ ìŠ¤ë ˆë“œì—ì„œ stackì— ì†ì„ ëŒ€ì§€ ì•Šì€ ìƒí™©
 			{
 				std::shared_ptr<T> res;
 				res.swap(ptr->data);
 
-				// external(ÂüÁ¶±Ç È¹µæ ½Ã 1Áõ°¡) : 1 -> 2(³ª+1) -> 4(³ª+1 ³²+2)
+				// external(ì°¸ì¡°ê¶Œ íšë“ ì‹œ 1ì¦ê°€) : 1 -> 2(ë‚˜+1) -> 4(ë‚˜+1 ë‚¨+2)
 				// internal : 1 -> 0
 				const int32 countIncrease = oldHead.externalCount - 2;
 
@@ -73,9 +73,9 @@ public:
 
 				return res;
 			}
-			else if (ptr->internalCount.fetch_sub(1) == 1)//internalCount°¡ 1ÀÌ¸é ³ª¸¸ ³²Àº »óÅÂÀÌ¹Ç·Î »èÁ¦
+			else if (ptr->internalCount.fetch_sub(1) == 1)//internalCountê°€ 1ì´ë©´ ë‚˜ë§Œ ë‚¨ì€ ìƒíƒœì´ë¯€ë¡œ ì‚­ì œ
 			{
-				// ÂüÁ¶±ÇÀº ¾ò¾úÀ¸³ª, ¼ÒÀ¯±ÇÀº ½ÇÆĞ -> µŞ¼ö½ÀÀº ³»°¡ ÇÑ´Ù
+				// ì°¸ì¡°ê¶Œì€ ì–»ì—ˆìœ¼ë‚˜, ì†Œìœ ê¶Œì€ ì‹¤íŒ¨ -> ë’·ìˆ˜ìŠµì€ ë‚´ê°€ í•œë‹¤
 				delete ptr;
 			}
 		}
@@ -88,7 +88,7 @@ private:
 		{
 			CountedNodePtr newCounter = oldCounter;
 			newCounter.externalCount++;
-			//head´Â top ³ëµåÀÌ¹Ç·Î oldCounter¿Í ´Ù¸£´Ù¸é, ´Ù¸¥ ¾²·¹µå°¡ Áß°£¿¡ ³ëµå¸¦ pop¶Ç´Â pushÇÑ °æ¿ì
+			//headëŠ” top ë…¸ë“œì´ë¯€ë¡œ oldCounterì™€ ë‹¤ë¥´ë‹¤ë©´, ë‹¤ë¥¸ ì“°ë ˆë“œê°€ ì¤‘ê°„ì— ë…¸ë“œë¥¼ popë˜ëŠ” pushí•œ ê²½ìš°
 			if (head.compare_exchange_strong(oldCounter, newCounter))
 			{
 				oldCounter.externalCount = newCounter.externalCount;
@@ -98,7 +98,7 @@ private:
 	}
 
 private:
-	std::atomic<CountedNodePtr> head; // Å¾ ³ëµå¸¦ °¡¸®Å´
+	std::atomic<CountedNodePtr> head; // íƒ‘ ë…¸ë“œë¥¼ ê°€ë¦¬í‚´
 };
 
 
@@ -106,7 +106,7 @@ private:
 
 /*============================================
  
-	Lock-free Stack (Chain-Pending List ¹æ½Ä)
+	Lock-free Stack (Chain-Pending List ë°©ì‹)
 
 ============================================*/
 
@@ -128,28 +128,28 @@ class LockFreeStack_ChainPending
 
 public:
 
-	// 1) »õ ³ëµå¸¦ ¸¸µé°í
-	// 2) »õ ³ëµåÀÇ next = head
-	// 3) head = »õ ³ëµå
+	// 1) ìƒˆ ë…¸ë“œë¥¼ ë§Œë“¤ê³ 
+	// 2) ìƒˆ ë…¸ë“œì˜ next = head
+	// 3) head = ìƒˆ ë…¸ë“œ
 	void Push(const T& value)
 	{
-		Node* node = new Node(value);//»õ·Î¿î ³ëµå »ı¼º
-		node->next = head;//»õ·Î¿î ³ëµå¿¡ Çìµå ¿¬°á
+		Node* node = new Node(value);//ìƒˆë¡œìš´ ë…¸ë“œ ìƒì„±
+		node->next = head;//ìƒˆë¡œìš´ ë…¸ë“œì— í—¤ë“œ ì—°ê²°
 
-		/*Áß°£¿¡ ´Ù¸¥ ¾²·¹µå°¡ ³¢¾îµé¾î head°¡ º¯°æµÇ¾úÀ» ¼ö ÀÖÀ¸¹Ç·Î È®ÀÎÇÏ±â
-		* head == node->next ÀÇ °æ¿ì (¾ÆÁ÷ head°¡ º¯°æµÇÁö ¾ÊÀ½)head°¡ »õ·Î »ı¼ºµÈ node¸¦ °¡¸®Å°µµ·Ï º¯°æÇÏ°í Á¾·á.
-		* head != node->next ÀÇ °æ¿ì (head°¡ º¯°æ µÈ°ÍÀÌ±â ¶§¹®¿¡) node->next°¡ °¡¸®Å°´Â ´ë»óÀ» »õ·Î¿î head·Î ¹Ù²ãÁÖ°í ´Ù½Ã ·çÇÁ¸¦ µ·´Ù.
+		/*ì¤‘ê°„ì— ë‹¤ë¥¸ ì“°ë ˆë“œê°€ ë¼ì–´ë“¤ì–´ headê°€ ë³€ê²½ë˜ì—ˆì„ ìˆ˜ ìˆìœ¼ë¯€ë¡œ í™•ì¸í•˜ê¸°
+		* head == node->next ì˜ ê²½ìš° (ì•„ì§ headê°€ ë³€ê²½ë˜ì§€ ì•ŠìŒ)headê°€ ìƒˆë¡œ ìƒì„±ëœ nodeë¥¼ ê°€ë¦¬í‚¤ë„ë¡ ë³€ê²½í•˜ê³  ì¢…ë£Œ.
+		* head != node->next ì˜ ê²½ìš° (headê°€ ë³€ê²½ ëœê²ƒì´ê¸° ë•Œë¬¸ì—) node->nextê°€ ê°€ë¦¬í‚¤ëŠ” ëŒ€ìƒì„ ìƒˆë¡œìš´ headë¡œ ë°”ê¿”ì£¼ê³  ë‹¤ì‹œ ë£¨í”„ë¥¼ ëˆë‹¤.
 		*/
 		while (head.compare_exchange_weak(node->next, node) == false)
 		{
 		}
 	}
 
-	// 1) head ÀĞ±â
-	// 2) head->next ÀĞ±â
+	// 1) head ì½ê¸°
+	// 2) head->next ì½ê¸°
 	// 3) head = head->next
-	// 4) data ÃßÃâÇØ¼­ ¹İÈ¯
-	// 5) ÃßÃâÇÑ ³ëµå¸¦ »èÁ¦
+	// 4) data ì¶”ì¶œí•´ì„œ ë°˜í™˜
+	// 5) ì¶”ì¶œí•œ ë…¸ë“œë¥¼ ì‚­ì œ
 	bool TryPop(T& value)
 	{
 		++popCount;
@@ -171,37 +171,37 @@ public:
 		return true;
 	}
 
-	// 1) µ¥ÀÌÅÍ ºĞ¸®
-	// 2) Count Ã¼Å©
-	// 3) ³ª È¥ÀÚ¸é »èÁ¦
+	// 1) ë°ì´í„° ë¶„ë¦¬
+	// 2) Count ì²´í¬
+	// 3) ë‚˜ í˜¼ìë©´ ì‚­ì œ
 	void TryDelete(Node* oldHead)
 	{
-		// ³ª ¿Ü¿¡ ´©°¡ ÀÖ´Â°¡?
+		// ë‚˜ ì™¸ì— ëˆ„ê°€ ìˆëŠ”ê°€?
 		if (popCount == 1)
 		{
-			// ³ª È¥ÀÚ³×?
+			// ë‚˜ í˜¼ìë„¤?
 
-			// ÀÌ¿Õ È¥ÀÚÀÎ°Å, »èÁ¦ ¿¹¾àµÈ ´Ù¸¥ µ¥ÀÌÅÍµéµµ »èÁ¦ÇØº¸ÀÚ
-			Node* node = pendingList.exchange(nullptr);//±âÁ¸ÀÇ pendingList°¡ °¡¸®Å°´ø ÁÖ¼Ò¸¦ ¹İÈ¯ÇÏ°í, pendingList´Â nullptrÀ» °¡¸®Å°µµ·Ï º¯°æ
+			// ì´ì™• í˜¼ìì¸ê±°, ì‚­ì œ ì˜ˆì•½ëœ ë‹¤ë¥¸ ë°ì´í„°ë“¤ë„ ì‚­ì œí•´ë³´ì
+			Node* node = pendingList.exchange(nullptr);//ê¸°ì¡´ì˜ pendingListê°€ ê°€ë¦¬í‚¤ë˜ ì£¼ì†Œë¥¼ ë°˜í™˜í•˜ê³ , pendingListëŠ” nullptrì„ ê°€ë¦¬í‚¤ë„ë¡ ë³€ê²½
 
 			if (--popCount == 0)
 			{
-				// ³¢¾îµç ¾Ö°¡ ¾øÀ½ -> »èÁ¦ ÁøÇà
-				// ÀÌÁ¦¿Í¼­ ³¢¾îµé¾îµµ, ¾îÂ÷ÇÇ »èÁ¦ÇØ¾ßÇÒ µ¥ÀÌÅÍ(pendingList)´Â ºĞ¸®ÇØµĞ »óÅÂ~!
+				// ë¼ì–´ë“  ì• ê°€ ì—†ìŒ -> ì‚­ì œ ì§„í–‰
+				// ì´ì œì™€ì„œ ë¼ì–´ë“¤ì–´ë„, ì–´ì°¨í”¼ ì‚­ì œí•´ì•¼í•  ë°ì´í„°(pendingList)ëŠ” ë¶„ë¦¬í•´ë‘” ìƒíƒœ~!
 				DeleteNodes(node);
 			}
 			else if (node)
 			{
-				// ´©°¡ ³¢¾îµé¾úÀ¸´Ï ´Ù½Ã °®´Ù ³õÀÚ
+				// ëˆ„ê°€ ë¼ì–´ë“¤ì—ˆìœ¼ë‹ˆ ë‹¤ì‹œ ê°–ë‹¤ ë†“ì
 				ChainPendingNodeList(node);
 			}
 
-			// ³» µ¥ÀÌÅÍ¸¸ »èÁ¦
+			// ë‚´ ë°ì´í„°ë§Œ ì‚­ì œ
 			delete oldHead;
 		}
 		else
 		{
-			// ´©°¡ ÀÖ³×? ±×·³ Áö±İ »èÁ¦ÇÏÁö ¾Ê°í, »èÁ¦ ¿¹¾à¸¸
+			// ëˆ„ê°€ ìˆë„¤? ê·¸ëŸ¼ ì§€ê¸ˆ ì‚­ì œí•˜ì§€ ì•Šê³ , ì‚­ì œ ì˜ˆì•½ë§Œ
 			ChainPendingNode(oldHead);
 			--popCount;
 		}
@@ -243,7 +243,7 @@ public:
 private:
 	std::atomic<Node*> head;
 
-	std::atomic<uint32> popCount = 0; // PopÀ» ½ÇÇàÁßÀÎ ¾²·¹µå °³¼ö
-	std::atomic<Node*> pendingList; // »èÁ¦ µÇ¾î¾ß ÇÒ ³ëµåµé (Ã¹¹øÂ° ³ëµå)
+	std::atomic<uint32> popCount = 0; // Popì„ ì‹¤í–‰ì¤‘ì¸ ì“°ë ˆë“œ ê°œìˆ˜
+	std::atomic<Node*> pendingList; // ì‚­ì œ ë˜ì–´ì•¼ í•  ë…¸ë“œë“¤ (ì²«ë²ˆì§¸ ë…¸ë“œ)
 };
 }

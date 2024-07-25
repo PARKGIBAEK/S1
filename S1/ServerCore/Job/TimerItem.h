@@ -1,5 +1,7 @@
-﻿#pragma once
+#pragma once
 #include "Core/Types.h"
+
+
 
 namespace ServerCore
 {

@@ -1,4 +1,4 @@
-﻿#include "BaseAllocator.h"
+#include "BaseAllocator.h"
 
 
 namespace ServerCore

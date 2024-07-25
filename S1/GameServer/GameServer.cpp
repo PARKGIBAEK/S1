@@ -3,26 +3,38 @@
 #include <boost/asio/co_spawn.hpp>
 #include <boost/asio/spawn.hpp>
 #include <boost/mysql/static_results.hpp>
-#include "LibConfig.h" // ¶óÀÌºê·¯¸® ¸µÅ·À» À§ÇÑ ÄÚµå
-#include "Core/GlobalInitializer.h" // °¡Àå ¸ÕÀú Æ÷ÇÔ ½ÃÄÑ¾ß Àü¿ª °´Ã¼ ÃÊ±âÈ­°¡ ¼ø¼­ º¸ÀåµÊ
+#include "LibConfig.h" // ë¼ì´ë¸ŒëŸ¬ë¦¬ ë§í‚¹ì„ ìœ„í•œ ì½”ë“œ
+#include "Core/GlobalInitializer.h" // ê°€ì¥ ë¨¼ì € í¬í•¨ ì‹œì¼œì•¼ ì „ì—­ ê°ì²´ ì´ˆê¸°í™”ê°€ ìˆœì„œ ë³´ì¥ë¨
 #include "DB/ConnectionTest.h"
 #include "DB/MySqlConnectionPool.h"
+#include <boost/describe/class.hpp>
+
+#include "DB/ORMTest.h"
 
 using namespace ServerCore;
+using namespace DB;
+
 
 int main()
 {
-	std::cout << "TEST GameServer\n";
-	try
-	{
-		boost::asio::io_context ioContext;
-		// DB::ConnectionTest connectionTest("..\\..\\..\\DB\\config.txt", ioContext, 100);
-		// connectionTest.TestConnectionPool();
-		MySqlConnectionPool mysqlConnectionPool("..\\..\\..\\DB\\config.txt", ioContext, 100);
-		auto conn = mysqlConnectionPool.GetPooledConnection();
-	}
-	catch (std::exception ex)
-	{
-		std::cout << ex.what();
-	}
+    std::cout << "TEST GameServer\n";
+    try
+    {
+        boost::asio::io_context ioContext;
+        // DB::ConnectionTest connectionTest("..\\..\\..\\DB\\config.txt", ioContext, 100);
+        // connectionTest.TestConnectionPool();
+        MySqlConnectionPool mysqlConnectionPool("..\\..\\..\\DB\\config.txt", ioContext, 100);
+        // auto conn = mysqlConnectionPool.GetPooledConnection();
+
+        ORMTest test(&ioContext,&mysqlConnectionPool);
+        test.StartTest();
+    }
+    catch (boost::mysql::error_code& ec)
+    {
+        std::cout << ec.what();
+    }
+    catch (std::exception& ex)
+    {
+        std::cout << ex.what();
+    }
 }

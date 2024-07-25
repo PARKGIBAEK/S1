@@ -26,14 +26,14 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<WeatherForecast> Get()
+    public IEnumerable<weather_forecast> Get()
     {
         var rng = new Random();
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        return Enumerable.Range(1, 5).Select(index => new weather_forecast
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                date = DateTime.Now.AddDays(index),
+                temperature_c = rng.Next(-20, 55),
+                summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
     }

@@ -1,4 +1,4 @@
-﻿#include "MySqlConnectionPool.h"
+#include "MySqlConnectionPool.h"
 #include <fstream>
 #include <iostream>
 #include <boost/asio.hpp>
@@ -8,11 +8,10 @@
 #include <boost/mysql/handshake_params.hpp>
 #include "Util/Path.h"
 
-#if defined(DB_TEST_MODE)
-#endif
-using namespace ServerCore;
 
 
+namespace DB
+{
 // The CA file that signed the server's certificate
 constexpr const char CA_PEM[] = R"%(-----BEGIN CERTIFICATE-----
 MIIDZzCCAk+gAwIBAgIUWznm2UoxXw3j7HCcp9PpiayTvFQwDQYJKoZIhvcNAQEL
@@ -39,13 +38,13 @@ OzBrmpfHEhF6NDU=
 
 
 // '_filename' is a directory based on the path of the executable
-MySqlConnectionPool::MySqlConnectionPool(const std::string& _filename, asio::io_context& _ioContext, int32 _poolSize):
+MySqlConnectionPool::MySqlConnectionPool(const std::string& _filename, asio::io_context& _ioContext, std::int32_t _poolSize):
     m_connectionPool(_poolSize), m_ioContext(
         _ioContext)
 {
     try
     {
-        std::string configFilePath = Path::GetRelativeFilePath(_filename);
+        std::string configFilePath = ServerCore::Path::GetRelativeFilePath(_filename);
         m_connectionConfig = ReadConfig(configFilePath);
         if (false == CreateConnectionPool(_poolSize))
             throw std::runtime_error("Failed to create MySql connection pool");
@@ -61,7 +60,7 @@ MySqlConnectionPool::~MySqlConnectionPool()
     CleanupConnectionPool();
 }
 
-bool MySqlConnectionPool::CreateConnectionPool(int32 _poolCount)
+bool MySqlConnectionPool::CreateConnectionPool(std::int32_t _poolCount)
 {
     // Application config
     const std::string host = m_connectionConfig[Config::host];
@@ -180,7 +179,7 @@ void MySqlConnectionPool::CleanupConnectionPool()
     }
 }
 
-#if defined(DB_TEST_MODE)
+#if defined(MY_TEST_CODE)
 bool MySqlConnectionPool::TestConnect(mysql::tcp_connection* conn)
 {
     // test for user table.
@@ -241,7 +240,9 @@ bool MySqlConnectionPool::TestConnectionPool()
 
     for (auto& thread : threads)
         thread.join();
-    
+
     return true;
 }
 #endif
+
+}

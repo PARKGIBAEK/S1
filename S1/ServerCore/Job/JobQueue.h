@@ -20,9 +20,9 @@ public:
 		Push(ObjectPool<Job>::MakeShared(std::move(_callback)));
 	}
 
-	/*Ret(T::*memFunc)(Args...)´Â Template ¹®¹ıÀ¸·Î ÇÔ¼ö Æ÷ÀÎÅÍ¸¦ ±¸ÇöÇÑ °ÍÀÌ´Ù.
-	ÅÛÇÃ¸´ÀÎÀÚ TÀÇ ¸â¹ö ÇÔ¼ö¿¡ ´ëÇÑ ÇÔ¼ö Æ÷ÀÎÅÍ¸¦ ÀÇ¹Ì´Ù.
-	Áï, ¹İÈ¯Å¸ÀÔÀÌ RetÀÌ¸ç, °¡º¯ ÀÎÀÚ Args...¸¦ ¸Å°³º¯¼ö·Î °®´Â TÅ¬·¡½ºÀÇ ¸â¹ö ÇÔ¼ö Æ÷ÀÎÅÍ¸¦ ÁöÄªÇÑ´Ù.*/
+	/*Ret(T::*memFunc)(Args...)ëŠ” Template ë¬¸ë²•ìœ¼ë¡œ í•¨ìˆ˜ í¬ì¸í„°ë¥¼ êµ¬í˜„í•œ ê²ƒì´ë‹¤.
+	í…œí”Œë¦¿ì¸ì Tì˜ ë©¤ë²„ í•¨ìˆ˜ì— ëŒ€í•œ í•¨ìˆ˜ í¬ì¸í„°ë¥¼ ì˜ë¯¸ë‹¤.
+	ì¦‰, ë°˜í™˜íƒ€ì…ì´ Retì´ë©°, ê°€ë³€ ì¸ì Args...ë¥¼ ë§¤ê°œë³€ìˆ˜ë¡œ ê°–ëŠ” Tí´ë˜ìŠ¤ì˜ ë©¤ë²„ í•¨ìˆ˜ í¬ì¸í„°ë¥¼ ì§€ì¹­í•œë‹¤.*/
 	template <typename T, typename Ret, typename... Args>
 	void DoAsync(Ret(T::* _memFunc)(Args...), Args... _args)
 	{
@@ -47,8 +47,8 @@ public:
 	void ClearJobs() { _jobs.Clear(); }
 
 public:
-	/* _jobs¿¡ jobÀ» ³Ö´Â´Ù. ´Ü, ¹Ù»Ú¸é
-	pushOnly == false : JobÃ³¸®±îÁö ¼öÇà*/
+	/* _jobsì— jobì„ ë„£ëŠ”ë‹¤. ë‹¨, ë°”ì˜ë©´
+	pushOnly == false : Jobì²˜ë¦¬ê¹Œì§€ ìˆ˜í–‰*/
 
 	void Push(std::shared_ptr<Job> _job, bool _pushOnly = false);
 	void Execute();

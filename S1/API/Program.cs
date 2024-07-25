@@ -18,13 +18,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // execute an sp for init
-// Å×ÀÌºí ÀüºÎ ³¯¸®°í ÃÊ±âÈ­ ÇÔ(»ı¼ºµÈ À¯Àú °èÁ¤µµ ´Ù ³¯¶ó°¡¹Ç·Î ¿øÄ¡ ¾ÊÀ¸¸é ÁÖ¼®Ã³¸®)
-var sqlFilePath = Path.Combine(AppContext.BaseDirectory, "../../../DB/SQL/pre_stored_procedures.sql");
+// í…Œì´ë¸” ì „ë¶€ ë‚ ë¦¬ê³  ì´ˆê¸°í™” í•¨(ìƒì„±ëœ ìœ ì € ê³„ì •ë„ ë‹¤ ë‚ ë¼ê°€ë¯€ë¡œ ì›ì¹˜ ì•Šìœ¼ë©´ ì£¼ì„ì²˜ë¦¬)
+var sqlFilePath = Path.Combine(AppContext.BaseDirectory, "../../../DB/SQL/create_table.sql");
+
+if (connectionString == null)
+    throw new Exception("connectionString is null");
+
 MyQueryExecutor.ExecuteSqlScript(connectionString, sqlFilePath);
 
 
 // add DbContext to Services & set option 'UseMySql'
-builder.Services.AddDbContext<MyDbContext>(options =>
+builder.Services.AddDbContext<GameDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 
@@ -49,11 +53,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKeyResolver = (token, securityToken, kid, validationParameters) =>
             {
                 var keyService = builder.Services.BuildServiceProvider().GetRequiredService<KeyService>();
-                return keyService.GetActiveKeys(); // JWT ÀÎÁõ ÅäÅ«À» ¹ß±Ş ¹Ş±â À§ÇÑ ·£´ıÅ°¸¦ KeyService¿¡¼­ °¡Á®¿Â´Ù
+                return keyService.GetActiveKeys(); // JWT ì¸ì¦ í† í°ì„ ë°œê¸‰ ë°›ê¸° ìœ„í•œ ëœë¤í‚¤ë¥¼ KeyServiceì—ì„œ ê°€ì ¸ì˜¨ë‹¤
             },
             ClockSkew = TimeSpan.Zero
         };
-        
+
         options.Events = new JwtBearerEvents
         {
             OnAuthenticationFailed = context =>
@@ -77,7 +81,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 return Task.CompletedTask;
             }
         };
-});
+    });
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -98,31 +102,31 @@ builder.Services.AddSwaggerGen(options =>
     // add security definition
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        // swagger¿¡ BearerÇü½ÄÀÇ º¸¾È Á¤ÀÇ Ãß°¡
-        In = ParameterLocation.Header, // JWTÅäÅ«ÀÌ HTTP ¿äÃ»ÀÇ Çì´õ¿¡ Æ÷ÇÔµÊÀ» ³ªÅ¸³¿
-        Description = "Please enter JWT with Bearer into field", // Swagger UIÇ¥½Ã µÉ ¼³¸í
-        Name = "Authorization", // Çì´õ ÀÌ¸§À» AuthorizationÀ¸·Î
-        Type = SecuritySchemeType.ApiKey, // º¸¾È Á¤ÀÇÀÇ À¯ÇüÀ» ApiKey·Î ¼³Á¤
-        // ApiKey´Â HTTP Çì´õ, Äõ¸® ¸Å°³ º¯¼ö ¶Ç´Â ÄíÅ°¿¡ À§Ä¡ÇÒ ¼ö ÀÖ´Â API Å°¸¦ ³ªÅ¸³¿
-        Scheme = "Bearer" // º¸¾È ÀÎÁõ ½ºÅ°¸¶¸¦ Bearer·Î ¼³Á¤(Bearer ½ºÅ°¸¶´Â JWT ¶Ç´Â OAuth 2.0 ÅäÅ«À» »ç¿ëÇÔÀ» ³ªÅ¸³¿)
+        // swaggerì— Bearerí˜•ì‹ì˜ ë³´ì•ˆ ì •ì˜ ì¶”ê°€
+        In = ParameterLocation.Header, // JWTí† í°ì´ HTTP ìš”ì²­ì˜ í—¤ë”ì— í¬í•¨ë¨ì„ ë‚˜íƒ€ëƒ„
+        Description = "Please enter JWT with Bearer into field", // Swagger UIí‘œì‹œ ë  ì„¤ëª…
+        Name = "Authorization", // í—¤ë” ì´ë¦„ì„ Authorizationìœ¼ë¡œ
+        Type = SecuritySchemeType.ApiKey, // ë³´ì•ˆ ì •ì˜ì˜ ìœ í˜•ì„ ApiKeyë¡œ ì„¤ì •
+        // ApiKeyëŠ” HTTP í—¤ë”, ì¿¼ë¦¬ ë§¤ê°œ ë³€ìˆ˜ ë˜ëŠ” ì¿ í‚¤ì— ìœ„ì¹˜í•  ìˆ˜ ìˆëŠ” API í‚¤ë¥¼ ë‚˜íƒ€ëƒ„
+        Scheme = "Bearer" // ë³´ì•ˆ ì¸ì¦ ìŠ¤í‚¤ë§ˆë¥¼ Bearerë¡œ ì„¤ì •(Bearer ìŠ¤í‚¤ë§ˆëŠ” JWT ë˜ëŠ” OAuth 2.0 í† í°ì„ ì‚¬ìš©í•¨ì„ ë‚˜íƒ€ëƒ„)
     });
 
     // add security requirement
-    // ¸ğµç ¿£µåÆ÷ÀÎÆ®¿¡ ´ëÇØ Bearer ÅäÅ«À» ¿ä±¸ÇÏµµ·Ï ÁöÁ¤
+    // ëª¨ë“  ì—”ë“œí¬ì¸íŠ¸ì— ëŒ€í•´ Bearer í† í°ì„ ìš”êµ¬í•˜ë„ë¡ ì§€ì •
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
-        // OpenApiSecurityRequirement¸¦ »ç¿ëÇÏ¿© º¸¾È ½ºÅ°¸¶¿Í ÇØ´ç ½ºÅ°¸¶°¡ Àû¿ëµÇ´Â ½ºÄÚÇÁ¸¦ Á¤ÀÇ
+        // OpenApiSecurityRequirementë¥¼ ì‚¬ìš©í•˜ì—¬ ë³´ì•ˆ ìŠ¤í‚¤ë§ˆì™€ í•´ë‹¹ ìŠ¤í‚¤ë§ˆê°€ ì ìš©ë˜ëŠ” ìŠ¤ì½”í”„ë¥¼ ì •ì˜
         {
-            new OpenApiSecurityScheme // º¸¾È ½ºÅ°¸¶¸¦ Á¤ÀÇ
+            new OpenApiSecurityScheme // ë³´ì•ˆ ìŠ¤í‚¤ë§ˆë¥¼ ì •ì˜
             {
                 Reference = new OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme, // ÂüÁ¶ À¯ÇüÀ» SecuritySchemeÀ¸·Î ¼³Á¤
-                    Id = "Bearer" // À§¿¡¼­ Á¤ÀÇÇÑ Bearer º¸¾È ÀÎÁõ ½ºÅ°¸¶¸¦ ÂüÁ¶
+                    Type = ReferenceType.SecurityScheme, // ì°¸ì¡° ìœ í˜•ì„ SecuritySchemeìœ¼ë¡œ ì„¤ì •
+                    Id = "Bearer" // ìœ„ì—ì„œ ì •ì˜í•œ Bearer ë³´ì•ˆ ì¸ì¦ ìŠ¤í‚¤ë§ˆë¥¼ ì°¸ì¡°
                 }
             },
-            new string[] { } // ÀÌ º¸¾È ½ºÅ°¸¶°¡ ¸ğµç ½ºÄÚÇÁ¿¡ Àû¿ëµÊÀ» ³ªÅ¸³¿
-            // ºó ¹è¿­À» »ç¿ëÇÏ¿© ¸ğµç ¿£µåÆ÷ÀÎÆ®¿¡ ´ëÇØ ÀÌ ½ºÅ°¸¶¸¦ ¿ä±¸ÇÏµµ·Ï ¼³Á¤
+            new string[] { } // ì´ ë³´ì•ˆ ìŠ¤í‚¤ë§ˆê°€ ëª¨ë“  ìŠ¤ì½”í”„ì— ì ìš©ë¨ì„ ë‚˜íƒ€ëƒ„
+            // ë¹ˆ ë°°ì—´ì„ ì‚¬ìš©í•˜ì—¬ ëª¨ë“  ì—”ë“œí¬ì¸íŠ¸ì— ëŒ€í•´ ì´ ìŠ¤í‚¤ë§ˆë¥¼ ìš”êµ¬í•˜ë„ë¡ ì„¤ì •
         }
     });
 });
@@ -134,9 +138,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<MyDbContext>();
+    var context = services.GetRequiredService<GameDbContext>();
 
-    // µ¥ÀÌÅÍº£ÀÌ½º°¡ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì ¸¶ÀÌ±×·¹ÀÌ¼ÇÀ» Àû¿ëÇÏÁö ¾Ê°í °è¼Ó ÁøÇà
+    // ë°ì´í„°ë² ì´ìŠ¤ê°€ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê²½ìš° ë§ˆì´ê·¸ë ˆì´ì…˜ì„ ì ìš©í•˜ì§€ ì•Šê³  ê³„ì† ì§„í–‰
     if (context.Database.CanConnect())
     {
         Console.WriteLine("Database already exists. Skipping migration.");
@@ -153,10 +157,10 @@ using (var scope = app.Services.CreateScope())
         keyService.GenerateAndSaveKey();
     }
 
-    // 7ÀÏ ÀÌÀü Å° »èÁ¦
+    // 7ì¼ ì´ì „ í‚¤ ì‚­ì œ
     keyService.DeleteExpiredKeys();
 
-    // ÀÓ½Ã admin °èÁ¤ »ı¼ºÇÏ±â
+    // ì„ì‹œ admin ê³„ì • ìƒì„±í•˜ê¸°
     try
     {
         var userService = services.GetRequiredService<UserService>();

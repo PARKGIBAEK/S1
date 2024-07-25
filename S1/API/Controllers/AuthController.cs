@@ -41,6 +41,7 @@ public class AuthController : ControllerBase
         {
             return Ok("User registered successfully");
         }
+
         return BadRequest("Registration failed");
     }
 
@@ -67,12 +68,13 @@ public class AuthController : ControllerBase
                 new Claim(ClaimTypes.Name, login.UserId)
             }),
             Expires = DateTime.UtcNow.AddHours(1), // 만료 기간 1시간 
-            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512), // 인증 키를 512비트짜리로 변경(기본 256비트짜리이므로 변경하려면 HmacSha256으로 변경해야 함)
+            SigningCredentials =
+                new SigningCredentials(key,
+                    SecurityAlgorithms.HmacSha512), // 인증 키를 512비트짜리로 변경(기본 256비트짜리이므로 변경하려면 HmacSha256으로 변경해야 함)
             Issuer = _configuration["JwtSettings:Issuer"]
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);
-        // TODO : JWT token string을 발급해줬으면 이제는
 
         return Ok(new { Token = tokenString });
     }

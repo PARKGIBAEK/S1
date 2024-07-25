@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{E084CE59
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ModelGenerator", "Tools\ModelGenerator\ModelGenerator.pyproj", "{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ORMGenerator", "Tools\ORMGenerator\ORMGenerator.pyproj", "{82D4D711-0D39-416D-8B7E-9F529C98FF51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}.Release|x64.ActiveCfg = Release|Any CPU
+		{82D4D711-0D39-416D-8B7E-9F529C98FF51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82D4D711-0D39-416D-8B7E-9F529C98FF51}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{82D4D711-0D39-416D-8B7E-9F529C98FF51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82D4D711-0D39-416D-8B7E-9F529C98FF51}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7FDA1F6F-FC72-427F-91C9-44F70F409E91} = {E084CE59-9CDB-464B-8C76-48A8EB554F5B}
 		{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53} = {E084CE59-9CDB-464B-8C76-48A8EB554F5B}
+		{82D4D711-0D39-416D-8B7E-9F529C98FF51} = {E084CE59-9CDB-464B-8C76-48A8EB554F5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B97DE5F9-6982-4268-A4E7-E2F3FCCB9AD8}

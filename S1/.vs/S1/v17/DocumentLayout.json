@@ -3,8 +3,72 @@
   "WorkspaceRootPath": "D:\\GIT_REPOSITORIES\\S1\\S1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\ModelGenerator2.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|solutionrelative:Tools\\ModelGenerator\\ModelGenerator2.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{82D4D711-0D39-416D-8B7E-9F529C98FF51}|Tools\\ORMGenerator\\ORMGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\.editorconfig||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{82D4D711-0D39-416D-8B7E-9F529C98FF51}|Tools\\ORMGenerator\\ORMGenerator.pyproj|solutionrelative:Tools\\ORMGenerator\\.editorconfig||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82D4D711-0D39-416D-8B7E-9F529C98FF51}|Tools\\ORMGenerator\\ORMGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{82D4D711-0D39-416D-8B7E-9F529C98FF51}|Tools\\ORMGenerator\\ORMGenerator.pyproj|solutionrelative:Tools\\ORMGenerator\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\model_generator.py||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|solutionrelative:Tools\\ModelGenerator\\model_generator.py||{8B382828-6202-11D1-8870-0000F87579D2}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|solutionrelative:Tools\\ModelGenerator\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82D4D711-0D39-416D-8B7E-9F529C98FF51}|Tools\\ORMGenerator\\ORMGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{82D4D711-0D39-416D-8B7E-9F529C98FF51}|Tools\\ORMGenerator\\ORMGenerator.pyproj|solutionrelative:Tools\\ORMGenerator\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|solutionrelative:Tools\\ModelGenerator\\__init__.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\WebServerTest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|solutionrelative:GameServer\\WebServerTest.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\GameServer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|solutionrelative:GameServer\\GameServer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\WebServerTest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|solutionrelative:GameServer\\WebServerTest.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\Network\\ConstSendBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|solutionrelative:ServerCore\\Network\\ConstSendBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\Network\\ConstSendBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|solutionrelative:ServerCore\\Network\\ConstSendBuffer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\DB\\MySqlConnectionPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|solutionrelative:ServerCore\\DB\\MySqlConnectionPool.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\DB\\MySqlConnectionPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{04838F99-5129-465D-B358-E7C4BC17B946}|ServerCore\\ServerCore.vcxproj|solutionrelative:ServerCore\\DB\\MySqlConnectionPool.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\weather_forecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\weather_forecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\user_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\user_inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_characters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\user_characters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_accounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,76 +79,20 @@
       "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\item_weapons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_characters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\user_characters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_items.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\user_items.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\SqlParser.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|solutionrelative:Tools\\ModelGenerator\\SqlParser.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\ModelGenerator.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{5D41832E-2DCE-4E4F-AB75-79DB30BD5C53}|Tools\\ModelGenerator\\ModelGenerator.pyproj|solutionrelative:Tools\\ModelGenerator\\ModelGenerator.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\services\\keyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\services\\keyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\item_armors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\item_armors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\auth_key.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\auth_key.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\item_accessories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\item_accessories.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\user_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\user_test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\model\\item_armors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\model\\item_armors.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\data\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\data\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\db\\sql\\pre_stored_procedures.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\db\\sql\\pre_stored_procedures.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7FDA1F6F-FC72-427F-91C9-44F70F409E91}|Tools\\PacketGenerator\\PacketGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\PacketGenerator\\PacketGenerator.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7FDA1F6F-FC72-427F-91C9-44F70F409E91}|Tools\\PacketGenerator\\PacketGenerator.pyproj|solutionrelative:Tools\\PacketGenerator\\PacketGenerator.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7FDA1F6F-FC72-427F-91C9-44F70F409E91}|Tools\\PacketGenerator\\PacketGenerator.pyproj|D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\PacketGenerator\\ProtoParser.py||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7FDA1F6F-FC72-427F-91C9-44F70F409E91}|Tools\\PacketGenerator\\PacketGenerator.pyproj|solutionrelative:Tools\\PacketGenerator\\ProtoParser.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\GameServer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5F170422-89E6-4181-8CC1-F9E1448A4400}|GameServer\\GameServer.vcxproj|solutionrelative:GameServer\\GameServer.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|d:\\git_repositories\\s1\\s1\\api\\db\\myqueryexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28778192-F07E-4D81-8DC8-5695D6D59AD1}|API\\API.csproj|solutionrelative:api\\db\\myqueryexecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -93,90 +101,168 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
+          "DockedWidth": 206,
           "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ModelGenerator2.py",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\ModelGenerator2.py",
-              "RelativeDocumentMoniker": "Tools\\ModelGenerator\\ModelGenerator2.py",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\ModelGenerator2.py",
-              "RelativeToolTip": "Tools\\ModelGenerator\\ModelGenerator2.py",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAADAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-07-20T04:42:22.144Z",
+              "Title": ".editorconfig",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\.editorconfig",
+              "RelativeDocumentMoniker": "Tools\\ORMGenerator\\.editorconfig",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\.editorconfig",
+              "RelativeToolTip": "Tools\\ORMGenerator\\.editorconfig",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-07-24T04:31:15.887Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "item_weapons.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_weapons.cs",
-              "RelativeDocumentMoniker": "API\\Model\\item_weapons.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_weapons.cs",
-              "RelativeToolTip": "API\\Model\\item_weapons.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:47:59.825Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "auth_key.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\auth_key.cs",
-              "RelativeDocumentMoniker": "API\\Model\\auth_key.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\auth_key.cs",
-              "RelativeToolTip": "API\\Model\\auth_key.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:34:43.018Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "user_characters.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_characters.cs",
-              "RelativeDocumentMoniker": "API\\Model\\user_characters.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_characters.cs",
-              "RelativeToolTip": "API\\Model\\user_characters.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:48:00.64Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "user_accounts.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_accounts.cs",
-              "RelativeDocumentMoniker": "API\\Model\\user_accounts.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_accounts.cs",
-              "RelativeToolTip": "API\\Model\\user_accounts.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:48:01.302Z",
+              "Title": "model_generator.py",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\model_generator.py",
+              "RelativeDocumentMoniker": "Tools\\ModelGenerator\\model_generator.py",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\model_generator.py",
+              "RelativeToolTip": "Tools\\ModelGenerator\\model_generator.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-23T04:51:54.453Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "user_items.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_items.cs",
-              "RelativeDocumentMoniker": "API\\Model\\user_items.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_items.cs",
-              "RelativeToolTip": "API\\Model\\user_items.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:48:02.011Z",
+              "Title": "main.py",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\main.py",
+              "RelativeDocumentMoniker": "Tools\\ORMGenerator\\main.py",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\main.py",
+              "RelativeToolTip": "Tools\\ORMGenerator\\main.py",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAUwBsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-23T05:18:41.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "__init__.py (ORMGenerator)",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\__init__.py",
+              "RelativeDocumentMoniker": "Tools\\ORMGenerator\\__init__.py",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ORMGenerator\\__init__.py",
+              "RelativeToolTip": "Tools\\ORMGenerator\\__init__.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-23T05:41:02.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "__init__.py (ModelGenerator)",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\__init__.py",
+              "RelativeDocumentMoniker": "Tools\\ModelGenerator\\__init__.py",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\__init__.py",
+              "RelativeToolTip": "Tools\\ModelGenerator\\__init__.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-23T05:41:11.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameServer.cpp",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\GameServer.cpp",
+              "RelativeDocumentMoniker": "GameServer\\GameServer.cpp",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\GameServer.cpp",
+              "RelativeToolTip": "GameServer\\GameServer.cpp",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAwBQAAABYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-23T04:51:54.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "WebServerTest.cpp",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\WebServerTest.cpp",
+              "RelativeDocumentMoniker": "GameServer\\WebServerTest.cpp",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\WebServerTest.cpp",
+              "RelativeToolTip": "GameServer\\WebServerTest.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-23T05:26:56.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WebServerTest.h",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\WebServerTest.h",
+              "RelativeDocumentMoniker": "GameServer\\WebServerTest.h",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\WebServerTest.h",
+              "RelativeToolTip": "GameServer\\WebServerTest.h",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABwAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-23T05:26:59.836Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "ConstSendBuffer.cpp",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\Network\\ConstSendBuffer.cpp",
+              "RelativeDocumentMoniker": "ServerCore\\Network\\ConstSendBuffer.cpp",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\Network\\ConstSendBuffer.cpp",
+              "RelativeToolTip": "ServerCore\\Network\\ConstSendBuffer.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-23T05:25:22.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ConstSendBuffer.h",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\Network\\ConstSendBuffer.h",
+              "RelativeDocumentMoniker": "ServerCore\\Network\\ConstSendBuffer.h",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\Network\\ConstSendBuffer.h",
+              "RelativeToolTip": "ServerCore\\Network\\ConstSendBuffer.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-23T05:25:22.082Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "MySqlConnectionPool.h",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\DB\\MySqlConnectionPool.h",
+              "RelativeDocumentMoniker": "ServerCore\\DB\\MySqlConnectionPool.h",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\DB\\MySqlConnectionPool.h",
+              "RelativeToolTip": "ServerCore\\DB\\MySqlConnectionPool.h",
+              "ViewState": "AQIAACsAAAAAAAAAAAAAADQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-07-23T05:21:24.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "weather_forecast.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\weather_forecast.cs",
+              "RelativeDocumentMoniker": "API\\Model\\weather_forecast.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\weather_forecast.cs",
+              "RelativeToolTip": "API\\Model\\weather_forecast.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:19:09.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "user_test.cs",
               "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_test.cs",
               "RelativeDocumentMoniker": "API\\Model\\user_test.cs",
@@ -184,51 +270,64 @@
               "RelativeToolTip": "API\\Model\\user_test.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:48:02.783Z",
+              "WhenOpened": "2024-07-23T05:19:08.447Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Program.cs",
-              "RelativeDocumentMoniker": "API\\Program.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Program.cs",
-              "RelativeToolTip": "API\\Program.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAqwBYAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:08:22.33Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "item_accessories.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_accessories.cs",
-              "RelativeDocumentMoniker": "API\\Model\\item_accessories.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_accessories.cs",
-              "RelativeToolTip": "API\\Model\\item_accessories.cs",
+              "DocumentIndex": 15,
+              "Title": "user_inventory.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_inventory.cs",
+              "RelativeDocumentMoniker": "API\\Model\\user_inventory.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_inventory.cs",
+              "RelativeToolTip": "API\\Model\\user_inventory.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:47:56.474Z",
+              "WhenOpened": "2024-07-23T05:19:07.986Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "KeyService.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Services\\KeyService.cs",
-              "RelativeDocumentMoniker": "API\\Services\\KeyService.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Services\\KeyService.cs",
-              "RelativeToolTip": "API\\Services\\KeyService.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAArwC8AAAAMAAAA",
+              "DocumentIndex": 16,
+              "Title": "user_characters.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_characters.cs",
+              "RelativeDocumentMoniker": "API\\Model\\user_characters.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_characters.cs",
+              "RelativeToolTip": "API\\Model\\user_characters.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:51:37.324Z",
+              "WhenOpened": "2024-07-23T05:19:07.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
+              "Title": "user_accounts.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_accounts.cs",
+              "RelativeDocumentMoniker": "API\\Model\\user_accounts.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\user_accounts.cs",
+              "RelativeToolTip": "API\\Model\\user_accounts.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:19:06.971Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "item_weapons.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_weapons.cs",
+              "RelativeDocumentMoniker": "API\\Model\\item_weapons.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_weapons.cs",
+              "RelativeToolTip": "API\\Model\\item_weapons.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:19:06.531Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "item_armors.cs",
               "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\item_armors.cs",
               "RelativeDocumentMoniker": "API\\Model\\item_armors.cs",
@@ -236,135 +335,79 @@
               "RelativeToolTip": "API\\Model\\item_armors.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-20T04:47:58.529Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "API.csproj",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\API.csproj",
-              "RelativeDocumentMoniker": "API\\API.csproj",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\API.csproj",
-              "RelativeToolTip": "API\\API.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAwBEAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-07-20T04:31:13.531Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "API\\appsettings.json",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\appsettings.json*",
-              "RelativeToolTip": "API\\appsettings.json*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAwAsAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-20T04:10:57.279Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "MyDbContext.cs",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Data\\MyDbContext.cs",
-              "RelativeDocumentMoniker": "API\\Data\\MyDbContext.cs",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Data\\MyDbContext.cs",
-              "RelativeToolTip": "API\\Data\\MyDbContext.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAxwBoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T15:24:41.144Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "pre_stored_procedures.sql",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\DB\\SQL\\pre_stored_procedures.sql",
-              "RelativeDocumentMoniker": "API\\DB\\SQL\\pre_stored_procedures.sql",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\DB\\SQL\\pre_stored_procedures.sql",
-              "RelativeToolTip": "API\\DB\\SQL\\pre_stored_procedures.sql",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-07-19T13:45:22.772Z",
+              "WhenOpened": "2024-07-23T05:19:06.013Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 20,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "API\\Properties\\launchSettings.json",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Properties\\launchSettings.json",
-              "RelativeToolTip": "API\\Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-17T15:00:33.152Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ModelGenerator.py",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\ModelGenerator.py",
-              "RelativeDocumentMoniker": "Tools\\ModelGenerator\\ModelGenerator.py",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\ModelGenerator.py",
-              "RelativeToolTip": "Tools\\ModelGenerator\\ModelGenerator.py",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-07-19T09:23:54.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "SqlParser.py",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\SqlParser.py",
-              "RelativeDocumentMoniker": "Tools\\ModelGenerator\\SqlParser.py",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\SqlParser.py",
-              "RelativeToolTip": "Tools\\ModelGenerator\\SqlParser.py",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAB8AAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-07-20T04:40:43.249Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "PacketGenerator.py",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\PacketGenerator\\PacketGenerator.py",
-              "RelativeDocumentMoniker": "Tools\\PacketGenerator\\PacketGenerator.py",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\PacketGenerator\\PacketGenerator.py",
-              "RelativeToolTip": "Tools\\PacketGenerator\\PacketGenerator.py",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-07-19T09:32:12.745Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ProtoParser.py",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\PacketGenerator\\ProtoParser.py",
-              "RelativeDocumentMoniker": "Tools\\PacketGenerator\\ProtoParser.py",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\PacketGenerator\\ProtoParser.py",
-              "RelativeToolTip": "Tools\\PacketGenerator\\ProtoParser.py",
+              "Title": "auth_key.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\auth_key.cs",
+              "RelativeDocumentMoniker": "API\\Model\\auth_key.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Model\\auth_key.cs",
+              "RelativeToolTip": "API\\Model\\auth_key.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-07-19T09:32:11.773Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:19:03.043Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "GameServer.cpp",
-              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\GameServer.cpp",
-              "RelativeDocumentMoniker": "GameServer\\GameServer.cpp",
-              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\GameServer\\GameServer.cpp",
-              "RelativeToolTip": "GameServer\\GameServer.cpp",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBUAAAAoAAAA",
+              "DocumentIndex": 21,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Program.cs",
+              "RelativeDocumentMoniker": "API\\Program.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\Program.cs",
+              "RelativeToolTip": "API\\Program.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAABYAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:11:53.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "MyQueryExecutor.cs",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\DB\\MyQueryExecutor.cs",
+              "RelativeDocumentMoniker": "API\\DB\\MyQueryExecutor.cs",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\API\\DB\\MyQueryExecutor.cs",
+              "RelativeToolTip": "API\\DB\\MyQueryExecutor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-23T05:11:46.743Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 194,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "main.py",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\main.py",
+              "RelativeDocumentMoniker": "Tools\\ModelGenerator\\main.py",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\Tools\\ModelGenerator\\main.py",
+              "RelativeToolTip": "Tools\\ModelGenerator\\main.py",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAACMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2024-07-23T05:40:12.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MySqlConnectionPool.cpp",
+              "DocumentMoniker": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\DB\\MySqlConnectionPool.cpp",
+              "RelativeDocumentMoniker": "ServerCore\\DB\\MySqlConnectionPool.cpp",
+              "ToolTip": "D:\\GIT_REPOSITORIES\\S1\\S1\\ServerCore\\DB\\MySqlConnectionPool.cpp",
+              "RelativeToolTip": "ServerCore\\DB\\MySqlConnectionPool.cpp",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAIwLMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-07-18T10:41:46.493Z"
+              "WhenOpened": "2024-07-23T05:21:03.233Z",
+              "EditorCaption": ""
             }
           ]
         }

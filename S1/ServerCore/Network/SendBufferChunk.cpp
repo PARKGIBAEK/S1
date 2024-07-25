@@ -1,4 +1,4 @@
-﻿#include "SendBufferChunk.h"
+#include "SendBufferChunk.h"
 #include "Network/SendBuffer.h"
 #include "Network/ConstSendBuffer.h"
 #include "Core/CoreMacro.h"

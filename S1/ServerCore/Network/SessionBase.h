@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <boost/asio.hpp>
 #include <boost/lockfree/queue.hpp>

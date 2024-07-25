@@ -1,5 +1,4 @@
 #include "JobQueue.h"
-
 #include "Core/CoreTLS.h"
 #include "Job/GlobalQueue.h"
 #include "Util/Time.h"

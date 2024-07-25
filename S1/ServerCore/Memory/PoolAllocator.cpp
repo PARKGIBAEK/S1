@@ -1,4 +1,4 @@
-﻿#include "PoolAllocator.h"
+#include "PoolAllocator.h"
 
 #include "Core/GlobalInitializer.h"
 #include "Memory/MemoryManager.h"

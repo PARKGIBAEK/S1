@@ -1,7 +1,8 @@
-﻿#include "JobData.h"
+#include "JobData.h"
 #include "Job/JobQueue.h"
 #include "Job/Job.h"
 #include <utility>
+
 
 
 namespace ServerCore

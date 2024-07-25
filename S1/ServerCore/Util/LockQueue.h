@@ -21,7 +21,7 @@ struct is_shared_ptr<std::shared_ptr<T>> : true_t {};
 template<typename T>
 class LockQueue
 {
-	// shared_ptr¸¸ »ç¿ëÇÒ ¿¹Á¤
+	// shared_ptrë§Œ ì‚¬ìš©í•  ì˜ˆì •
 	static_assert(is_shared_ptr<T>::value, "T must be shared_ptr");
 public:
 	void Push(T item)

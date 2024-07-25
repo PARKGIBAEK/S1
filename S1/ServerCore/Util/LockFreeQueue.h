@@ -5,10 +5,10 @@
 #include "Core/Types.h"
 
 
-/* atomicÀÇ compare_exchange_strong ÇÔ¼öÀÇ µ¿ÀÛ
-* ¿¹) origin.compare_exchange_strong(expected, desired)
-	- origin°ú expected°¡ °°À¸¸é origin¿¡ desired¸¦ º¹»ç ´ëÀÔ
-	- origin°ú expected°¡ ´Ù¸£¸é origin¿¡ expected¸¦ º¹»ç ´ëÀÔ
+/* atomicì˜ compare_exchange_strong í•¨ìˆ˜ì˜ ë™ì‘
+* ì˜ˆ) origin.compare_exchange_strong(expected, desired)
+	- originê³¼ expectedê°€ ê°™ìœ¼ë©´ originì— desiredë¥¼ ë³µì‚¬ ëŒ€ì…
+	- originê³¼ expectedê°€ ë‹¤ë¥´ë©´ originì— expectedë¥¼ ë³µì‚¬ ëŒ€ì…
 */
 namespace ServerCore
 {
@@ -19,8 +19,8 @@ class LockFreeQueue
 {
 	struct NodeCounter
 	{
-		uint32 internalCount : 30; // ÂüÁ¶±Ç ¹İÈ¯ °ü·Ã
-		uint32 externalCountRemaining : 2; // Push & Pop ´ÙÁß ÂüÁ¶±Ç °ü·Ã
+		uint32 internalCount : 30; // ì°¸ì¡°ê¶Œ ë°˜í™˜ ê´€ë ¨
+		uint32 externalCountRemaining : 2; // Push & Pop ë‹¤ì¤‘ ì°¸ì¡°ê¶Œ ê´€ë ¨
 	};
 
 	struct CountedNodePtr;
@@ -41,17 +41,17 @@ class LockFreeQueue
 
 		void ReleaseRef()
 		{
-			NodeCounter oldCounter = nodeCounter.load();// oldCounter´Â º¯ÇÏÁö ¾Ê´Â´Ù µû¶ó¼­ nodeCounter.internalCount´Â 
+			NodeCounter oldCounter = nodeCounter.load();// oldCounterëŠ” ë³€í•˜ì§€ ì•ŠëŠ”ë‹¤ ë”°ë¼ì„œ nodeCounter.internalCountëŠ” 
 
 			while (true)
 			{
 				NodeCounter newCounter = oldCounter;
 				newCounter.internalCount--;
 
-				/* ´Ù¸¥ Thread°¡ oldCounter¿Í nodeCounter¸¦ °Çµå¸®Áö ¾Ê¾ÒÀ¸¸é nodeCounter´Â internalCount°¡ 1°¨¼ÒÇÑ´Ù.
-				¸¸¾à ´Ù¸¥ ÇÔ¼ö¿¡¼­ ³ëµå¸¦ Push ¶Ç´Â PopÇÏ°Ô µÉ °æ¿ì FreeExternalCountÇÔ¼ö¿¡ ÀÇÇØ
-				externalCountRemaining°¡ ¹Ù²î°Ô µÇ¾î compare_exchange_strong´Â ½ÇÆĞÇÑ´Ù.
-				ÀÌ¸¦ ÅëÇØ ¿ÜºÎ¿¡¼­ head³ª tailÀ» °Çµå¸± °æ¿ì¿¡ ´ëºñÇÒ ¼ö ÀÖ°Ô µÈ´Ù.	*/
+				/* ë‹¤ë¥¸ Threadê°€ oldCounterì™€ nodeCounterë¥¼ ê±´ë“œë¦¬ì§€ ì•Šì•˜ìœ¼ë©´ nodeCounterëŠ” internalCountê°€ 1ê°ì†Œí•œë‹¤.
+				ë§Œì•½ ë‹¤ë¥¸ í•¨ìˆ˜ì—ì„œ ë…¸ë“œë¥¼ Push ë˜ëŠ” Popí•˜ê²Œ ë  ê²½ìš° FreeExternalCountí•¨ìˆ˜ì— ì˜í•´
+				externalCountRemainingê°€ ë°”ë€Œê²Œ ë˜ì–´ compare_exchange_strongëŠ” ì‹¤íŒ¨í•œë‹¤.
+				ì´ë¥¼ í†µí•´ ì™¸ë¶€ì—ì„œ headë‚˜ tailì„ ê±´ë“œë¦´ ê²½ìš°ì— ëŒ€ë¹„í•  ìˆ˜ ìˆê²Œ ëœë‹¤.	*/
 				if (nodeCounter.compare_exchange_strong(oldCounter, newCounter))
 				{
 					if (newCounter.internalCount == 0 && newCounter.externalCountRemaining == 0)
@@ -69,7 +69,7 @@ class LockFreeQueue
 
 	struct CountedNodePtr
 	{
-		int32 externalCount; // ÂüÁ¶±Ç
+		int32 externalCount; // ì°¸ì¡°ê¶Œ
 		Node* nodePtr = nullptr;
 	};
 
@@ -87,23 +87,23 @@ public:
 	LockFreeQueue(const LockFreeQueue&) = delete;
 	LockFreeQueue& operator=(const LockFreeQueue&) = delete;
 
-	/*	Push °úÁ¤
-	*   ±âÁ¸ »óÅÂ
+	/*	Push ê³¼ì •
+	*   ê¸°ì¡´ ìƒíƒœ
 		[node][node][nullptr]
-		  ¡è		        ¡è
+		  â†‘		        â†‘
 		[head]		  [tail]
 
-	*	³ëµå »ğÀÔÀ» À§ÇØ ´õ¹Ì ³ëµå¸¦ »ı¼º
+	*	ë…¸ë“œ ì‚½ì…ì„ ìœ„í•´ ë”ë¯¸ ë…¸ë“œë¥¼ ìƒì„±
 		[node][node][nullptr][nullptr]
-		  ¡è		        ¡è
+		  â†‘		        â†‘
 		[head]		  [tail]
 
-	*	»õ·Î¿î ³ëµå¸¦ ±âÁ¸ÀÇ tailÀÌ °¡¸®Å°´ø ´õ¹Ì¿¡ ¿¬°áÇØÁÖ°í tailÀº »õ·Î¿î ´õ¹Ì¸¦ °¡¸®Å°µµ·Ï º¯°æ
+	*	ìƒˆë¡œìš´ ë…¸ë“œë¥¼ ê¸°ì¡´ì˜ tailì´ ê°€ë¦¬í‚¤ë˜ ë”ë¯¸ì— ì—°ê²°í•´ì£¼ê³  tailì€ ìƒˆë¡œìš´ ë”ë¯¸ë¥¼ ê°€ë¦¬í‚¤ë„ë¡ ë³€ê²½
 		[node][node][new node][nullptr]
-		  ¡è				          ¡è
+		  â†‘				          â†‘
 		[head]				    [tail]
 	
-	¡Ø head¿Í tailÀÌ °¡¸®Å°´Â ³ëµå´Â CountedNodePtr.ptr¸¦ ÀÇ¹Ì
+	â€» headì™€ tailì´ ê°€ë¦¬í‚¤ëŠ” ë…¸ë“œëŠ” CountedNodePtr.ptrë¥¼ ì˜ë¯¸
 	*/
 	void Push(const T& value)
 	{
@@ -113,26 +113,26 @@ public:
 		dummy.nodePtr = new Node;
 		dummy.externalCount = 1;
 
-		CountedNodePtr tailCopy = tail.load(); // tail.nodePtr Àº nullptr
+		CountedNodePtr tailCopy = tail.load(); // tail.nodePtr ì€ nullptr
 
 		while (true)
 		{
-			// tail¿¡ ´ëÇÑ °æÇÕ (externalCount¸¦ Çö½ÃÁ¡ ±âÁØ +1 ÇÑ Thread°¡ ÀÌ±è)
+			// tailì— ëŒ€í•œ ê²½í•© (externalCountë¥¼ í˜„ì‹œì  ê¸°ì¤€ +1 í•œ Threadê°€ ì´ê¹€)
 			IncreaseExternalCount(tail, tailCopy);
 
 			T* oldData = nullptr;
-			/* tail¿¡ ´ëÇÑ ¼ÒÀ¯±Ç È¹µæÇÏ±â(data¸¦ ¸ÕÀú¸¦ ±³È¯ÇÑ Thread°¡ ÀÌ±è)
-			   tailCopy.nodePtr->data°¡ nullptr¿´´Ù¸é oldData¿Í °°±â ¶§¹®¿¡ newData·Î º¯°æµÊ */
+			/* tailì— ëŒ€í•œ ì†Œìœ ê¶Œ íšë“í•˜ê¸°(dataë¥¼ ë¨¼ì €ë¥¼ êµí™˜í•œ Threadê°€ ì´ê¹€)
+			   tailCopy.nodePtr->dataê°€ nullptrì˜€ë‹¤ë©´ oldDataì™€ ê°™ê¸° ë•Œë¬¸ì— newDataë¡œ ë³€ê²½ë¨ */
 			if (tailCopy.nodePtr->data.compare_exchange_strong(oldData, newData.get()))
-			{ // tailÀÌ »õ·Î¿î ´õ¹Ì¸¦ °¡¸®Å°°Ô º¯°æÇÏ±â
+			{ // tailì´ ìƒˆë¡œìš´ ë”ë¯¸ë¥¼ ê°€ë¦¬í‚¤ê²Œ ë³€ê²½í•˜ê¸°
 				tailCopy.nodePtr->next = dummy;
-				tailCopy = tail.exchange(dummy); // tailÀÌ ¿ø·¡ °¡¸®Å°°í ÀÖ´ø dummy¸¦ tailCopy¿¡ º¹»ç
+				tailCopy = tail.exchange(dummy); // tailì´ ì›ë˜ ê°€ë¦¬í‚¤ê³  ìˆë˜ dummyë¥¼ tailCopyì— ë³µì‚¬
 				FreeExternalCount(tailCopy);
-				newData.release(); // resource¿¡ ´ëÇÑ unique_ptrÀÇ ¼ÒÀ¯±Ç Æ÷±â(nullptr °¡¸®Å°±â)
+				newData.release(); // resourceì— ëŒ€í•œ unique_ptrì˜ ì†Œìœ ê¶Œ í¬ê¸°(nullptr ê°€ë¦¬í‚¤ê¸°)
 				break;
 			}
 
-			// ¼ÒÀ¯±Ç °æÀï ÆĞ¹è..
+			// ì†Œìœ ê¶Œ ê²½ìŸ íŒ¨ë°°..
 			tailCopy.nodePtr->ReleaseRef();
 		}
 	}
@@ -140,14 +140,14 @@ public:
 	std::shared_ptr<T> TryPop()
 	{
 		/*	[data][data][nullptr]
-			  ¡è				¡è
+			  â†‘				â†‘
 			[head]		  [tail]	*/
 
 		CountedNodePtr oldHead = head.load();
 
 		while (true)
 		{
-			// ÂüÁ¶±Ç È¹µæ (externalCount¸¦ Çö½ÃÁ¡ ±âÁØ +1 ÇÑ ¾Ö°¡ ÀÌ±è)
+			// ì°¸ì¡°ê¶Œ íšë“ (externalCountë¥¼ í˜„ì‹œì  ê¸°ì¤€ +1 í•œ ì• ê°€ ì´ê¹€)
 			IncreaseExternalCount(head, oldHead);
 
 			Node* ptr = oldHead.nodePtr;
@@ -157,10 +157,10 @@ public:
 				return std::shared_ptr<T>();
 			}
 
-			// ¼ÒÀ¯±Ç È¹µæ (head = nodePtr->next)
+			// ì†Œìœ ê¶Œ íšë“ (head = nodePtr->next)
 			if (head.compare_exchange_strong(oldHead, ptr->next))
 			{
-				T* res = ptr->data.load(); // exchange(nullptr); ·Î ÇÏ¸é ¹ö±× ÀÖÀ½!
+				T* res = ptr->data.load(); // exchange(nullptr); ë¡œ í•˜ë©´ ë²„ê·¸ ìˆìŒ!
 				FreeExternalCount(oldHead);
 				return std::shared_ptr<T>(res);
 			}
@@ -170,8 +170,8 @@ public:
 	}
 
 private:
-	/* _counter¿Í _counterCopy°¡ º¯°æµÇ±â Àü¿¡ cas¸¦ ¼öÇàÇÑ ½º·¹µå°¡ ¸ÕÀú Å»Ãâ
-		±× ´ÙÀ½ ½º·¹µåµéÀº »õ·Ó°Ô º¯°æµÈ newCounter¿Í counter */
+	/* _counterì™€ _counterCopyê°€ ë³€ê²½ë˜ê¸° ì „ì— casë¥¼ ìˆ˜í–‰í•œ ìŠ¤ë ˆë“œê°€ ë¨¼ì € íƒˆì¶œ
+		ê·¸ ë‹¤ìŒ ìŠ¤ë ˆë“œë“¤ì€ ìƒˆë¡­ê²Œ ë³€ê²½ëœ newCounterì™€ counter */
 	static void IncreaseExternalCount(std::atomic<CountedNodePtr>& _counter,
 		CountedNodePtr& _counterCopy)
 	{
@@ -214,9 +214,9 @@ private:
 
 private:
 	/*	[data][data][nullptr]
-		  ¡è				¡è
+		  â†‘				â†‘
 		[head]		  [tail]	*/
 	std::atomic<CountedNodePtr> head;
-	std::atomic<CountedNodePtr> tail; // nullptr¸¦ À¯Áö
+	std::atomic<CountedNodePtr> tail; // nullptrë¥¼ ìœ ì§€
 };
 }

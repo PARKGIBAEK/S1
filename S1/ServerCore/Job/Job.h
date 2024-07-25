@@ -3,6 +3,7 @@
 #include <memory>
 
 
+
 namespace ServerCore
 {
 using CallbackType = std::function<void()>;
@@ -20,7 +21,7 @@ public:
 	{
 		_callback = [owner, memFunc, args...]()
 		{
-			(owner.get()->*memFunc)(args...); // ownerÀÇ ÇÔ¼ö Æ÷ÀÎÅÍ
+			(owner.get()->*memFunc)(args...); // ownerì˜ í•¨ìˆ˜ í¬ì¸í„°
 		};
 	}
 

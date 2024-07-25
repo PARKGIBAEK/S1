@@ -5,6 +5,8 @@
 #include "Core/Types.h"
 #include "Job/TimerItem.h"
 
+
+
 namespace ServerCore
 {
 class Job;
@@ -13,15 +15,15 @@ class JobQueue;
 	JobTimer
 ---------------*/
 /*
-  Àü¿ª °´Ã¼ÀÌ¸ç, TimerItemÀÇ executeTick¿¡ ¸ÂÃç JobÀ»
-  - TimerItemÀÇ ½ÇÇà½Ã°¢ÀÌ Áö³µÀ¸¸é ½ÇÇàµÉ ¼ö ÀÖ°Ô JobQueue¿¡ ³Ö¾î ÁÖ´Â ¿ªÇÒ
+  ì „ì—­ ê°ì²´ì´ë©°, TimerItemì˜ executeTickì— ë§ì¶° Jobì„
+  - TimerItemì˜ ì‹¤í–‰ì‹œê°ì´ ì§€ë‚¬ìœ¼ë©´ ì‹¤í–‰ë  ìˆ˜ ìˆê²Œ JobQueueì— ë„£ì–´ ì£¼ëŠ” ì—­í• 
 */
 class JobTimer
 {
 public:
-	/* Priority_Queue¿¡ JobÀ» executeTick±âÁØÀ¸·Î ³Ö±â*/
+	/* Priority_Queueì— Jobì„ executeTickê¸°ì¤€ìœ¼ë¡œ ë„£ê¸°*/
 	void			Reserve(uint64 tickAfter, std::weak_ptr<JobQueue> owner, std::shared_ptr<Job> job);
-	// Job ½ÇÇà ½Ã°¢ÀÌ Áö³µÀ¸¸é owner(JobQueue)¿¡°Ô Àü´Ş
+	// Job ì‹¤í–‰ ì‹œê°ì´ ì§€ë‚¬ìœ¼ë©´ owner(JobQueue)ì—ê²Œ ì „ë‹¬
 	void			Distribute(uint64 now);
 
 	void			Clear();

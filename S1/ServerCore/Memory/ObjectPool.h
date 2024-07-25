@@ -8,18 +8,18 @@
 namespace ServerCore
 {
 /* 
-	¡Ø	Memory Pool°ú Object PoolÀÇ Â÷ÀÌ
+	â€»	Memory Poolê³¼ Object Poolì˜ ì°¨ì´
 
 	 * Memory Pool : 
-	 - Memory PoolÀ» ¿©·¯ Class°¡ °øÀ¯ÇÏ´Â ¹æ½ÄÀÌ¸ç
-	   ¸Þ¸ð¸® ¿À¿°ÀÌ ¹ß»ýÇßÀ» °æ¿ì ¿øÀÎÀ» Ã£±â ¾î·Æ´Ù.
+	 - Memory Poolì„ ì—¬ëŸ¬ Classê°€ ê³µìœ í•˜ëŠ” ë°©ì‹ì´ë©°
+	   ë©”ëª¨ë¦¬ ì˜¤ì—¼ì´ ë°œìƒí–ˆì„ ê²½ìš° ì›ì¸ì„ ì°¾ê¸° ì–´ë µë‹¤.
 
 
 	 * Object Pool : 
-	 - Object PoolÀº template classÀÌ¸ç, static ¸É¹ö¸¸ Á¸ÀçÇÏ±â ¶§¹®¿¡
-	   °¢ class¸¦ template ÀÎÀÚ·Î È£ÃâÇÏ´Â °æ¿ì¿¡¸¸ ÀÎ½ºÅÏ½ÌµÈ´Ù.
-	   ´Ù½Ã ¸»ÇØ¼­ Classº°·Î PoolingÇÏ´Â ¹æ½ÄÀÌ±â ¶§¹®¿¡ allocSize°¡ class¿¡ µû¶ó ´Ù¸£´Ù. 
-	   ¸Þ¸ð¸® ¿À¿° ¹ß»ý ½Ã ¾î¶² ClassÀÇ Object Pool¿¡¼­ ¹ß»ýÇÑ °ÍÀÎÁö ½±°Ô ÆÄ¾ÇÇÒ ¼ö ÀÖ´Ù.
+	 - Object Poolì€ template classì´ë©°, static ë§´ë²„ë§Œ ì¡´ìž¬í•˜ê¸° ë•Œë¬¸ì—
+	   ê° classë¥¼ template ì¸ìžë¡œ í˜¸ì¶œí•˜ëŠ” ê²½ìš°ì—ë§Œ ì¸ìŠ¤í„´ì‹±ëœë‹¤.
+	   ë‹¤ì‹œ ë§í•´ì„œ Classë³„ë¡œ Poolingí•˜ëŠ” ë°©ì‹ì´ê¸° ë•Œë¬¸ì— allocSizeê°€ classì— ë”°ë¼ ë‹¤ë¥´ë‹¤. 
+	   ë©”ëª¨ë¦¬ ì˜¤ì—¼ ë°œìƒ ì‹œ ì–´ë–¤ Classì˜ Object Poolì—ì„œ ë°œìƒí•œ ê²ƒì¸ì§€ ì‰½ê²Œ íŒŒì•…í•  ìˆ˜ ìžˆë‹¤.
 */
 
 template <typename Type>
@@ -37,7 +37,7 @@ public:
 
     static void Push(Type* obj)
     {
-        obj->~Type(); // ¼Ò¸êÀÚ È£Ãâ
+        obj->~Type(); // ì†Œë©¸ìž í˜¸ì¶œ
         s_pool.Push(MemoryHeader::DetachHeader(obj));
     }
 

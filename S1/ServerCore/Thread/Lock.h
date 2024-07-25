@@ -11,7 +11,7 @@ namespace ServerCore
      RW SpinLock
 -----------------*/
 /*--------------------------------------------
-32ºñÆ® º¯¼ö(ºñÆ® ÇÃ·¡±× ¿ëµµ) : [WWWWWWWW][WWWWWWWW][RRRRRRRR][RRRRRRRR]
+32ë¹„íŠ¸ ë³€ìˆ˜(ë¹„íŠ¸ í”Œë˜ê·¸ ìš©ë„) : [WWWWWWWW][WWWWWWWW][RRRRRRRR][RRRRRRRR]
 W : WriteFlag (Exclusive-lock Owner ThreadId)
 R : ReadFlag (Shared Lock Count)
 ---------------------------------------------*/

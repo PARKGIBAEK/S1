@@ -1,4 +1,4 @@
-﻿#include "SendBufferManager.h"
+#include "SendBufferManager.h"
 
 #include "Core/GlobalInitializer.h"
 #include "Core/CoreTLS.h"
@@ -16,9 +16,9 @@ std::shared_ptr<SendBuffer> SendBufferManager::Open(uint32 _reqSize)
     {
         tls_SendBufferChunk = SendBufferManager::Pop(); // WRITE_LOCK
         tls_SendBufferChunk->ResetBuffer();
-    }		
+    }
 
-    ASSERT_CRASH(tls_SendBufferChunk->IsOpen() == false);
+    ASSERT_CRASH(tls_SendBufferChunk->IsOpen() == false)
 
     // 다 썼으면 버리고 새걸 교체
     if (tls_SendBufferChunk->FreeSize() < _reqSize)
@@ -36,7 +36,7 @@ std::shared_ptr<ConstSendBuffer> SendBufferManager::OpenConst(uint32 _reqSize)
     {
         tls_SendBufferChunk = SendBufferManager::Pop(); // WRITE_LOCK
         tls_SendBufferChunk->ResetBuffer();
-    }		
+    }
 
     ASSERT_CRASH(tls_SendBufferChunk->IsOpen() == false);
 
@@ -46,7 +46,7 @@ std::shared_ptr<ConstSendBuffer> SendBufferManager::OpenConst(uint32 _reqSize)
         tls_SendBufferChunk = SendBufferManager::Pop(); // WRITE_LOCK
         tls_SendBufferChunk->ResetBuffer();
     }
-    
+
     return tls_SendBufferChunk->OpenConst(_reqSize);
 }
 
@@ -62,10 +62,10 @@ std::shared_ptr<SendBufferChunk>  SendBufferManager::Pop()
         }
     }
 
-    /* Pooling
-    - SendBufferChunk* 인스턴스를 SendBufferManager::sendBufferChunks에 다시 반환
-    - PushGlobal은 shared_ptr의 소멸자*/
-    return std::shared_ptr<SendBufferChunk> (XNew<SendBufferChunk>(), PushGlobal); 
+    // Pooling
+    // SendBufferChunk* 인스턴스를 SendBufferManager::sendBufferChunks에 다시 반환
+    // PushGlobal은 shared_ptr의 소멸자
+    return std::shared_ptr<SendBufferChunk> (XNew<SendBufferChunk>(), PushGlobal);
 }
 
 void SendBufferManager::Push(std::shared_ptr<SendBufferChunk>  _buffer)
@@ -78,4 +78,5 @@ void SendBufferManager::PushGlobal(SendBufferChunk* _buffer)
 {
     g_SendBufferManager->Push(std::shared_ptr<SendBufferChunk> (_buffer, PushGlobal));
 }
+
 }

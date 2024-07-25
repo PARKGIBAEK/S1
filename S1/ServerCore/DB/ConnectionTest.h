@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include <boost/lockfree/queue.hpp>
 #include <boost/mysql/tcp.hpp>

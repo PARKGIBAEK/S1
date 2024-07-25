@@ -43,7 +43,7 @@ void Lock::WriteLock(const char* name)
         }
 
         if (Time::GetTickCount64() - beginTick >= ACQUIRE_TIMEOUT_TICK)
-            CRASH("LOCK_TIMEOUT");
+            CRASH("LOCK_TIMEOUT")
 
         std::this_thread::yield();
     }
@@ -58,7 +58,7 @@ void Lock::WriteUnlock(const char* name)
 
     // WriteLock이 잡혀 있는 상태에서 ReadLock이 함께 잡혀있다면 로직 오류
     if ((lockFlag.load() & READ_COUNT_MASK) != 0)
-        CRASH("INVALID_UNLOCK_ORDER");
+        CRASH("INVALID_UNLOCK_ORDER")
 
     const int32 lockCount = --writeCount;
     if (lockCount == 0)
@@ -93,7 +93,7 @@ void Lock::ReadLock(const char* name)
         }
 
         if (Time::GetTickCount64() - beginTick >= ACQUIRE_TIMEOUT_TICK)
-            CRASH("LOCK_TIMEOUT");
+            CRASH("LOCK_TIMEOUT")
 
         std::this_thread::yield();
     }
@@ -107,7 +107,7 @@ void Lock::ReadUnlock(const char* name)
 #endif
 
     if ((lockFlag.fetch_sub(1) & READ_COUNT_MASK) == 0)
-        CRASH("MULTIPLE_UNLOCK");
+        CRASH("MULTIPLE_UNLOCK")
 }
 
 ReadLockGuard::ReadLockGuard(Lock& _lock, const char* _name)

@@ -6,12 +6,12 @@ namespace API.Services;
 
 /* UserService는 로그인 인증 후 JWT토큰을 발급받기 위한 Random Key를 DB에서 가져오는 용도이다*/
 
-public class UserService(MyDbContext context)
+public class UserService(GameDbContext context)
 {
     public async Task<bool> RegisterUser(string userId, string username, string password, string email)
     {
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-        var user = new user_accounts
+        var user = new user_account
         {
             user_id = userId,
             user_name = username,
@@ -26,9 +26,9 @@ public class UserService(MyDbContext context)
         return true;
     }
 
-    public async Task<user_accounts?> GetUserAccountByUserId(string userId)
+    public async Task<user_account?> GetUserAccountByUserId(string userId)
     {
-        user_accounts? userAccounts = await context.user_accounts.FirstOrDefaultAsync(userAccount => userAccount.user_id == userId);
+        user_account? userAccounts = await context.user_accounts.FirstOrDefaultAsync(userAccount => userAccount.user_id == userId);
         return userAccounts;
     }
 

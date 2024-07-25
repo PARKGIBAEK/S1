@@ -12,6 +12,7 @@
 #include <unordered_set>
 #include <string>
 
+
 namespace ServerCore{
 template<typename Type, uint32 Size>
 using Array = std::array<Type, Size>;

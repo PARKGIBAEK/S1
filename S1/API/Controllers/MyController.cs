@@ -12,9 +12,9 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class SampleController : ControllerBase
 {
-    private readonly MyDbContext _context;
+    private readonly GameDbContext _context;
 
-    public SampleController(MyDbContext context)
+    public SampleController(GameDbContext context)
     {
         _context = context;
     }

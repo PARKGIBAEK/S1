@@ -18,6 +18,5 @@ struct user_accounts
     std::string created_at;
     std::string updated_at;
 };
-
 BOOST_DESCRIBE_STRUCT(user_accounts, (), (user_id, username, password, email, created_at,updated_at));
 }

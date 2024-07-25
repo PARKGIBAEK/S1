@@ -22,9 +22,6 @@
     <Filter Include="DB">
       <UniqueIdentifier>{67e1e182-0834-4f63-b4e0-7245925b6fd8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DB\test">
-      <UniqueIdentifier>{9a1dda74-2296-4e5c-9c9a-b5ece910a871}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Log">
       <UniqueIdentifier>{b8ec3b5d-0485-470a-aee7-3286696f3396}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="Util">
       <UniqueIdentifier>{db11ddda-7787-4b44-bef8-9b93ab625d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DB\test_table">
+      <UniqueIdentifier>{9a1dda74-2296-4e5c-9c9a-b5ece910a871}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +75,6 @@
     <ClInclude Include="DB\MySqlConnectionPool.h">
       <Filter>DB</Filter>
     </ClInclude>
-    <ClInclude Include="DB\test\user.h">
-      <Filter>DB\test</Filter>
-    </ClInclude>
     <ClInclude Include="Log\ConsoleLog.h">
       <Filter>Log</Filter>
     </ClInclude>
@@ -111,28 +108,7 @@
     <ClInclude Include="Memory\TypeCast.h">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Network\ClientService.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\IDispatchable.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\IocpEvent.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\IocpService.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\Listener.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\NetAddress.h">
-      <Filter>Network</Filter>
-    </ClInclude>
     <ClInclude Include="Network\PacketHeader.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\PacketSession.h">
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Network\RecvBuffer.h">
@@ -145,18 +121,6 @@
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Network\SendBufferManager.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\ServerService.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\Service.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\Session.h">
-      <Filter>Network</Filter>
-    </ClInclude>
-    <ClInclude Include="Network\SocketUtils.h">
       <Filter>Network</Filter>
     </ClInclude>
     <ClInclude Include="Util\BufferReader.h">
@@ -194,6 +158,24 @@
     </ClInclude>
     <ClInclude Include="Core\GlobalInitializer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ConnectionTest.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\test_table\user_test.h">
+      <Filter>DB\test_table</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\ConstSendBuffer.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetHelper.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetTypes.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\SessionBase.h">
+      <Filter>Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -242,24 +224,6 @@
     <ClCompile Include="Memory\StompAllocator.cpp">
       <Filter>Memory</Filter>
     </ClCompile>
-    <ClCompile Include="Network\ClientService.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\IocpEvent.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\IocpService.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\Listener.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\NetAddress.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\PacketSession.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
     <ClCompile Include="Network\RecvBuffer.cpp">
       <Filter>Network</Filter>
     </ClCompile>
@@ -270,18 +234,6 @@
       <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="Network\SendBufferManager.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\ServerService.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\Service.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\Session.cpp">
-      <Filter>Network</Filter>
-    </ClCompile>
-    <ClCompile Include="Network\SocketUtils.cpp">
       <Filter>Network</Filter>
     </ClCompile>
     <ClCompile Include="Util\BufferReader.cpp">
@@ -307,6 +259,18 @@
     </ClCompile>
     <ClCompile Include="Thread\ThreadManager.cpp">
       <Filter>Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\ConnectionTest.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\ConstSendBuffer.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetHelper.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\SessionBase.cpp">
+      <Filter>Network</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

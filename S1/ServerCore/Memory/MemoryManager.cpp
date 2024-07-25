@@ -12,16 +12,16 @@ MemoryManager::MemoryManager()
 	int32 size = 0;
 	int32 tableIndex = 0;
 
-	/* °¢ »çÀÌÁîº° ¸Ş¸ğ¸® Ç® »ı¼º
+	/* ê° ì‚¬ì´ì¦ˆë³„ ë©”ëª¨ë¦¬ í’€ ìƒì„±
 
-	- 32 byte, 64 byte, 96 byte, 128 byte... 1024 byte ´ÜÀ§ »çÀÌÁîÀÇ
-	 MemoryManager PoolµéÀ» °¢°¢ »ı¼ºÇÑ´Ù.
+	- 32 byte, 64 byte, 96 byte, 128 byte... 1024 byte ë‹¨ìœ„ ì‚¬ì´ì¦ˆì˜
+	 MemoryManager Poolë“¤ì„ ê°ê° ìƒì„±í•œë‹¤.
 
-	 ¿¹¸¦µé¸é
-	 32 byte ´ÜÀ§ »çÀÌÁî MemoryManager PoolÀº 1~32 byte ´ÜÀ§ Å©±âÀÇ ¸Ş¸ğ¸®¸¦ ÇÒ´çÇØÁÖ°í,
-	 64 byte ´ÜÀ§ »çÀÌÁî MemoryManager PoolÀº 33~64 byte ´ÜÀ§ Å©±âÀÇ ¸Ş¸ğ¸®¸¦ ÇÒ´çÇØÁÖ´Â ¹æ½ÄÀÌ´Ù.
+	 ì˜ˆë¥¼ë“¤ë©´
+	 32 byte ë‹¨ìœ„ ì‚¬ì´ì¦ˆ MemoryManager Poolì€ 1~32 byte ë‹¨ìœ„ í¬ê¸°ì˜ ë©”ëª¨ë¦¬ë¥¼ í• ë‹¹í•´ì£¼ê³ ,
+	 64 byte ë‹¨ìœ„ ì‚¬ì´ì¦ˆ MemoryManager Poolì€ 33~64 byte ë‹¨ìœ„ í¬ê¸°ì˜ ë©”ëª¨ë¦¬ë¥¼ í• ë‹¹í•´ì£¼ëŠ” ë°©ì‹ì´ë‹¤.
 	*/
-	for (size = 32; size <= 1024; size += 32) // ¸Ş¸ğ¸® Ç® »çÀÌÁî 32¾¿ Áõ°¡
+	for (size = 32; size <= 1024; size += 32) // ë©”ëª¨ë¦¬ í’€ ì‚¬ì´ì¦ˆ 32ì”© ì¦ê°€
 	{
 		MemoryPool* pool = new MemoryPool(size);
 		pools.push_back(pool);
@@ -30,12 +30,12 @@ MemoryManager::MemoryManager()
 		{
 			poolTable[tableIndex] = pool;
 			tableIndex++;
-			/* ¿¹½Ã) poolTable[0~32]´Â 32 bytesÂ¥¸® MemoryPoolÀ» ÂüÁ¶
-					  poolTable[33~64]´Â 64 bytesÂ¥¸® MemoryPoolÀ» ÂüÁ¶ */
+			/* ì˜ˆì‹œ) poolTable[0~32]ëŠ” 32 bytesì§œë¦¬ MemoryPoolì„ ì°¸ì¡°
+					  poolTable[33~64]ëŠ” 64 bytesì§œë¦¬ MemoryPoolì„ ì°¸ì¡° */
 		}
 	}
 
-	for (size = 1024 + 128; size <= 2048; size += 128) // ¸Ş¸ğ¸® Ç® »çÀÌÁî 128¾¿ Áõ°¡
+	for (size = 1024 + 128; size <= 2048; size += 128) // ë©”ëª¨ë¦¬ í’€ ì‚¬ì´ì¦ˆ 128ì”© ì¦ê°€
 	{
 		MemoryPool* pool = new MemoryPool(size);
 		pools.push_back(pool);
@@ -47,7 +47,7 @@ MemoryManager::MemoryManager()
 		}
 	}
 
-	for (size = 2048 + 256; size <= MAX_ALLOC_SIZE; size += 256) // ¸Ş¸ğ¸® Ç® »çÀÌÁî 256¾¿ Áõ°¡
+	for (size = 2048 + 256; size <= MAX_ALLOC_SIZE; size += 256) // ë©”ëª¨ë¦¬ í’€ ì‚¬ì´ì¦ˆ 256ì”© ì¦ê°€
 	{
 		MemoryPool* pool = new MemoryPool(size);
 		pools.push_back(pool);
@@ -63,7 +63,7 @@ MemoryManager::MemoryManager()
 MemoryManager::~MemoryManager()
 {
 	for (MemoryPool* pool : pools)
-		delete pool; // MemoryPool ¼Ò¸êÀÚ È£Ãâ
+		delete pool; // MemoryPool ì†Œë©¸ì í˜¸ì¶œ
 
 	pools.clear();
 }
@@ -72,27 +72,27 @@ void* MemoryManager::Allocate(int32 size)
 {
 	//G_CoreGlobal = new CoreGlobal();
 
-	// CoreInitializer::Init(); // Àü¿ª º¯¼ö ÃÊ±âÈ­
+	// CoreInitializer::Init(); // ì „ì—­ ë³€ìˆ˜ ì´ˆê¸°í™”
 	MemoryHeader* header = nullptr;
-	const int32 allocSize = size + sizeof(MemoryHeader);// ¸Ç¾Õ¿¡ ¸Ş¸ğ¸® Çì´õ¸¦ ºÙÀÌ±â À§ÇØ MemoryHeader »çÀÌÁî ¸¸Å­ ´õ Å©°Ô »ı¼º
+	const int32 allocSize = size + sizeof(MemoryHeader);// ë§¨ì•ì— ë©”ëª¨ë¦¬ í—¤ë”ë¥¼ ë¶™ì´ê¸° ìœ„í•´ MemoryHeader ì‚¬ì´ì¦ˆ ë§Œí¼ ë” í¬ê²Œ ìƒì„±
 
 #ifdef _STOMP_ALLOCATOR
 	header = reinterpret_cast<MemoryHeader*>(StompAllocator::AllocateMemory(allocSize));
 #else
 	if (allocSize > MAX_ALLOC_SIZE)
-	{// ¸Ş¸ğ¸® Ç®¸µ ÃÖ´ë Å©±â¸¦ ¹ş¾î³ª¸é ÀÏ¹İ ÇÒ´ç
+	{// ë©”ëª¨ë¦¬ í’€ë§ ìµœëŒ€ í¬ê¸°ë¥¼ ë²—ì–´ë‚˜ë©´ ì¼ë°˜ í• ë‹¹
 
 		header = reinterpret_cast<MemoryHeader*>(
 			::_aligned_malloc(allocSize, static_cast<int>(MEMORY_ALIGNMENT::FOR_MEMORY_POOL)));
 	}
 	else
 	{
-		// ¸Ş¸ğ¸® Ç®¿¡¼­ ²¨³»¿Â´Ù
+		// ë©”ëª¨ë¦¬ í’€ì—ì„œ êº¼ë‚´ì˜¨ë‹¤
 		header =g_MemoryManager->poolTable[allocSize]->Pop();
 	}
 #endif	
 
-	return MemoryHeader::AttachHeader(header, allocSize);// MemoryHeaderµŞºÎºĞÀÇ ½Ç»ç¿ë ¿µ¿ªÀÇ ÁÖ¼Ò ¹İÈ¯
+	return MemoryHeader::AttachHeader(header, allocSize);// MemoryHeaderë’·ë¶€ë¶„ì˜ ì‹¤ì‚¬ìš© ì˜ì—­ì˜ ì£¼ì†Œ ë°˜í™˜
 }
 
 void MemoryManager::Release(void* ptr)
@@ -107,12 +107,12 @@ void MemoryManager::Release(void* ptr)
 #else
 	if (allocSize > MAX_ALLOC_SIZE)
 	{
-		// ¸Ş¸ğ¸® Ç®¸µ ÃÖ´ë Å©±â¸¦ ¹ş¾î³ª¸é ÀÏ¹İ ÇØÁ¦
+		// ë©”ëª¨ë¦¬ í’€ë§ ìµœëŒ€ í¬ê¸°ë¥¼ ë²—ì–´ë‚˜ë©´ ì¼ë°˜ í•´ì œ
 		::_aligned_free(header);
 	}
 	else
 	{
-		// ¸Ş¸ğ¸® Ç®¿¡ ¹İ³³ÇÑ´Ù
+		// ë©”ëª¨ë¦¬ í’€ì— ë°˜ë‚©í•œë‹¤
 		g_MemoryManager->poolTable[allocSize]->Push(header);
 	}
 #endif	

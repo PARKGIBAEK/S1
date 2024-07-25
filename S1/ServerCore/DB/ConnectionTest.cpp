@@ -1,4 +1,4 @@
-﻿#include "ConnectionTest.h"
+#include "ConnectionTest.h"
 
 #include <fstream>
 #include <iostream>

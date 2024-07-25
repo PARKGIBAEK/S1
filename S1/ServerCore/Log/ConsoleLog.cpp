@@ -8,11 +8,12 @@
 #include <unistd.h>
 #endif
 
+
 namespace ServerCore
 {
 ConsoleLog::ConsoleLog()
 {
-    // c Ç¥ÁØ ÀÔÃâ·Â ÇÚµé ¹Ù´ç¿À±â
+    // c í‘œì¤€ ìž…ì¶œë ¥ í•¸ë“¤ ë°”ë‹¹ì˜¤ê¸°
     _stdOut = ::GetStdHandle(STD_OUTPUT_HANDLE);
     _stdErr = ::GetStdHandle(STD_ERROR_HANDLE);
 }
@@ -54,7 +55,7 @@ void ConsoleLog::WriteStdErr(Color color, const WCHAR* format, ...)
 
     if (ret < 0)
     {
-        // ¹öÆÛ ÃÊ±âÈ­ ½ÇÆÐ ½Ã ¾ÈÀüÇÑ ±âº»°ª ¼³Á¤
+        // ë²„í¼ ì´ˆê¸°í™” ì‹¤íŒ¨ ì‹œ ì•ˆì „í•œ ê¸°ë³¸ê°’ ì„¤ì •
         buffer[0] = L'\0';
     }
 
@@ -80,7 +81,7 @@ void ConsoleLog::WriteStdErr(const WCHAR* format, ...)
 
     if (ret < 0)
     {
-        // ¹öÆÛ ÃÊ±âÈ­ ½ÇÆÐ ½Ã ¾ÈÀüÇÑ ±âº»°ª ¼³Á¤
+        // ë²„í¼ ì´ˆê¸°í™” ì‹¤íŒ¨ ì‹œ ì•ˆì „í•œ ê¸°ë³¸ê°’ ì„¤ì •
         buffer[0] = L'\0';
     }
 

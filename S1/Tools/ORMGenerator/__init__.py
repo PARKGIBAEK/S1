@@ -1,3 +1,4 @@
+# coding=utf-8
 # ORMGenerator/__init__.py
 
 # 서브 패키지나 모듈을 임포트하여 패키지 인터페이스를 정의합니다.

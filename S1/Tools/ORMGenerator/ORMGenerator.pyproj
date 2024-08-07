@@ -25,9 +25,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="column_info.py" />
+    <Content Include="customed_logger.py" />
     <Content Include="index_info.py" />
     <Content Include="main.py" />
     <Content Include="orm_generator.py" />
+    <Content Include="stored_procedures.py" />
+    <Content Include="table_info.py" />
+    <Content Include="type_converter.py" />
+    <Content Include="type_info.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

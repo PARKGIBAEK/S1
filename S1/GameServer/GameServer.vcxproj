@@ -237,14 +237,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DB\ORMTest.h" />
-    <ClInclude Include="DB\ORM\auth_key.hpp" />
-    <ClInclude Include="DB\ORM\item_accessory.hpp" />
-    <ClInclude Include="DB\ORM\item_armor.hpp" />
-    <ClInclude Include="DB\ORM\item_weapon.hpp" />
-    <ClInclude Include="DB\ORM\user_account.hpp" />
-    <ClInclude Include="DB\ORM\user_character.hpp" />
-    <ClInclude Include="DB\ORM\user_inventory.hpp" />
-    <ClInclude Include="DB\ORM\user_test.hpp" />
+    <ClInclude Include="DB\ORM\auth_key_orm.hpp" />
+    <ClInclude Include="DB\ORM\item_accessory_orm.hpp" />
+    <ClInclude Include="DB\ORM\item_armor_orm.hpp" />
+    <ClInclude Include="DB\ORM\item_weapon_orm.hpp" />
+    <ClInclude Include="DB\ORM\user_account_orm.hpp" />
+    <ClInclude Include="DB\ORM\user_character_orm.hpp" />
+    <ClInclude Include="DB\ORM\user_inventory_orm.hpp" />
+    <ClInclude Include="DB\ORM\user_test_orm.hpp" />
     <ClInclude Include="DB\TableSchemas\user_accounts.h" />
     <ClInclude Include="LibConfig.h" />
     <ClInclude Include="WebServerTest.h" />

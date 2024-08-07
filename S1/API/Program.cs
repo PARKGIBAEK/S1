@@ -1,14 +1,13 @@
 // Program.cs
-
-using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
-using API.Data;
 using API.DB;
+using API.Helper;
+using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -19,72 +18,40 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // execute an sp for init
 // 테이블 전부 날리고 초기화 함(생성된 유저 계정도 다 날라가므로 원치 않으면 주석처리)
-var sqlFilePath = Path.Combine(AppContext.BaseDirectory, "../../../DB/SQL/create_table.sql");
+string? dbSetupFile = builder.Configuration["DbSetupFile"];
+var sqlFilePath = Path.Combine(AppContext.BaseDirectory, dbSetupFile);
 
 if (connectionString == null)
     throw new Exception("connectionString is null");
 
-MyQueryExecutor.ExecuteSqlScript(connectionString, sqlFilePath);
+// MyQueryExecutor.ExecuteSqlScript(connectionString, sqlFilePath);
 
 
 // add DbContext to Services & set option 'UseMySql'
-builder.Services.AddDbContext<GameDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<GameServerDbContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), ServerVersion.AutoDetect(connectionString)));
 
 
 // register services
 builder.Services.AddScoped<KeyService>();
 builder.Services.AddScoped<UserService>();
 
-// get "JwtSettings" item from 'appsettings.json'
-var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-
 // settings about JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtSettings["Issuer"],
-            IssuerSigningKeyResolver = (token, securityToken, kid, validationParameters) =>
-            {
-                var keyService = builder.Services.BuildServiceProvider().GetRequiredService<KeyService>();
-                return keyService.GetActiveKeys(); // JWT 인증 토큰을 발급 받기 위한 랜덤키를 KeyService에서 가져온다
-            },
-            ClockSkew = TimeSpan.Zero
-        };
-
-        options.Events = new JwtBearerEvents
-        {
-            OnAuthenticationFailed = context =>
-            {
-                Console.WriteLine($"OnAuthenticationFailed: {context.Exception}");
-                return Task.CompletedTask;
-            },
-            OnTokenValidated = context =>
-            {
-                Console.WriteLine($"OnTokenValidated: {context.SecurityToken}");
-                return Task.CompletedTask;
-            },
-            OnMessageReceived = context =>
-            {
-                Console.WriteLine($"OnMessageReceived: {context.Token}");
-                return Task.CompletedTask;
-            },
-            OnChallenge = context =>
-            {
-                Console.WriteLine($"OnChallenge: {context.Error}, {context.ErrorDescription}");
-                return Task.CompletedTask;
-            }
-        };
-    });
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+/*
+ * AddSingleton매서드는 서비스를 싱글톤으로 등록한다.
+ * 첫번째 제네릭 인자는 해당 서비스의 인터페이스 타입을 기입하며,
+ * 두번째 제네릭 인자는 해당 서비스의 인터페이스를 구현한 실제 클래스 타입이다.
+ * 참고로 IControllerActivator는 ASP.NET Core MVC에서 컨트롤러 인스턴스의 생성/해제를 정의하는 인터페이스다.
+ */
+// Register a RedisManager as a Singleton
+builder.Services.AddSingleton<RedisManager>(sp =>
+    new RedisManager(builder.Configuration.GetConnectionString("RedisConnection"), poolSize: 5));
+builder.Services.AddTransient<IStartupFilter, ControllerLoggingStartupFilter>();
 
 // Add logging service
 builder.Services.AddLogging(logging =>
@@ -138,7 +105,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<GameDbContext>();
+    var context = services.GetRequiredService<GameServerDbContext>();
 
     // 데이터베이스가 이미 존재하는 경우 마이그레이션을 적용하지 않고 계속 진행
     if (context.Database.CanConnect())
@@ -150,15 +117,6 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine("Creating database and applying migrations...");
         context.Database.Migrate();
     }
-
-    var keyService = scope.ServiceProvider.GetRequiredService<KeyService>();
-    if (!keyService.GetActiveKeys().Any())
-    {
-        keyService.GenerateAndSaveKey();
-    }
-
-    // 7일 이전 키 삭제
-    keyService.DeleteExpiredKeys();
 
     // 임시 admin 계정 생성하기
     try

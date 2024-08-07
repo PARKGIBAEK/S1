@@ -2,17 +2,106 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4865873a-0b21-45c8-a3cf-cbea51da0210" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/DB/RedisManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Helper/ConsoleHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Helper/ControllerLoggingStartupFilter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Migrations/20240803160653_InitialCreate.Designer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Migrations/20240803160653_InitialCreate.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Migrations/GameServerDbContextModelSnapshot.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/AuthKey.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/Efmigrationshistory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/GameServerDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/ItemAccessory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/ItemArmor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/ItemWeapon.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/TestContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/UserAccount.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/UserCharacter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/UserInventory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Models/UserTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/Services/JwtConfigurationExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/Pipelines.Sockets.Unofficial.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/StackExchange.Redis.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DB/SQL/setup_database.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/Network/HttpClient.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/Network/HttpClient.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/Network/WebSocketSession.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ServerCore/Network/WebSocketSession.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ModelGenerator/ModelGenerator.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/customed_logger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sp_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stored_procedures.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/table_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/type_converter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/type_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/boost_context-vc144-mt-gd-x64-1_85.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/boost_coroutine-vc144-mt-gd-x64-1_85.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Controllers/ItemController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Controllers/ItemController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Controllers/MyController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Data/GameDbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Migrations/20240720104944_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Migrations/20240720104944_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Migrations/MyDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Services/ItemService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Services/ItemService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Services/KeyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Services/KeyService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/API.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/API.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/ref/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/ref/API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/refint/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/refint/API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DB/SQL/create_table.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test.hpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORMTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORMTest.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SessionBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SessionBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ServerCore/ServerCore.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/ServerCore.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ModelGenerator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ModelGenerator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ModelGenerator/ModelGenerator.pyproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ModelGenerator/ModelGenerator.pyproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ModelGenerator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ModelGenerator/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ORMGenerator.pyproj" beforeDir="false" afterPath="$PROJECT_DIR$/ORMGenerator.pyproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/column_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/column_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/index_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orm_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/orm_generator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +109,21 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2jaHxcnYAtF2dIl1NKhlxVQOOBe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -39,7 +138,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;editorconfig.notification&quot;: &quot;lf &quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/GIT_REPOSITORIES/S1/S1/Tools/ORMGenerator&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Python&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -47,7 +146,28 @@
       <recent name="D:\GIT_REPOSITORIES\S1\S1\Tools\ORMGenerator" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="database_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ORMGenerator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database_info.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ORMGenerator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -69,9 +189,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="stored_procedures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="ORMGenerator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/stored_procedures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.database_info" />
+        <item itemvalue="Python.stored_procedures" />
       </list>
     </recent_temporary>
   </component>
@@ -85,6 +228,9 @@
       <updated>1721618515222</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -110,6 +256,26 @@
           <line>481</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/database_info.py</url>
+          <line>390</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/database_info.py</url>
+          <line>383</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/database_info.py</url>
+          <line>195</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/database_info.py</url>
+          <line>323</line>
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -121,7 +287,11 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="self.sp_name_mapper" />
+        <watch expression="product" />
+        <watch expression="index_combinations" language="Python" />
+        <watch expression="sorted_columns" />
+        <watch expression="where_combinations" />
+        <watch expression="self.tables" />
       </configuration>
     </watches-manager>
   </component>

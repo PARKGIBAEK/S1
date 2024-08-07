@@ -199,6 +199,7 @@
     <ClInclude Include="Memory\StompAllocator.h" />
     <ClInclude Include="Memory\TypeCast.h" />
     <ClInclude Include="Network\ConstSendBuffer.h" />
+    <ClInclude Include="Network\HttpClient.h" />
     <ClInclude Include="Network\NetHelper.h" />
     <ClInclude Include="Network\NetTypes.h" />
     <ClInclude Include="Network\PacketHeader.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Network\SendBufferChunk.h" />
     <ClInclude Include="Network\SendBufferManager.h" />
     <ClInclude Include="Network\SessionBase.h" />
+    <ClInclude Include="Network\WebSocketSession.h" />
     <ClInclude Include="Thread\DeadLockProfiler.h" />
     <ClInclude Include="Thread\Lock.h" />
     <ClInclude Include="Thread\ThreadManager.h" />
@@ -237,6 +239,7 @@
     <ClCompile Include="Memory\PoolAllocator.cpp" />
     <ClCompile Include="Memory\StompAllocator.cpp" />
     <ClCompile Include="Network\ConstSendBuffer.cpp" />
+    <ClCompile Include="Network\HttpClient.cpp" />
     <ClCompile Include="Network\NetHelper.cpp" />
     <ClCompile Include="Network\RecvBuffer.cpp">
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -539,6 +542,7 @@
       <AdditionalIncludeDirectories>;C:\Users\tkdri\vcpkg\installed\x64-windows\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="Network\SessionBase.cpp" />
+    <ClCompile Include="Network\WebSocketSession.cpp" />
     <ClCompile Include="Thread\DeadLockProfiler.cpp" />
     <ClCompile Include="Thread\Lock.cpp" />
     <ClCompile Include="Thread\ThreadManager.cpp" />

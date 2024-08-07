@@ -2,162 +2,59 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3938433b-3447-43f0-a1fd-fb4e458599e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../.vs/S1/FileContentIndex/e69e954e-f469-453b-a69e-b1e7985b8e88.vsidx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/Controllers/ItemController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/DTO/AddItemRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/DTO/ConsumeItemRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/DTO/DeleteItemRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/Migrations/20240720104944_InitialCreate.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/Migrations/20240720104944_InitialCreate.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/Migrations/MyDbContextModelSnapshot.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/Services/ItemService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../API/obj/API.csproj.EntityFrameworkCore.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../DB/SQL/create_table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/__efmigrationshistory.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test.hpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORMTest.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORMTest.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/make_exe.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/ORMGenerator.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/ORMGenerator.pyproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/column_info.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/index_info.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/make_exe.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/obj/Debug/ORMGenerator.pyproj.CoreCompileInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/orm_generator.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ORMGenerator/orm_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../PacketGenerator/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/boost_charconv-vc144-mt-gd-x64-1_85.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/libcrypto-1_1-x64.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/.idea.S1/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.idea.S1/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.metadata.v8.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.metadata.v8.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.projects.v8.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.projects.v8.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.strings.v8.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/ProjectEvaluation/s1.strings.v8.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/S1/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/S1/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/S1/v17/.futdcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/S1/v17/.futdcache.v2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/S1/v17/DocumentLayout.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/S1/v17/DocumentLayout.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.vs/S1/v17/fileList.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../.vs/S1/v17/fileList.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Controllers/MyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Controllers/MyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Controllers/WeatherForecastController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Controllers/WeatherForecastController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/DB/MyQueryExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/DB/MyQueryExecutor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/DB/SQL/pre_stored_procedures.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Data/MyDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Data/GameDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/WeatherForecast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/weather_forecast.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/item_accessories.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/item_accessory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/item_armors.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/item_armor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/item_weapons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/item_weapon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/user_accounts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/user_account.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/user_characters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/user_character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Model/user_items.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Model/user_inventory.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../DB/SQL/setup_database.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test_orm.hpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ModelGenerator.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/ReadMe.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/customed_logger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/database_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/sp_generator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/stored_procedures.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/table_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/type_converter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ORMGenerator/type_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/boost_context-vc144-mt-gd-x64-1_85.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../binary/x64/Debug/boost_coroutine-vc144-mt-gd-x64-1_85.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Services/KeyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Services/KeyService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/Services/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/bin/Debug/net8.0/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/API.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/ref/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/ref/API.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/refint/API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/Debug/net8.0/refint/API.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../API/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/../../API/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/SQL/test_db_data.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/SQL/test_db_setup.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/TableSchemas/user_accounts.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/TableSchemas/user_accounts.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../DB/SQL/create_table.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/auth_key.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_accessory.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_armor.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/item_weapon.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_account.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_character.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_inventory.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORM/user_test.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../GameServer/DB/ORMTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/DB/ORMTest.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/GameServer.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/WebServerTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/WebServerTest.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../GameServer/x64/Debug/GameServer.vcxproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../GameServer/x64/Debug/GameServer.vcxproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../S1.sln" beforeDir="false" afterPath="$PROJECT_DIR$/../../S1.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/ConnectionTest.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/DB/MySqlConnectionPool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/GlobalQueue.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/GlobalQueue.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/GlobalQueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/GlobalQueue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/Job.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/Job.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/JobData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/JobData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/JobData.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/JobData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/JobQueue.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/JobQueue.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/JobQueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/JobQueue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/JobTimer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/JobTimer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/JobTimer.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/JobTimer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/TimerItem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/TimerItem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Job/TimerItem.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Job/TimerItem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Log/ConsoleLog.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Log/ConsoleLog.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/BaseAllocator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/BaseAllocator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/BaseAllocator.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/BaseAllocator.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/Container.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/Container.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryHeader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryPool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryPool.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/MemoryPool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/ObjectPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/ObjectPool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/PoolAllocator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/PoolAllocator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/PoolAllocator.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/PoolAllocator.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/STL_Allocator.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/STL_Allocator.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/StompAllocator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/StompAllocator.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Memory/StompAllocator.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Memory/StompAllocator.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/NetTypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/NetTypes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/PacketHeader.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/PacketHeader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/RecvBuffer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/RecvBuffer.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferChunk.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferChunk.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferChunk.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferChunk.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SendBufferManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SessionBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SessionBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Network/SessionBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Network/SessionBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/ServerCore.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/ServerCore.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Thread/DeadLockProfiler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Thread/DeadLockProfiler.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Thread/Lock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Thread/Lock.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Thread/Lock.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Thread/Lock.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/FileUtils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/FileUtils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/LockFreeQueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/LockFreeQueue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/LockFreeStack.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/LockFreeStack.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/LockQueue.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/LockQueue.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/Path.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/Path.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/Path.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/Path.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/Time.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/Time.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../ServerCore/Util/Time.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../ServerCore/Util/Time.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ModelGenerator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ModelGenerator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelGenerator.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModelGenerator.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ModelGenerator.pyproj" beforeDir="false" afterPath="$PROJECT_DIR$/ModelGenerator.pyproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReadMe.md" beforeDir="false" afterPath="$PROJECT_DIR$/ReadMe.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SQL/create_table.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SqlParser2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/ORMGenerator.pyproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/ORMGenerator.pyproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/column_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/column_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/index_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/index_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ORMGenerator/orm_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ORMGenerator/orm_generator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,5 +131,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -11,7 +11,7 @@
 #include "Network/PacketHeader.h"
 #include "Network/SendBufferManager.h"
 
-namespace 
+namespace #error
 {
 
 using namespace ServerCore;
@@ -22,19 +22,13 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
 enum : uint16
 {
-	PKT_C_LOGIN = 1000,
-	PKT_S_LOGIN = 1001,
-	PKT_C_ENTER_GAME = 1002,
-	PKT_S_ENTER_GAME = 1003,
-	PKT_C_CHAT = 1004,
-	PKT_S_CHAT = 1005,
+
 };
 
 // Custom Handlers
 bool Handle_INVALID(std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len);
-bool Handle_C_LOGIN(std::shared_ptr<PacketSession>& session, Protocol::C_LOGIN& pkt);
-bool Handle_C_ENTER_GAME(std::shared_ptr<PacketSession>& session, Protocol::C_ENTER_GAME& pkt);
-bool Handle_C_CHAT(std::shared_ptr<PacketSession>& session, Protocol::C_CHAT& pkt);
+
+
 
 class TestPacketHandler
 {
@@ -43,15 +37,8 @@ public:
 	{
 		for (int32 i = 0; i < UINT16_MAX; i++)
 			GPacketHandler[i] = Handle_INVALID;
-		GPacketHandler[PKT_C_LOGIN] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) {
-			 return HandlePacket<Protocol::C_LOGIN>(Handle_C_LOGIN, session, buffer, len); 
-		};
-		GPacketHandler[PKT_C_ENTER_GAME] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) {
-			 return HandlePacket<Protocol::C_ENTER_GAME>(Handle_C_ENTER_GAME, session, buffer, len); 
-		};
-		GPacketHandler[PKT_C_CHAT] = [](std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len) {
-			 return HandlePacket<Protocol::C_CHAT>(Handle_C_CHAT, session, buffer, len); 
-		};
+
+
 	}
 
 	static bool HandlePacket(std::shared_ptr<PacketSession>& session, BYTE* buffer, int32 len)
@@ -59,18 +46,8 @@ public:
 		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 		return GPacketHandler[header->id](session, buffer, len);
 	}
-	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_LOGIN& pkt)
-	{
-		return MakeSendBuffer(pkt, PKT_S_LOGIN); 
-	}
-	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_ENTER_GAME& pkt)
-	{
-		return MakeSendBuffer(pkt, PKT_S_ENTER_GAME); 
-	}
-	static std::shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_CHAT& pkt)
-	{
-		return MakeSendBuffer(pkt, PKT_S_CHAT); 
-	}
+
+
 
 private:
 	template<typename PacketType, typename ProcessFunc>

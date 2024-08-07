@@ -3,7 +3,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using API.DB;
+using API.Helper;
 using API.Services;
+using StackExchange.Redis;
 
 namespace API.Controllers;
 
@@ -14,12 +17,15 @@ public class AuthController : ControllerBase
     private readonly IConfiguration _configuration;
     private readonly KeyService _keyService;
     private readonly UserService _userService;
+    private readonly RedisManager _redisManager;
 
-    public AuthController(IConfiguration configuration, KeyService keyService, UserService userService)
+    public AuthController(IConfiguration configuration, KeyService keyService, UserService userService,
+        RedisManager redisManager)
     {
         _configuration = configuration;
         _keyService = keyService;
         _userService = userService;
+        _redisManager = redisManager;
     }
 
     /// <summary>
@@ -45,11 +51,6 @@ public class AuthController : ControllerBase
         return BadRequest("Registration failed");
     }
 
-    /// <summary>
-    /// Issue a JWT(JSON Web Token)
-    /// </summary>
-    /// <param name="login"></param>
-    /// <returns></returns>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel login)
     {
@@ -59,24 +60,12 @@ public class AuthController : ControllerBase
             return Unauthorized("Invalid credentials");
         }
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = _keyService.GetActiveKeys().First();
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Name, login.UserId)
-            }),
-            Expires = DateTime.UtcNow.AddHours(1), // 만료 기간 1시간 
-            SigningCredentials =
-                new SigningCredentials(key,
-                    SecurityAlgorithms.HmacSha512), // 인증 키를 512비트짜리로 변경(기본 256비트짜리이므로 변경하려면 HmacSha256으로 변경해야 함)
-            Issuer = _configuration["JwtSettings:Issuer"]
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var tokenString = tokenHandler.WriteToken(token);
-
-        return Ok(new { Token = tokenString });
+        var key = _keyService.GenerateKey();
+        // 만료시간 1시간짜리 등록
+        var userId = login.UserId;
+        await _redisManager.QueryRedisAsync(db => db.SetAddAsync(userId, "1234"));
+        await _redisManager.QueryRedisAsync(db => db.KeyExpireAsync(userId,TimeSpan.FromHours(1)));
+        return Ok(new { Token= key });
     }
 }
 

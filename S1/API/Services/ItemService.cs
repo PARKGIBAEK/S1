@@ -1,48 +1,47 @@
-﻿using API.Data;
-using API.Model;
+﻿using API.DB;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Services;
 
-public class ItemService(GameDbContext dbContext)
+public class ItemService(GameServerDbContext dbContext, RedisManager redis)
 {
-    private readonly GameDbContext _dbContext = dbContext;
 
-    public async Task<user_inventory> AddItemAsync(int userCharacterId, int itemId, int quantity)
+    public async Task<UserInventory> AddItemAsync(int userCharacterId, int itemId, int quantity)
     {
-        var userItem = new user_inventory
+        var userItem = new UserInventory
         {
-            user_character_id = userCharacterId,
-            item_id = itemId,
-            item_quantity = quantity
+            CharacterId = userCharacterId,
+            ItemId = itemId,
+            Quantity = quantity
         };
 
-        dbContext.user_items.Add(userItem);
+        dbContext.UserInventories.Add(userItem);
         await dbContext.SaveChangesAsync();
         return userItem;
     }
 
     public async Task<bool> ConsumeItemAsync(int userCharacterId, int itemId, int itemQuantity)
     {
-        var userItem = await _dbContext.user_items.FirstOrDefaultAsync(item =>
-            item.user_character_id == userCharacterId && item.item_id == itemId);
-        if (userItem == null || userItem.item_quantity < itemQuantity)
+        var userItem = await dbContext.UserInventories.FirstOrDefaultAsync(item =>
+            item.CharacterId == userCharacterId && item.ItemId == itemId);
+        if (userItem == null || userItem.Quantity < itemQuantity)
         {
             return false;
         }
 
-        userItem.item_quantity -= itemQuantity; // userItem은 참조타입이므로 dbContext의 user_items테이블 원본 값이 변경된다
+        userItem.Quantity -= itemQuantity; // userItem은 참조타입이므로 dbContext의 user_items테이블 원본 값이 변경된다
         await dbContext.SaveChangesAsync();
         return true;
     }
 
     public async Task<bool> DeleteItemAsync(int userCharacterId, int itemId)
     {
-        var userItem = await dbContext.user_items.FirstOrDefaultAsync(item =>
-            item.user_character_id == userCharacterId && item.item_id == itemId);
+        var userItem = await dbContext.UserInventories.FirstOrDefaultAsync(item =>
+            item.CharacterId == userCharacterId && item.ItemId == itemId);
         if (userItem == null)
             return false;
-        _dbContext.user_items.Remove(userItem);
+        dbContext.UserInventories.Remove(userItem);
         await dbContext.SaveChangesAsync();
         return true;
     }

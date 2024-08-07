@@ -1,4 +1,6 @@
 ﻿using API.DTO;
+using API.Helper;
+using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,27 +10,25 @@ namespace API.Controllers;
 [Route("api/controller/item")]
 public class ItemController(ItemService itemService) : ControllerBase
 {
-    private readonly ItemService _itemService = itemService;
-
     [HttpPost("add")]
     public async Task<IActionResult> AddItem([FromBody] AddItemRequest request)
     {
-        var item = await _itemService.AddItemAsync(request.UserCharacterId, request.ItemId, request.Quantity);
+        var item = await itemService.AddItemAsync(request.UserCharacterId, request.ItemId, request.Quantity);
         return Ok(item);
     }
 
     [HttpPost("consume")]
     public async Task<IActionResult> ConsumeItem([FromBody] ConsumeItemRequest request)
     {
-        var success = await _itemService.ConsumeItemAsync(request.UserCharacterId, request.ItemId, request.Quantity);
+        var success = await itemService.ConsumeItemAsync(request.UserCharacterId, request.ItemId, request.Quantity);
         return Ok(success);
     }
 
     [HttpPost("delete")]
     public async Task<IActionResult> DeleteItem([FromBody] DeleteItemRequest request)
     {
-        var success = await _itemService.DeleteItemAsync(request.UserCharacterId, request.ItemId);
+        var success = await itemService.DeleteItemAsync(request.UserCharacterId, request.ItemId);
         return Ok(success);
     }
-    
+
 }

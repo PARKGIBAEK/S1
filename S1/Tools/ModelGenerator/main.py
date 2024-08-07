@@ -5,8 +5,8 @@ import model_generator
 def main():
     #  argparse모듈로 command line arguments를 파싱
     parser = argparse.ArgumentParser(description="Generate C# model classes from MySQL CREATE TABLE statements.")
-    parser.add_argument("-f", "--file", default="../../DB/SQL/create_table.sql",
-                        help="Path to the SQL file containing CREATE TABLE statements (default: ../../DB/SQL/create_table.sql)")
+    parser.add_argument("-f", "--file", default="../../DB/SQL/setup_database.sql",
+                        help="Path to the SQL file containing CREATE TABLE statements (default: ../../DB/SQL/setup_database.sql)")
     parser.add_argument("-o", "--output", default="../../API/Model",
                         help="Output directory for generated C# files (default: ../../API/Model)")
     parser.add_argument("-n", "--namespace", default="API.Model",

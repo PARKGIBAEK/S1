@@ -3,11 +3,55 @@
 #include <boost/asio/io_context.hpp>
 #include <boost/describe/class.hpp>
 #include <boost/mysql/static_results.hpp>
+#include <coroutine>
+#include <boost/asio/spawn.hpp>
+#include <boost/mysql/throw_on_error.hpp>
 
 #include "DB/MySqlConnectionPool.h"
 
 using namespace ServerCore;
 using namespace DB;
+/*
+-- 테스트 용 테이블 생성
+CREATE TABLE user_test
+(
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    username   VARCHAR(32) NOT NULL,
+    password   VARCHAR(32) NOT NULL,
+    email      VARCHAR(64) NOT NULL UNIQUE,
+    created_at TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+-- 테스트 용 테이블 데이터 삽입
+INSERT INTO user_test (username, password, email)
+VALUES ('user1', 'password1', 'user1@example.com'),
+       ('user2', 'password2', 'user2@example.com'),
+       ('user3', 'password3', 'user3@example.com'),
+       ('user4', 'password4', 'user4@example.com'),
+       ('user5', 'password5', 'user5@example.com'),
+       ('user6', 'password6', 'user6@example.com'),
+       ('user7', 'password7', 'user7@example.com'),
+       ('user8', 'password8', 'user8@example.com');
+ */
+
+
+using namespace boost::mysql;
+using namespace boost::asio;
+
+struct user_test
+{
+    int32_t id; // int
+    std::string username; // varchar(32)
+    std::string password; // varchar(32)
+    std::string email; // varchar(64)
+    datetime created_at; // timestamp
+    datetime updated_at; // timestamp
+};
+
+BOOST_DESCRIBE_STRUCT(user_test, (), (id, username, password, email, created_at, updated_at));
+
 
 class ORMTest
 {
@@ -24,34 +68,24 @@ CREATE TABLE user_inventory
     INDEX idx_user_character_id (user_character_id)
 );
 */
-    struct user_inventory
-    {
-        int id;
-        int user_character_id;
-        int item_id;
-        int item_quantity;
-        boost::mysql::datetime created_at;
-        boost::mysql::datetime updated_at;
-    };
-
-    BOOST_DESCRIBE_STRUCT(user_inventory, (), (id, user_character_id,item_id,item_quantity,created_at,updated_at))
 
     using empty = std::tuple<>;
 
 private:
     boost::asio::io_context* m_ioContext;
-    MySqlConnectionPool* m_mysqlConnectionPool;
+    std::shared_ptr<MySqlConnectionPool> m_mysqlConnectionPool;
 
 public:
     ORMTest()
     {
         m_ioContext = new asio::io_context;
-        m_mysqlConnectionPool = new MySqlConnectionPool("..\\..\\..\\DB\\config.txt", *m_ioContext, 100);
+        m_mysqlConnectionPool = std::make_shared<MySqlConnectionPool>("..\\..\\..\\DB\\config.txt", *m_ioContext, 100);
     }
 
-    ORMTest(boost::asio::io_context* ioContext, MySqlConnectionPool* mysqlConnectionPool): m_ioContext(ioContext),
+    ORMTest(boost::asio::io_context* ioContext, std::shared_ptr<MySqlConnectionPool> mysqlConnectionPool): m_ioContext(ioContext),
         m_mysqlConnectionPool(mysqlConnectionPool)
     {
+
     }
 
     ~ORMTest()
@@ -59,7 +93,7 @@ public:
         m_mysqlConnectionPool->CleanupConnectionPool();
     }
 
-    void StartTest()
+    void start_dynamic_interface_test()
     {
         int user_character_id = 1;
         int item_id = 10100001;
@@ -76,6 +110,104 @@ public:
         int updated = update_user_character_id_by_user_character_id_from_user_inventory(conn, user_character_id);
         success = delete_by_user_character_id_from_user_inventory(conn, user_character_id);
 
+        m_mysqlConnectionPool->ReturnConnection(conn);
+    }
+
+
+    void start_static_interface_test() const
+    {
+        // We can use a plain struct with ints and strings to describe our rows.
+        // This must be placed at the namespace level
+
+
+        //
+        // This must be placed inside your function or method:
+        //
+
+        // Passing a static_results to execute() selects the static interface
+        mysql::tcp_connection* conn = m_mysqlConnectionPool->GetPooledConnection();
+        mysql::static_results<user_test> result;
+        conn->execute("SELECT * FROM user_test", result);
+
+        // Query results are parsed directly into your own type
+        for (const user_test& p : result.rows())
+        {
+            std::cout << "id : " << p.id << "username: " << p.username << "password : " << p.password << "email : " << p
+                .email << "created_at : " << p.created_at << "updated_at : " << p.updated_at << std::endl;
+        }
+
+        m_mysqlConnectionPool->ReturnConnection(conn);
+    }
+
+    void start_coroutine()
+    {
+        spawn(m_ioContext->get_executor(),
+              [this](boost::asio::yield_context yield)
+              {
+                  boost::mysql::error_code ec;
+                  boost::mysql::diagnostics diag;
+                  auto conn = m_mysqlConnectionPool->GetPooledConnection();
+                  boost::mysql::statement stmt = conn->async_prepare_statement(
+                      "CALL sp_10535(?)", diag, yield[ec]);
+                  boost::mysql::throw_on_error(ec, diag);
+
+                  static_results<user_test> result;
+                  conn->async_execute(stmt.bind(10), result, diag, yield[ec]);
+                  boost::mysql::throw_on_error(ec, diag);
+
+                  for (const user_test& p : result.rows())
+                  {
+                      std::cout << "id : " << p.id << "username: " << p.username << "password : " << p.
+                          password << "email : " << p
+                          .email << "created_at : " << p.created_at << "updated_at : " << p.updated_at <<
+                          std::endl;
+                  }
+
+
+                  // This will throw an error_with_diagnostics in case of failure
+                  m_mysqlConnectionPool->ReturnConnection(conn);
+              },
+              // If any exception is thrown in the coroutine body, rethrow it.
+              [](std::exception_ptr ptr)
+              {
+                  if (ptr)
+                  {
+                      std::rethrow_exception(ptr);
+                  }
+              }
+        );
+    }
+
+    asio::awaitable<void> start_async_interface_test() const
+    {
+        // We can use a plain struct with ints and strings to describe our rows.
+        // This must be placed at the namespace level
+
+
+        //
+        // This must be placed inside your function or method:
+        //
+
+        // Passing a static_results to execute() selects the static interface
+        mysql::tcp_connection* conn = m_mysqlConnectionPool->GetPooledConnection();
+
+        // Using this CompletionToken, you get C++20 coroutines that communicate
+        // errors with error_codes. This way, you can access the diagnostics object.
+        constexpr auto token = boost::asio::as_tuple(boost::asio::use_awaitable);
+        // Run our query as a coroutine
+        mysql::diagnostics diag;
+        mysql::static_results<user_test> static_result;
+        auto [ec] = co_await conn->async_execute("SELECT * FROM user_test", static_result, diag, token);
+        boost::mysql::throw_on_error(ec, diag);
+
+        // Query results are parsed directly into your own type
+        for (const user_test& p : static_result.rows())
+        {
+            std::cout << "id : " << p.id << "username: " << p.username << "password : " << p.password << "email : " << p
+                .email << "created_at : " << p.created_at << "updated_at : " << p.updated_at << std::endl;
+        }
+
+        // This will throw an error_with_diagnostics in case of failure
         m_mysqlConnectionPool->ReturnConnection(conn);
     }
 

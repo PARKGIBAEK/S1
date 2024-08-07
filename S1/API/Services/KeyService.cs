@@ -1,66 +1,76 @@
 ﻿using System.Security.Cryptography;
-using System.Text;
-using API.Data;
-using API.Model;
+using API.DB;
+using API.Models;
 using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
 
 namespace API.Services;
 
-/* JWT 인증 토큰을 발급 받기 위한 랜덤키를 DB에 생성하고 가져온다
- * 참고로 '~Service'류의 네이밍은 DbContext를 통해 DB와 통신하는 것들이다 */
-public class KeyService(GameDbContext dbContext)
+public class KeyService
 {
-    // GetActiveKeys 메서드를 수정하여 SymmetricSecurityKey를 직접 반환
-    public List<SecurityKey> GetActiveKeys()
+    private readonly RedisManager _redisManager;
+    private readonly GameServerDbContext _dbContext;
+    private const string SetKey = "user:keys";
+
+    public KeyService(GameServerDbContext dbContext, RedisManager redisManager)
     {
         try
         {
-            var keys = dbContext.auth_keys
-                .Where(k => k.created_at > DateTime.UtcNow.AddDays(-1))
-                .Select(k => new SymmetricSecurityKey(Convert.FromBase64String(k.key_value)) as SecurityKey)
-                .ToList();
 
-            if (!keys.Any())
-            {
-                GenerateAndSaveKey();
-                keys = dbContext.auth_keys
-                    .Where(k => k.created_at > DateTime.UtcNow.AddDays(-1))
-                    .Select(k => new SymmetricSecurityKey(Convert.FromBase64String(k.key_value)) as SecurityKey)
-                    .ToList();
-            }
-
-            return keys;
+            _dbContext = dbContext;
+            _redisManager = redisManager;
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Console.WriteLine($"Error in GetActiveKeys: {ex.Message}");
-            Console.WriteLine($"Stack Trace: {ex.StackTrace}");
-            // 여기서 빈 리스트를 반환하거나 기본 키를 생성할 수 있습니다.
-            return new List<SecurityKey>();
+            Console.WriteLine(e);
+            Console.WriteLine(e);
         }
     }
 
-    public void GenerateAndSaveKey()
+    // GetActiveKeys 메서드를 수정하여 SymmetricSecurityKey를 직접 반환
+    public string GenerateKey()
     {
-        var newRandomGeneratedKey = GenerateRandomKey();
-        var keyEntity = new auth_key
-        {
-            key_value = newRandomGeneratedKey,
-            created_at = DateTime.UtcNow,
-        };
-
-        dbContext.auth_keys.Add(keyEntity);
-        dbContext.SaveChanges();
+        return GenerateRandomKey();
     }
 
-    // key valid in 24 hours
-    public void DeleteExpiredKeys()
-    {
-        var expiryDate = DateTime.UtcNow.AddDays(-1); // keys generated before 24 hours
-        var expiredKeys = dbContext.auth_keys.Where(k => k.created_at <= expiryDate).ToList();
-        dbContext.auth_keys.RemoveRange(expiredKeys);
-        dbContext.SaveChanges();
-    }
+
+    // public async Task RegisterUserKey(string userId, string key)
+    // {
+    //     // 기존 set삭제
+    //     await _redisManager._connectionPool.QueryRedisAsync(db => db.KeyDeleteAsync(userId));
+    //     // 새로운 set 등록하기
+    //     await _redisManager._connectionPool.QueryRedisAsync(db => db.SetAddAsync(userId, key));
+    //     // userId에 해당하는 set 만료시간 1시간으로 설정
+    //     await _redisManager._connectionPool.QueryRedisAsync(db => db.KeyExpireAsync(userId, TimeSpan.FromHours(1)));
+    // }
+    //
+    // public async Task<bool> DeleteUserKey(string userId, string key)
+    // {
+    //     // 기존 set삭제
+    //     return await _redisManager._connectionPool.QueryRedisAsync(db => db.KeyDeleteAsync(userId));
+    // }
+    //
+    // private async Task DeleteAllUserKeys()
+    // {
+    //     var keys = _redisManager._server.Keys(pattern:"*");
+    //     var tasks = new List<Task>();
+    //
+    //     foreach (var key in keys)
+    //     {
+    //         if (await _redisManager._database.KeyTypeAsync(key) == RedisType.Set) // 키의 타입이 Set인지 확인
+    //         {
+    //             tasks.Add(_redisManager._database.KeyDeleteAsync(key)); // 집합 삭제
+    //         }
+    //     }
+    //
+    //     await Task.WhenAll(tasks); // 모든 삭제 작업을 병렬로 실행
+    // }
+    //
+    // public async Task<string[]> GetAllUserKeys()
+    // {
+    //     var members = await _redisManager._connectionPool.QueryRedisAsync(db => db.SetMembersAsync(SetKey));
+    //     return members.Select(m => m.ToString()).ToArray();
+    // }
 
     // JWT토큰 생성에 사용되는 인증키의 길이는 기본적으로 (32바이트)256비트이다.
     // 그러나 이 프로젝트에서는 (64바이트)512비트를 사용한다.
@@ -74,4 +84,16 @@ public class KeyService(GameDbContext dbContext)
         return Convert.ToBase64String(byteArray);
     }
 
+    // JWT토큰키 생성
+    public IEnumerable<SecurityKey> GenerateSecurityKey()
+    {
+        // 예시: RSA 키를 사용하는 경우
+        var rsa = new RSACryptoServiceProvider(2048);
+        var key = new RsaSecurityKey(rsa)
+        {
+            KeyId = GenerateKey()
+        };
+
+        return new List<SecurityKey> { key };
+    }
 }

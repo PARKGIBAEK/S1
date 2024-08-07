@@ -1,3 +1,4 @@
+# coding=utf-8
 # ORMGenerator/main.py
 import argparse
 import mysql
@@ -24,9 +25,9 @@ def main():
         database = args.database
         port = args.port
 
-        orm_gen = OrmGenerator(host, user, password, database, port)
+        orm_gen = OrmGenerator(args.output, host, user, password, database, port)
 
-        orm_gen.generate_orm_for_database(args.output, database)
+        orm_gen.generate_orm_for_database()
 
     except mysql.connector.Error as e:
         print(f"Error: {e}")

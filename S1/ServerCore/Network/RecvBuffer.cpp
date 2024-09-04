@@ -1,18 +1,19 @@
+#include "pch.h"
 #include "RecvBuffer.h"
 
 
 namespace ServerCore
 {
-RecvBuffer::RecvBuffer() : bufferSize(static_cast<int32>(ALLOCATION::DEFAULT_RECV_BUFFER_SIZE))
+RecvBuffer::RecvBuffer() : m_BufferSize(static_cast<int32>(ALLOCATION::DEFAULT_RECV_BUFFER_SIZE))
 {
-    capacity = bufferSize * BUFFER_COUNT;
-    buffer.resize(capacity);
+    m_Capacity = m_BufferSize * BUFFER_COUNT;
+    m_Buffer.resize(m_Capacity);
 }
 
-RecvBuffer::RecvBuffer(int32 _bufferSize) : bufferSize(_bufferSize)
+RecvBuffer::RecvBuffer(int32 _bufferSize) : m_BufferSize(_bufferSize)
 {
-    capacity = bufferSize * BUFFER_COUNT;
-    buffer.resize(capacity);
+    m_Capacity = m_BufferSize * BUFFER_COUNT;
+    m_Buffer.resize(m_Capacity);
 }
 
 void RecvBuffer::Clean()
@@ -21,23 +22,23 @@ void RecvBuffer::Clean()
 
     if (0 == dataSize)
     {
-        readCursor = writeCursor = 0;
+        m_ReadCursor = m_WriteCursor = 0;
     }
-    else if (FreeSize() < bufferSize)
+    else if (FreeSize() < m_BufferSize)
     {
         // 여유 공간이 버퍼 1개 크기 미만이면, 데이터를 앞으로 당기기
-        ::memcpy(&buffer[0], &buffer[readCursor], dataSize);
-        readCursor = 0;
-        writeCursor = dataSize;
+        ::memcpy(&m_Buffer[0], &m_Buffer[m_ReadCursor], dataSize);
+        m_ReadCursor = 0;
+        m_WriteCursor = dataSize;
     }
 }
 
 bool RecvBuffer::OnRead(int32 _numOfBytes)
 {
     if (_numOfBytes > DataSize())
-        return false;
+        return false; // 수신된 데이터를 초과한 양을 처리한 경우
 
-    readCursor += _numOfBytes;
+    m_ReadCursor += _numOfBytes;
     return true;
 }
 
@@ -46,7 +47,7 @@ bool RecvBuffer::OnWrite(int32 _numOfBytes)
     if (_numOfBytes > FreeSize())
         return false;
 
-    writeCursor += _numOfBytes;
+    m_WriteCursor += _numOfBytes;
     return true;
 }
 

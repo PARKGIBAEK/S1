@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Path.h"
 
 #include <filesystem>
@@ -35,7 +36,7 @@ std::string Path::GetRelativeFilePath(const std::string& _filePath)
 {
 	std::filesystem::path exePath = GetExecutablePath();
 	std::filesystem::path exeDir = exePath.parent_path();
-	
+
 	std::filesystem::path relPath(_filePath);
 	for (auto& part : relPath)
 	{

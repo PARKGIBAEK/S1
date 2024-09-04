@@ -21,16 +21,16 @@ public:
 	bool			OnRead(int32 _numOfBytes); // readCursor 조정
 	bool			OnWrite(int32 _numOfBytes); // writeCursor 조정
 
-	BYTE*			ReadPos() { return &buffer[readCursor]; }
-	BYTE*			WritePos() { return &buffer[writeCursor]; }
-	int32			DataSize() const { return writeCursor - readCursor; }
-	int32			FreeSize () const { return capacity - writeCursor; }
+	BYTE*			ReadPos() { return &m_Buffer[m_ReadCursor]; }
+	BYTE*			WritePos() { return &m_Buffer[m_WriteCursor]; }
+	int32			DataSize() const { return m_WriteCursor - m_ReadCursor; }
+	int32			FreeSize () const { return m_Capacity - m_WriteCursor; }
 
 private:
-	int32			capacity = 0;
-	int32			bufferSize = 0;
-	int32			readCursor = 0;
-	int32			writeCursor = 0;
-	Vector<BYTE>	buffer;
+	int32			m_Capacity = 0;
+	int32			m_BufferSize = 0;
+	int32			m_ReadCursor = 0;
+	int32			m_WriteCursor = 0;
+	Vector<BYTE>	m_Buffer;
 };
 }

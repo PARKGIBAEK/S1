@@ -8,7 +8,7 @@ namespace ServerCore
 class PoolAllocator
 {
 public:
-    static void*	AllocateMemory(int32 size);
-    static void		ReleaseMemory(void* ptr);
+    static void*	AllocateMemory(int32 _size);
+    static void		ReleaseMemory(void* _ptr);
 };
 }

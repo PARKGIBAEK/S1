@@ -25,7 +25,7 @@ private:
     static void PushGlobal(SendBufferChunk* _buffer);
 
 private:
-    USE_LOCK;
-    Vector<std::shared_ptr<SendBufferChunk>> sendBufferChunks;
+    DECLARE_SINGLE_LOCK;
+    Vector<std::shared_ptr<SendBufferChunk>> m_SendBufferChunks;
 };
 }

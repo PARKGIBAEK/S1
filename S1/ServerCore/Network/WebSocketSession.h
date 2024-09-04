@@ -14,20 +14,20 @@ class WebSocketSession : std::enable_shared_from_this<WebSocketSession>
 {
 public:
     explicit WebSocketSession(boost::asio::ip::tcp::socket _socket)
-        : m_ws(std::move(_socket))
+        : m_webSocket(std::move(_socket))
     {
     }
 
     void Start()
     {
-        m_ws.async_accept(
+        m_webSocket.async_accept(
             beast::bind_front_handler(&WebSocketSession::OnAccept,
                 shared_from_this()));
     }
 
     void close()
     {
-        m_ws.async_close(websocket::close_code::normal,
+        m_webSocket.async_close(websocket::close_code::normal,
             beast::bind_front_handler(
                 &WebSocketSession::OnClose,
                 shared_from_this()));
@@ -44,7 +44,7 @@ private:
 
     void DoRead()
     {
-        m_ws.async_read(m_buffer,
+        m_webSocket.async_read(m_buffer,
             beast::bind_front_handler(&WebSocketSession::OnRead,
                 shared_from_this()));
     }
@@ -53,13 +53,13 @@ private:
     {
         if(ec)
             return Fail(ec,"Read");
-        m_ws.text(m_ws.got_text()); // 텍스트 메시지인지 설정
+        m_webSocket.text(m_webSocket.got_text()); // 텍스트 메시지인지 설정
 
         // 받은 메시지 문자열로 변환
         std::string received = beast::buffers_to_string(m_buffer.data());
         std::cout<<"Received : "<<received<<std::endl;
 
-        m_ws.async_write(m_buffer.data(),beast::bind_front_handler(&WebSocketSession::OnWrite,shared_from_this()));
+        m_webSocket.async_write(m_buffer.data(),beast::bind_front_handler(&WebSocketSession::OnWrite,shared_from_this()));
 
     }
 
@@ -87,6 +87,6 @@ private:
     {
         std::cerr << what << ": " << ec.message() << "\n";
     }
-    websocket::stream<beast::tcp_stream> m_ws;
+    websocket::stream<beast::tcp_stream> m_webSocket;
     beast::flat_buffer m_buffer;
 };

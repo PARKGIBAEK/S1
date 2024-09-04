@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "BufferWriter.h"
 
 namespace ServerCore

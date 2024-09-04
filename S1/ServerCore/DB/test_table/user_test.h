@@ -10,12 +10,12 @@ namespace ServerCore
 struct user_test
 {
     uint32_t user_id;
-    std::string name;
+    std::string m_name;
     std::string password;
     std::string email;
     std::string created_at;
     std::string updated_at;
 };
-BOOST_DESCRIBE_STRUCT(user_test, (), (user_id, name,password,email,created_at,updated_at));
+BOOST_DESCRIBE_STRUCT(user_test, (), (user_id, m_name,password,email,created_at,updated_at));
 
 }

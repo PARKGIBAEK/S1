@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 #include <format>
+#include "Macros/WanringSuppression.h"
+DISABLE_WARNING(4244)
 
 using namespace boost::mysql;
 using namespace std;
@@ -3186,3 +3188,5 @@ inline int auth_key_orm::delete_from_auth_key_where_GE_id(tcp_connection* conn, 
 
 
 } // namespace ORM
+
+DISABLE_WARNING_POP

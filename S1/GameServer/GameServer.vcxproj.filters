@@ -16,23 +16,77 @@
     <Filter Include="DB">
       <UniqueIdentifier>{a58a4554-b5bd-4f09-809d-a54905ba2512}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DB\ORM">
+      <UniqueIdentifier>{68b2696f-8fd2-4f89-bfe1-bc82c5370290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protocol">
+      <UniqueIdentifier>{e65d592f-2c76-4fd1-87c1-93a84bb7f980}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameServer.cpp">
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="ClientSession.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ServerService.cpp" />
+    <ClCompile Include="Temp\Temp.cpp" />
+    <ClCompile Include="WebServerTest.cpp" />
+    <ClCompile Include="Network\PacketHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WebServerTest.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Network\Protocol\Enum.pb.cc">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Protocol\Protocol.pb.cc">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Protocol\Struct.pb.cc">
+      <Filter>Protocol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LibConfig.h">
+    <ClInclude Include="DB\ORM\auth_key_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\item_accessory_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\item_armor_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\item_weapon_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\user_account_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\user_character_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\user_inventory_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="DB\ORM\user_test_orm.hpp">
+      <Filter>DB\ORM</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="WebServerTest.h" />
+    <ClInclude Include="ClientSession.h" />
+    <ClInclude Include="ServerService.h" />
+    <ClInclude Include="Temp\Temp.h" />
+    <ClInclude Include="DB\TableSchemas\user_accounts.h" />
+    <ClInclude Include="Network\PacketHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WebServerTest.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Network\Protocol\Enum.pb.h">
+      <Filter>Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="DB\TableSchemas\user_accounts.h">
+    <ClInclude Include="Network\Protocol\Protocol.pb.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Protocol\Struct.pb.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryLinkage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

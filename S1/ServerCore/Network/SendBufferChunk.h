@@ -27,7 +27,7 @@ public:
     std::shared_ptr<SendBuffer>	Open(uint32 _allocSize);
     std::shared_ptr<ConstSendBuffer>	OpenConst(uint32 _allocSize);
     void					    Close(uint32 _writeSize);
-    
+
     bool					    IsOpen() const;
     BYTE*					    Buffer();
     uint32					    FreeSize();
@@ -37,8 +37,8 @@ public:
     SendBufferChunk& operator=(const SendBufferChunk&) = delete;
     SendBufferChunk& operator=(const SendBufferChunk&&) = delete;
 private:
-    std::array<BYTE, SEND_BUFFER_CHUNK_SIZE>	buffer;
-    bool									    isOpen;
-    uint32									    usedSize; // buffer cursor
+    std::array<BYTE, SEND_BUFFER_CHUNK_SIZE>	m_Buffer;
+    bool									    m_IsOpen;
+    uint32									    m_UsedSize; // buffer cursor
 };
 }

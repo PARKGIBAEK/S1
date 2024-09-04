@@ -1,28 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
-    <file url="file://$PROJECT_DIR$/GameServer/DB/ORM/auth_key.hpp" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/GameServer/DB/SQL/test_db_data.sql" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Job/GlobalQueue.h" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Job/Job.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Job/JobQueue.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Job/JobTimer.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Job/JobTimer.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Log/ConsoleLog.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Memory/MemoryManager.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Memory/ObjectPool.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Memory/STL_Allocator.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Network/RecvBuffer.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Network/backup/IocpService.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Network/backup/Listener.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Network/backup/Listener.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Thread/DeadLockProfiler.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Thread/Lock.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Util/FileUtils.cpp" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Util/FileUtils.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Util/LockFreeQueue.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Util/LockFreeStack.h" charset="x-windows-949" />
-    <file url="file://$PROJECT_DIR$/ServerCore/Util/LockQueue.h" charset="x-windows-949" />
-    <file url="PROJECT" charset="x-windows-949" />
-  </component>
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8" />
 </project>

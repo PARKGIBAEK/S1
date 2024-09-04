@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ConsoleLog.h"
 #include <iostream>
 #ifdef _WIN32
@@ -11,11 +12,14 @@
 
 namespace ServerCore
 {
+// c 표준 입출력 핸들 받아오기
+inline HANDLE ConsoleLog::m_stdOut = ::GetStdHandle(STD_OUTPUT_HANDLE);
+inline HANDLE ConsoleLog::m_stdErr = ::GetStdHandle(STD_ERROR_HANDLE);
+
 ConsoleLog::ConsoleLog()
 {
-    // c 표준 입출력 핸들 바당오기
-    _stdOut = ::GetStdHandle(STD_OUTPUT_HANDLE);
-    _stdErr = ::GetStdHandle(STD_ERROR_HANDLE);
+    // m_stdOut = ::GetStdHandle(STD_OUTPUT_HANDLE);
+    // m_stdErr = ::GetStdHandle(STD_ERROR_HANDLE);
 }
 
 ConsoleLog::~ConsoleLog()
@@ -33,6 +37,37 @@ void ConsoleLog::WriteStdOut(Color color, const WCHAR* format, ...)
     va_start(ap, format);
     ::vwprintf(format, ap);
     va_end(ap);
+
+    fflush(stdout);
+
+    SetColor(true, Color::WHITE);
+}
+
+void ConsoleLog::WriteStdOut(const WCHAR* format, ...)
+{
+    if (format == nullptr)
+        return;
+
+    SetColor(true, Color::WHITE);
+
+    va_list ap;
+    va_start(ap, format);
+    ::vwprintf(format, ap);
+    va_end(ap);
+
+    fflush(stdout);
+
+    SetColor(true, Color::WHITE);
+}
+
+void ConsoleLog::WriteStdOut(const std::wstring& str)
+{
+    if (str.empty())
+        return;
+
+    SetColor(false, Color::WHITE);
+
+    std::wcout << str << std::endl;
 
     fflush(stdout);
 
@@ -60,6 +95,21 @@ void ConsoleLog::WriteStdErr(Color color, const WCHAR* format, ...)
     }
 
     ::fwprintf_s(stderr, L"%ls", buffer);
+
+    fflush(stderr);
+
+    SetColor(false, Color::WHITE);
+}
+
+void ConsoleLog::WriteStdErr(Color color, const std::wstring& str)
+{
+    if (str.empty())
+        return;
+
+    SetColor(false, color);
+
+    std::wcerr << str << '\n';
+
     fflush(stderr);
 
     SetColor(false, Color::WHITE);
@@ -86,6 +136,7 @@ void ConsoleLog::WriteStdErr(const WCHAR* format, ...)
     }
 
     ::fwprintf_s(stderr, L"%ls", buffer);
+
     fflush(stderr);
 
     SetColor(false, Color::WHITE);
@@ -99,6 +150,8 @@ void ConsoleLog::WriteStdErr(const std::wstring& str)
     SetColor(false, Color::RED);
 
     std::wcerr << str << '\n';
+
+    fflush(stderr);
     SetColor(false, Color::WHITE);
 }
 
@@ -114,6 +167,6 @@ void ConsoleLog::SetColor(bool stdOut, Color color)
         FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY
     };
 
-    ::SetConsoleTextAttribute(stdOut ? _stdOut : _stdErr, SColors[static_cast<int32>(color)]);
+    ::SetConsoleTextAttribute(stdOut ? m_stdOut : m_stdErr, SColors[static_cast<int32>(color)]);
 }
 }

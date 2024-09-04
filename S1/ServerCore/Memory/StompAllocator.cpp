@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "StompAllocator.h"
 
 #if defined(_WIN32) || defined(_WIN64)
@@ -39,7 +40,7 @@ void* StompAllocator::AllocateMemory(int32 size)
     const int64 pageCount = (size + PAGE_SIZE - 1) / PAGE_SIZE;
     /* 할당한 메모리 중 마지막 메모리의 주소를 기준으로
         size만큼 앞으로 당긴 위치를 반환하기 위함
-        
+
         예시) 4096 byte 할당 받았고, 메모리의 시작점이 0x0000'0000이라고 가정했을 때
             사용할 메모리 크기가 16이라면
              시작 주소(0000) + 할당받은 메모리 크기(4096) - 사용할 메모리 크기(16) = Offset(4080)
@@ -56,10 +57,10 @@ void* StompAllocator::AllocateMemory(int32 size)
     // pageCount x PAGE_SIZE만큼 할당하고 할당 주소의 시작점을 받아옴
     /* VirtualAlloc 옵션
     - MEM_RESERVE : 메모리 할당 예약(페이징 파일에 실제 물리적 저장공간을 할당하지 않고, 프로세스의 가상 주소 공간 범위를 예약)
-     
+
     - MEM_COMMIT : 예약된 메모리 페이지에 MemoryManager Charge(할당한 메모리의 크기와 페이징 파일의 크기)를 할당.
                     단, 가상 주소에 실제로 엑세스하지 않는 한 실제 물리적 페이지는 할당되지 않는다.
-    
+
     ※ 페이지를 예약과 동시에 할당하려면 ?
       MEM_COMMIT | MEM_RESERVE 옵션을 사용하면 된다.
       즉, 할당과 동시에 사용할 경우를 말한다.

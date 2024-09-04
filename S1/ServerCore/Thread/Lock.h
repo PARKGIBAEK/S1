@@ -3,21 +3,22 @@
 #include "Core/Types.h"
 
 
-
 namespace ServerCore
 {
+//////////////////////
+//   RW SpinLock  //
+/////////////////////
 
-/*----------------
-     RW SpinLock
------------------*/
-/*--------------------------------------------
-32비트 변수(비트 플래그 용도) : [WWWWWWWW][WWWWWWWW][RRRRRRRR][RRRRRRRR]
-W : WriteFlag (Exclusive-lock Owner ThreadId)
-R : ReadFlag (Shared Lock Count)
----------------------------------------------*/
 class Lock
 {
-    enum : uint32
+    /*--------------------------------------------
+
+    * 32 bit flag usage  :  [WWWWWWWW][WWWWWWWW][RRRRRRRR][RRRRRRRR]
+      W : WriteFlag (Exclusive-lock Owner ThreadId)
+      R : ReadFlag (Shared Lock Count)
+
+    ---------------------------------------------*/
+    enum LOCK_FLAG : uint32
     {
         ACQUIRE_TIMEOUT_TICK = 10000,
         MAX_SPIN_COUNT = 5000,
@@ -27,35 +28,34 @@ class Lock
     };
 
 public:
-    Lock();
-    void WriteLock(const char* name);
-    void WriteUnlock(const char* name);
-    void ReadLock(const char* name);
-    void ReadUnlock(const char* name);
+    Lock() :m_lockFlag(LOCK_FLAG::EMPTY_FLAG), m_writeCount(0) {}
+    void WriteLock(const char* m_name);
+    void WriteUnlock(const char* m_name);
+    void ReadLock(const char* m_name);
+    void ReadUnlock(const char* m_name);
 
 private:
-    std::atomic<uint32> lockFlag; // = EMPTY_FLAG;
-    uint16 writeCount; // = 0;
+    std::atomic<uint32> m_lockFlag;
+    uint16 m_writeCount;
 };
 
-/*----------------
-     LockGuards
------------------*/
+
+//////////////////////
+//    LockGuards    //
+//////////////////////
 
 class ReadLockGuard
 {
 public:
     ReadLockGuard(Lock& _lock, const char* _name);
 
-    ~ReadLockGuard()
-    {
-        lock.ReadUnlock(name);
-    }
+    ~ReadLockGuard();
 
 private:
-    Lock& lock;
-    const char* name;
+    Lock& m_lock;
+    const char* m_name;
 };
+
 
 class WriteLockGuard
 {
@@ -64,7 +64,7 @@ public:
     ~WriteLockGuard();
 
 private:
-    Lock& lock;
-    const char* name;
+    Lock& m_lock;
+    const char* m_name;
 };
 }

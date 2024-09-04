@@ -40,11 +40,11 @@
     <Filter Include="DB\test_table">
       <UniqueIdentifier>{9a1dda74-2296-4e5c-9c9a-b5ece910a871}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Macros">
+      <UniqueIdentifier>{8e545fa9-e8a5-46b7-80ce-aef27ba3add1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Core.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\CoreMacro.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -54,9 +54,6 @@
     <ClInclude Include="Core\Types.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Job\GlobalQueue.h">
-      <Filter>Job</Filter>
-    </ClInclude>
     <ClInclude Include="Job\Job.h">
       <Filter>Job</Filter>
     </ClInclude>
@@ -64,12 +61,6 @@
       <Filter>Job</Filter>
     </ClInclude>
     <ClInclude Include="Job\JobQueue.h">
-      <Filter>Job</Filter>
-    </ClInclude>
-    <ClInclude Include="Job\JobTimer.h">
-      <Filter>Job</Filter>
-    </ClInclude>
-    <ClInclude Include="Job\TimerItem.h">
       <Filter>Job</Filter>
     </ClInclude>
     <ClInclude Include="DB\MySqlConnectionPool.h">
@@ -108,9 +99,6 @@
     <ClInclude Include="Memory\TypeCast.h">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="Network\PacketHeader.h">
-      <Filter>Network</Filter>
-    </ClInclude>
     <ClInclude Include="Network\RecvBuffer.h">
       <Filter>Network</Filter>
     </ClInclude>
@@ -132,12 +120,6 @@
     <ClInclude Include="Util\FileUtils.h">
       <Filter>Util</Filter>
     </ClInclude>
-    <ClInclude Include="Util\LockFreeQueue.h">
-      <Filter>Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\LockFreeStack.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="Util\LockQueue.h">
       <Filter>Util</Filter>
     </ClInclude>
@@ -156,9 +138,6 @@
     <ClInclude Include="Thread\ThreadManager.h">
       <Filter>Thread</Filter>
     </ClInclude>
-    <ClInclude Include="Core\GlobalInitializer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DB\ConnectionTest.h">
       <Filter>DB</Filter>
     </ClInclude>
@@ -171,36 +150,68 @@
     <ClInclude Include="Network\NetHelper.h">
       <Filter>Network</Filter>
     </ClInclude>
-    <ClInclude Include="Network\NetTypes.h">
-      <Filter>Network</Filter>
-    </ClInclude>
     <ClInclude Include="Network\SessionBase.h">
       <Filter>Network</Filter>
     </ClInclude>
+    <ClInclude Include="Core\BoostTypes.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Service.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\WebSocketSession.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\HttpClient.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GlobalInitializer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Core\ServerCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Job\JobScheduler.h">
+      <Filter>Job</Filter>
+    </ClInclude>
+    <ClInclude Include="Job\GlobalJobQueue.h">
+      <Filter>Job</Filter>
+    </ClInclude>
+    <ClInclude Include="Job\ScheduledJob.h">
+      <Filter>Job</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketSession.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketHeader.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\SFINAEs.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\SessionManager.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros\WanringSuppression.h">
+      <Filter>Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryLinkage.h" />
+    <ClInclude Include="StringHelper.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Core.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\CoreTLS.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\GlobalInitializer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Job\GlobalQueue.cpp">
-      <Filter>Job</Filter>
-    </ClCompile>
     <ClCompile Include="Job\JobData.cpp">
       <Filter>Job</Filter>
     </ClCompile>
     <ClCompile Include="Job\JobQueue.cpp">
-      <Filter>Job</Filter>
-    </ClCompile>
-    <ClCompile Include="Job\JobTimer.cpp">
-      <Filter>Job</Filter>
-    </ClCompile>
-    <ClCompile Include="Job\TimerItem.cpp">
       <Filter>Job</Filter>
     </ClCompile>
     <ClCompile Include="DB\MySqlConnectionPool.cpp">
@@ -271,6 +282,37 @@
     </ClCompile>
     <ClCompile Include="Network\SessionBase.cpp">
       <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\HttpClient.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Service.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\WebSocketSession.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Core\ServerCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Job\GlobalJobQueue.cpp">
+      <Filter>Job</Filter>
+    </ClCompile>
+    <ClCompile Include="Job\JobScheduler.cpp">
+      <Filter>Job</Filter>
+    </ClCompile>
+    <ClCompile Include="Job\ScheduledJob.cpp">
+      <Filter>Job</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\PacketSession.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\SessionManager.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Memory/MemoryManager.h"
 #include "Memory/MemoryPool.h"
 #include "Core/GlobalInitializer.h"
@@ -90,7 +91,7 @@ void* MemoryManager::Allocate(int32 size)
 		// 메모리 풀에서 꺼내온다
 		header =g_MemoryManager->poolTable[allocSize]->Pop();
 	}
-#endif	
+#endif
 
 	return MemoryHeader::AttachHeader(header, allocSize);// MemoryHeader뒷부분의 실사용 영역의 주소 반환
 }
@@ -115,6 +116,6 @@ void MemoryManager::Release(void* ptr)
 		// 메모리 풀에 반납한다
 		g_MemoryManager->poolTable[allocSize]->Push(header);
 	}
-#endif	
+#endif
 }
 }

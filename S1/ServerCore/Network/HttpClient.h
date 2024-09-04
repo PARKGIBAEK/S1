@@ -27,10 +27,10 @@ public:
                                          const std::string& body = "");
 
 private:
-    std::string host_;
-    std::string port_;
-    net::io_context ioc_;
-    ssl::context ctx_;
+    std::string m_Host;
+    std::string m_Port;
+    net::io_context m_Ioc;
+    ssl::context m_Ctx;
     std::unique_ptr<beast::ssl_stream<beast::tcp_stream>> stream_;
 
     void connect();

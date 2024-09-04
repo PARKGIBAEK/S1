@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ConnectionTest.h"
 
 #include <fstream>
@@ -186,7 +187,7 @@ bool ConnectionTest::TestConnectionPool()
 
             for (const auto& meta : result.meta())
                 std::cout << meta.column_name() << '\t';
-            
+
             for (auto row : result.rows())
             {
                 auto columns = row.size();
@@ -210,7 +211,7 @@ bool ConnectionTest::TestConnectionPool()
 
     for (auto& thread : threads)
         thread.join();
-    
+
     return true;
 }
 }

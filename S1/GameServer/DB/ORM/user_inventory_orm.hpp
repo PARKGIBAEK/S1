@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 #include <format>
+#include "Macros/WanringSuppression.h"
+DISABLE_WARNING(4244)
 
 using namespace boost::mysql;
 using namespace std;
@@ -48333,3 +48335,4 @@ inline int user_inventory_orm::delete_from_user_inventory_where_GE_id(tcp_connec
 
 
 } // namespace ORM
+DISABLE_WARNING_POP

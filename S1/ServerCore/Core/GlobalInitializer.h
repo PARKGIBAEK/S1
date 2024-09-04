@@ -15,16 +15,16 @@ class DeadLockProfiler;
 class ThreadManager;
 class MemoryManager;
 class SendBufferManager;
-class GlobalQueue;
-class JobTimer;
+class GlobalJobQueue;
+class JobScheduler;
 class ConsoleLog;
 
 extern DeadLockProfiler* g_DeadLockProfiler;
 extern ThreadManager* g_ThreadManager;
 extern MemoryManager* g_MemoryManager;
 extern SendBufferManager* g_SendBufferManager;
-extern GlobalQueue* g_GlobalQueue;
-extern JobTimer* g_JobTimer;
+extern GlobalJobQueue* g_GlobalJobQueue;
+extern JobScheduler* g_JobScheduler;
 extern ConsoleLog* g_ConsoleLogger;
 
 class GlobalInitializer

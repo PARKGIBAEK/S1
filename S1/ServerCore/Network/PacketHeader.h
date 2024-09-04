@@ -4,7 +4,7 @@
 
 namespace ServerCore
 {
-constexpr int16 HEADER_SIZE = 4;
+constexpr int16 PACKET_HEADER_SIZE = 4;
 
 struct PacketHeader
 {

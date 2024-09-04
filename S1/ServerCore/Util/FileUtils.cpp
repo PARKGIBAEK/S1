@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+#include "pch.h"
 #include "FileUtils.h"
 #include <filesystem>
 #include <fstream>

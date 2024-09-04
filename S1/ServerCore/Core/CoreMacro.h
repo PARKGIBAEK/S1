@@ -2,31 +2,28 @@
 #include <iostream>
 #include "Thread/Lock.h"
 
-
 namespace ServerCore
 {
 
 #define OUT
-// #define NAMESPACE_BEGIN(name)	namespace name {
-// #define NAMESPACE_END			}
 
 /*---------------
-	  Lock
+      Lock
 ---------------*/
+#define DECLARE_MULTIPLE_LOCKS(count)       Lock locks[count]
+#define DECLARE_SINGLE_LOCK				    DECLARE_MULTIPLE_LOCKS(1)
 
-#define USE_MANY_LOCKS(count)	Lock locks[count]
-#define USE_LOCK				USE_MANY_LOCKS(1)
-#define	READ_LOCK_IDX(idx)		ReadLockGuard readLockGuard_##idx(locks[idx], typeid(this).name())
-#define READ_LOCK				READ_LOCK_IDX(0)
-#define	WRITE_LOCK_IDX(idx)		WriteLockGuard writeLockGuard_##idx(locks[idx], typeid(this).name())
-#define WRITE_LOCK				WRITE_LOCK_IDX(0)
+#define	READ_LOCK_IDX(idx)		            ReadLockGuard readLockGuard_##idx(locks[idx], typeid(this).name())
+#define READ_LOCK				            READ_LOCK_IDX(0)
+
+#define	WRITE_LOCK_IDX(idx)		            WriteLockGuard writeLockGuard_##idx(locks[idx], typeid(this).name())
+#define WRITE_LOCK				            WRITE_LOCK_IDX(0)
 
 /*---------------
-	  Crash
+      Crash
 ---------------*/
 // Windows-specific includes and definitions
 #ifdef _WIN32
-#include <intrin.h>
 #define CRASH(cause)                         \
 {                                            \
 	uint32_t* crash = nullptr;               \
@@ -34,7 +31,6 @@ namespace ServerCore
 	*crash = 0xDEADBEEF;                     \
 }
 #define ANALYSIS_ASSUME(expr) __analysis_assume(expr)
-
 // Linux-specific includes and definitions
 #else
 #define CRASH(cause)                         \
@@ -43,20 +39,26 @@ namespace ServerCore
 	std::abort();                            \
 }
 #define ANALYSIS_ASSUME(expr) __builtin_assume(expr)
-
 #endif
 
-// expr이 false로 평가되면 CRASH 발생
-#define ASSERT_CRASH(expr)                       \
-{                                                \
-	if (!(expr))                                 \
-	{                                            \
-		CRASH("ASSERT_CRASH");                   \
-		ANALYSIS_ASSUME(expr);                   \
-	}                                            \
+// CRASH if expr is evaluated to 'false'
+#ifdef _DEBUG
+#define ASSERT_CRASH(expr)           \
+{                                    \
+if (!(expr))                     \
+{                                \
+CRASH("ASSERT_CRASH");       \
+ANALYSIS_ASSUME(expr);       \
+}                                \
 }
+#else
+#define ASSERT_CRASH(expr) (expr)
+#endif
 
-// 디버그 모드에서 로깅 테스트
+/*-------------------------------
+      Debug Mode Console Log
+-------------------------------*/
+// console logging when DEBUG MODE
 #ifdef _DEBUG
 #define DEBUG_LOG(str) \
 do { \
@@ -66,5 +68,4 @@ do { \
 #define DEBUG_LOG(str) \
 do { } while(0)
 #endif
-
-}
+} // End namespace ServerCore

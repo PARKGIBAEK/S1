@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "MySqlConnectionPool.h"
 #include <fstream>
 #include <iostream>
@@ -7,7 +8,6 @@
 #include <boost/mysql/error_with_diagnostics.hpp>
 #include <boost/mysql/handshake_params.hpp>
 #include "Util/Path.h"
-
 
 
 namespace DB
@@ -38,7 +38,8 @@ OzBrmpfHEhF6NDU=
 
 
 // '_filename' is a directory based on the path of the executable
-MySqlConnectionPool::MySqlConnectionPool(const std::string& _filename, asio::io_context& _ioContext, std::int32_t _poolSize):
+MySqlConnectionPool::MySqlConnectionPool(const std::string& _filename, asio::io_context& _ioContext,
+                                         std::int32_t _poolSize):
     m_connectionPool(_poolSize), m_ioContext(
         _ioContext)
 {
@@ -173,9 +174,16 @@ void MySqlConnectionPool::CleanupConnectionPool()
     mysql::tcp_connection* conn;
     while (m_connectionPool.pop(conn))
     {
-        conn->close();
-        std::cout << "DB Connection closed" << std::endl;
-        delete conn;
+        try
+        {
+            conn->close();
+            std::cout << "DB Connection closed" << std::endl;
+            delete conn;
+        }
+        catch (const boost::mysql::error_code& ec)
+        {
+            std::cerr << ec.what() << std::endl;
+        }
     }
 }
 
@@ -210,7 +218,7 @@ bool MySqlConnectionPool::TestConnectionPool()
         while (count < 1000)
         {
             auto conn = GetPooledConnection();
-            std::string sql = std::format("SELECT * from {}",m_testTableName);
+            std::string sql = std::format("SELECT * from {}", m_testTableName);
             mysql::results result;
             conn->execute(sql, result);
 
@@ -244,5 +252,4 @@ bool MySqlConnectionPool::TestConnectionPool()
     return true;
 }
 #endif
-
 }

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SendBufferManager.h"
 
 #include "Core/GlobalInitializer.h"
@@ -54,10 +55,10 @@ std::shared_ptr<SendBufferChunk>  SendBufferManager::Pop()
 {
     {
         WRITE_LOCK;
-        if (sendBufferChunks.empty() == false)
+        if (m_SendBufferChunks.empty() == false)
         {
-            std::shared_ptr<SendBufferChunk>  sendBufferChunk = sendBufferChunks.back();
-            sendBufferChunks.pop_back();
+            std::shared_ptr<SendBufferChunk>  sendBufferChunk = m_SendBufferChunks.back();
+            m_SendBufferChunks.pop_back();
             return sendBufferChunk;
         }
     }
@@ -71,7 +72,7 @@ std::shared_ptr<SendBufferChunk>  SendBufferManager::Pop()
 void SendBufferManager::Push(std::shared_ptr<SendBufferChunk>  _buffer)
 {
     WRITE_LOCK;
-    sendBufferChunks.emplace_back(_buffer);
+    m_SendBufferChunks.emplace_back(_buffer);
 }
 
 void SendBufferManager::PushGlobal(SendBufferChunk* _buffer)
